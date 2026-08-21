@@ -11,8 +11,7 @@ import Landing from './Landing';
 import About from './About';
 import WhatIDo from './WhatIDo';
 import Career from './Career';
-import DomeGallery from './DomeGallery';
-import TechStackNew from './TechStackNew';
+import SkillsSection from './SkillsSection';
 import Projects from './Projects';
 import MiniGame from './MiniGame';
 import CallToAction from './CallToAction';
@@ -71,8 +70,7 @@ export default function MainContainer() {
             <About />
             <WhatIDo />
             <Career />
-            <DomeGallery />
-            <TechStackNew />
+            <SkillsSection />
             <Projects />
             <div id="game"><MiniGame /></div>
             <CallToAction />

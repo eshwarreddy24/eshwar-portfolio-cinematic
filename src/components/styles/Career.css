@@ -1,6 +1,9 @@
-/* CAREER */
-.career { position: relative; padding: 120px 0; z-index: 5; }
-.career-container { max-width: 900px; margin: 0 auto; padding: 0 40px; }
+/* CAREER — SOLID BLOCK */
+.career {
+  position: relative; padding: 120px 0; z-index: 5;
+  background: linear-gradient(180deg, transparent 0%, rgba(8, 8, 15, 0.9) 10%, rgba(8, 8, 15, 0.95) 50%, rgba(8, 8, 15, 0.9) 90%, transparent 100%);
+}
+.career-container { max-width: 900px; margin: 0 auto; padding: 0 40px; position: relative; z-index: 2; }
 .career-timeline { position: relative; display: flex; flex-direction: column; gap: 48px; }
 .timeline-line {
   position: absolute; left: 50%; top: 0; bottom: 0; width: 1px;
@@ -9,13 +12,12 @@
 }
 .career-card {
   position: relative; width: calc(50% - 40px); padding: 28px;
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.07);
-  border-radius: 8px; transition: all 0.4s ease;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 8px;
+  transition: all 0.4s ease;
 }
 .career-card:hover {
-  transform: translateY(-4px);
-  border-color: rgba(167, 139, 250, 0.3);
+  transform: translateY(-4px); border-color: rgba(167, 139, 250, 0.3);
 }
 .card-left { align-self: flex-start; }
 .card-right { align-self: flex-end; }
@@ -27,8 +29,7 @@
 .card-right .card-dot { left: -46px; }
 .card-content { display: flex; flex-direction: column; gap: 8px; }
 .card-period {
-  font-family: 'Courier New', monospace; font-size: 11px; letter-spacing: 2px;
-  color: #a78bfa;
+  font-family: 'Courier New', monospace; font-size: 11px; letter-spacing: 2px; color: #a78bfa;
 }
 .card-company {
   font-family: 'Inter', sans-serif; font-weight: 600; font-size: 16px;
@@ -44,10 +45,9 @@
 .card-highlights { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
 .highlight-tag {
   font-family: 'Inter', sans-serif; font-size: 10px; letter-spacing: 1px;
-  padding: 4px 10px;
-  background: rgba(167, 139, 250, 0.1);
-  border: 1px solid rgba(167, 139, 250, 0.2);
-  border-radius: 4px; color: #a78bfa; text-transform: uppercase;
+  padding: 4px 10px; background: rgba(167, 139, 250, 0.1);
+  border: 1px solid rgba(167, 139, 250, 0.2); border-radius: 4px;
+  color: #a78bfa; text-transform: uppercase;
 }
 @media (max-width: 768px) {
   .career { padding: 80px 0; }
