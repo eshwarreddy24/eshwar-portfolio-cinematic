@@ -1,0 +1,30 @@
+.bike-wheel-wrap {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: min(60vh, 480px);
+  height: min(60vh, 480px);
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  filter: drop-shadow(0 0 40px rgba(0, 230, 118, 0.35));
+}
+
+.bike-wheel-svg {
+  width: 100%;
+  height: 100%;
+  animation: bike-wheel-spin 4s linear infinite;
+}
+
+.wheel-tire { fill: none; stroke: #111; stroke-width: 14; }
+.wheel-rim { fill: none; stroke: var(--accentColor); stroke-width: 4; }
+.wheel-spokes line { stroke: var(--accentColor); stroke-width: 2; opacity: 0.75; }
+.wheel-hub { fill: var(--accentColor); }
+
+@keyframes bike-wheel-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bike-wheel-svg { animation: none; }
+}

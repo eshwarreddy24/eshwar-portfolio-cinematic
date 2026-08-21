@@ -1,0 +1,79 @@
+/* ============================================
+   WHAT I DO — CINEMATIC
+   ============================================ */
+
+.whatido {
+  position: relative;
+  padding: 120px 0;
+  z-index: 5;
+}
+
+.whatido-container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  gap: 24px;
+}
+
+.service-card {
+  padding: 32px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 10px;
+  transition: all 0.4s ease;
+}
+
+.service-card:hover {
+  border-color: rgba(0, 200, 255, 0.2);
+  background: rgba(0, 200, 255, 0.03);
+  transform: translateY(-4px);
+}
+
+.service-icon-wrapper {
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 200, 255, 0.08);
+  border-radius: 10px;
+  margin-bottom: 16px;
+}
+
+.service-icon {
+  color: #00c8ff;
+}
+
+.service-title {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 16px;
+  color: #ffffff;
+  margin: 0 0 8px;
+}
+
+.service-desc {
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.5);
+  margin: 0;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .whatido {
+    padding: 80px 0;
+  }
+  .whatido-container {
+    padding: 0 20px;
+  }
+  .services-grid {
+    grid-template-columns: 1fr;
+  }
+}

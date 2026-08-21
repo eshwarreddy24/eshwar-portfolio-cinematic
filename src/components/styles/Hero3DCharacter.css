@@ -1,0 +1,214 @@
+/* ============================================
+   HERO 3D CHARACTER — CSS POWERED
+   ============================================ */
+
+.hero-3d-character {
+  position: relative;
+  width: 320px;
+  height: 320px;
+  perspective: 1000px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Scanning Rings */
+.ring {
+  position: absolute;
+  border-radius: 50%;
+  border: 1px solid rgba(0, 200, 255, 0.3);
+  pointer-events: none;
+}
+
+.ring-1 {
+  width: 280px;
+  height: 280px;
+  border-style: dashed;
+  animation: rotateRing 8s linear infinite;
+}
+
+.ring-2 {
+  width: 320px;
+  height: 320px;
+  border-color: rgba(0, 150, 200, 0.2);
+  animation: rotateRing 12s linear infinite reverse;
+}
+
+.ring-3 {
+  width: 360px;
+  height: 360px;
+  border-color: rgba(0, 200, 255, 0.1);
+  border-width: 2px;
+  animation: rotateRing 16s linear infinite;
+}
+
+@keyframes rotateRing {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Image container */
+.character-perspective {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  transform-style: preserve-3d;
+  z-index: 2;
+}
+
+.character-image-wrapper {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  overflow: hidden;
+  position: relative;
+  border: 2px solid rgba(0, 200, 255, 0.4);
+  box-shadow:
+    0 0 40px rgba(0, 200, 255, 0.25),
+    0 0 80px rgba(0, 200, 255, 0.1),
+    inset 0 0 40px rgba(0, 200, 255, 0.1);
+}
+
+.character-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: saturate(0.85) contrast(1.1);
+}
+
+.character-fallback {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #0a1628, #001428);
+  font-size: 48px;
+  font-weight: 700;
+  color: rgba(0, 200, 255, 0.5);
+  letter-spacing: 4px;
+}
+
+/* Scan line effect */
+.character-scanline {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg,
+    transparent,
+    rgba(0, 200, 255, 0.7),
+    rgba(0, 255, 200, 0.3),
+    transparent
+  );
+  animation: scanDown 3s ease-in-out infinite;
+  z-index: 5;
+}
+
+@keyframes scanDown {
+  0%, 100% { top: -3px; opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { top: 100%; opacity: 0; }
+}
+
+/* Holographic overlay */
+.character-holo-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(0, 200, 255, 0.08) 0%,
+    transparent 40%,
+    rgba(0, 200, 255, 0.04) 60%,
+    transparent 100%
+  );
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+/* HUD data panels */
+.character-hud {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 6px 10px;
+  background: rgba(0, 200, 255, 0.05);
+  border: 1px solid rgba(0, 200, 255, 0.15);
+  border-radius: 4px;
+  font-family: 'Courier New', monospace;
+  z-index: 5;
+  animation: hudPulse 3s ease-in-out infinite;
+}
+
+@keyframes hudPulse {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 1; }
+}
+
+.hud-label {
+  font-size: 8px;
+  letter-spacing: 2px;
+  color: rgba(0, 200, 255, 0.5);
+  text-transform: uppercase;
+}
+
+.hud-value {
+  font-size: 10px;
+  color: rgba(0, 200, 255, 0.8);
+  letter-spacing: 1px;
+}
+
+.hud-top-left { top: 30px; left: -40px; }
+.hud-top-right { top: 30px; right: -40px; }
+.hud-bottom-left { bottom: 30px; left: -40px; }
+.hud-bottom-right { bottom: 30px; right: -40px; }
+
+/* Energy Particles */
+.character-particle {
+  position: absolute;
+  width: var(--size);
+  height: var(--size);
+  background: rgba(0, 200, 255, 0.6);
+  border-radius: 50%;
+  animation: orbitParticle 4s linear infinite;
+  animation-delay: var(--delay);
+  box-shadow: 0 0 6px rgba(0, 200, 255, 0.4);
+}
+
+@keyframes orbitParticle {
+  0% {
+    transform: rotate(var(--angle)) translateX(var(--distance)) scale(0);
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+    transform: rotate(var(--angle)) translateX(var(--distance)) scale(1);
+  }
+  80% {
+    opacity: 1;
+    transform: rotate(calc(var(--angle) + 360deg)) translateX(var(--distance)) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: rotate(calc(var(--angle) + 360deg)) translateX(var(--distance)) scale(0);
+  }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .hero-3d-character {
+    width: 240px;
+    height: 240px;
+  }
+  .character-perspective {
+    width: 150px;
+    height: 150px;
+  }
+  .ring-1 { width: 200px; height: 200px; }
+  .ring-2 { width: 230px; height: 230px; }
+  .ring-3 { width: 260px; height: 260px; }
+  .character-hud { display: none; }
+}

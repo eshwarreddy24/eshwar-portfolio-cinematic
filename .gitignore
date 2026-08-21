@@ -1,0 +1,8 @@
+node_modules/
+dist/
+.vite/
+*.tsbuildinfo
+create-zip.mjs
+create-zip.ps1
+create-zip-clean.ps1
+.freebuff/
