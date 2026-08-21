@@ -1,46 +1,21 @@
-/* ============================================
-   SOCIAL ICONS — CINEMATIC
-   ============================================ */
-
-.icons-section {
-  margin-top: 32px;
-}
-
-.social-icons {
-  display: flex;
-  gap: 16px;
-}
-
+/* SOCIAL ICONS */
+.icons-section { margin-top: 32px; }
+.social-icons { display: flex; gap: 16px; }
 .social-icons a {
-  width: 44px;
-  height: 44px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  width: 44px; height: 44px;
+  display: flex; align-items: center; justify-content: center;
   background: rgba(255, 255, 255, 0.03);
   border: 1px solid rgba(255, 255, 255, 0.06);
-  border-radius: 10px;
-  color: rgba(255, 255, 255, 0.5);
-  font-size: 18px;
-  transition: all 0.3s ease;
-  text-decoration: none;
+  border-radius: 10px; color: #94a3b8; font-size: 18px;
+  transition: all 0.3s ease; text-decoration: none;
 }
-
 .social-icons a:hover {
-  border-color: rgba(0, 200, 255, 0.3);
-  color: #00c8ff;
-  background: rgba(0, 200, 255, 0.05);
+  border-color: rgba(167, 139, 250, 0.3);
+  color: #a78bfa;
+  background: rgba(167, 139, 250, 0.05);
   transform: translateY(-3px);
 }
-
-/* Mobile */
 @media (max-width: 768px) {
-  .social-icons {
-    gap: 12px;
-  }
-  .social-icons a {
-    width: 40px;
-    height: 40px;
-    font-size: 16px;
-  }
+  .social-icons { gap: 12px; }
+  .social-icons a { width: 40px; height: 40px; font-size: 16px; }
 }

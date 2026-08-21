@@ -1,0 +1,44 @@
+/* MINI GAME */
+.minigame-section { position: relative; padding: 80px 0; z-index: 5; }
+.minigame-container { max-width: 500px; margin: 0 auto; padding: 0 40px; }
+.minigame-desc {
+  font-family: 'Inter', sans-serif; font-size: 14px; color: #94a3b8;
+  margin-bottom: 20px; text-align: center;
+}
+.minigame-desc strong { color: #fbbf24; }
+.minigame-box {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 12px; overflow: hidden;
+  display: flex; flex-direction: column; align-items: center;
+}
+.game-canvas {
+  width: 100%; max-width: 400px; display: block;
+  cursor: pointer; border-radius: 8px;
+}
+.game-controls {
+  display: flex; gap: 20px; align-items: center; padding: 12px 16px;
+  width: 100%; justify-content: center;
+}
+.game-score {
+  font-family: 'Courier New', monospace; font-size: 13px; color: #a78bfa; letter-spacing: 1px;
+}
+.game-high {
+  font-family: 'Courier New', monospace; font-size: 13px; color: #fbbf24; letter-spacing: 1px;
+}
+.play-btn, .restart-btn {
+  font-family: 'Inter', sans-serif; font-size: 14px; font-weight: 600;
+  letter-spacing: 2px; padding: 16px 40px;
+  background: rgba(167, 139, 250, 0.1);
+  border: 1px solid rgba(167, 139, 250, 0.3);
+  border-radius: 8px; color: #a78bfa;
+  transition: all 0.3s ease; cursor: pointer;
+}
+.play-btn:hover, .restart-btn:hover {
+  background: rgba(167, 139, 250, 0.2);
+  transform: scale(1.05);
+  box-shadow: 0 0 30px rgba(167, 139, 250, 0.2);
+}
+@media (max-width: 768px) {
+  .minigame-container { padding: 0 20px; }
+}
