@@ -6,16 +6,17 @@ import Lenis from 'lenis';
 const CinematicScene = lazy(() => import('./CinematicScene'));
 const CinematicIntro = lazy(() => import('./CinematicIntro'));
 
+import FlowingMenu from './FlowingMenu';
 import Landing from './Landing';
 import About from './About';
 import WhatIDo from './WhatIDo';
 import Career from './Career';
+import DomeGallery from './DomeGallery';
 import TechStackNew from './TechStackNew';
 import Projects from './Projects';
 import MiniGame from './MiniGame';
 import CallToAction from './CallToAction';
 import Contact from './Contact';
-import Navbar from './Navbar';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -64,15 +65,16 @@ export default function MainContainer() {
 
       {introComplete && (
         <>
-          <Navbar />
+          <FlowingMenu />
           <main className="main-content">
             <Landing />
             <About />
             <WhatIDo />
             <Career />
+            <DomeGallery />
             <TechStackNew />
             <Projects />
-            <MiniGame />
+            <div id="game"><MiniGame /></div>
             <CallToAction />
             <Contact />
           </main>

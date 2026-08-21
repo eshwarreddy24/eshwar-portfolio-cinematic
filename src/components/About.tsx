@@ -1,6 +1,7 @@
 import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import TiltCard from './TiltCard';
 import '../components/styles/About.css';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -11,23 +12,12 @@ export default function About() {
 
   useEffect(() => {
     if (!contentRef.current || !sectionRef.current) return;
-
     gsap.fromTo(contentRef.current.children, {
-      opacity: 0,
-      y: 40,
-      filter: 'blur(5px)',
+      opacity: 0, y: 40, filter: 'blur(5px)',
     }, {
-      opacity: 1,
-      y: 0,
-      filter: 'blur(0px)',
-      duration: 1,
-      stagger: 0.2,
-      ease: 'power3.out',
-      scrollTrigger: {
-        trigger: sectionRef.current,
-        start: 'top 70%',
-        toggleActions: 'play none none reverse',
-      },
+      opacity: 1, y: 0, filter: 'blur(0px)',
+      duration: 1, stagger: 0.2, ease: 'power3.out',
+      scrollTrigger: { trigger: sectionRef.current, start: 'top 70%', toggleActions: 'play none none reverse' },
     });
   }, []);
 
@@ -47,18 +37,24 @@ export default function About() {
             building innovative solutions.
           </p>
           <div className="about-stats">
-            <div className="stat-item">
-              <span className="stat-number">2+</span>
-              <span className="stat-label">Years Experience</span>
-            </div>
-            <div className="stat-item">
-              <span className="stat-number">5+</span>
-              <span className="stat-label">Roles</span>
-            </div>
-            <div className="stat-item">
-              <span className="stat-number">50+</span>
-              <span className="stat-label">Projects</span>
-            </div>
+            <TiltCard className="stat-tilt">
+              <div className="stat-item">
+                <span className="stat-number">2+</span>
+                <span className="stat-label">Years Experience</span>
+              </div>
+            </TiltCard>
+            <TiltCard className="stat-tilt">
+              <div className="stat-item">
+                <span className="stat-number">5+</span>
+                <span className="stat-label">Roles</span>
+              </div>
+            </TiltCard>
+            <TiltCard className="stat-tilt">
+              <div className="stat-item">
+                <span className="stat-number">50+</span>
+                <span className="stat-label">Projects</span>
+              </div>
+            </TiltCard>
           </div>
         </div>
       </div>

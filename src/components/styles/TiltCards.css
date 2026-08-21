@@ -1,0 +1,23 @@
+/* TILT CARDS */
+.tilt-card {
+  position: relative;
+  transition: transform 0.15s ease-out;
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+.tilt-card-glare {
+  position: absolute; inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(
+    circle at var(--glare-x, 50%) var(--glare-y, 50%),
+    var(--glare-color, rgba(167, 139, 250, 0.15)) 0%,
+    transparent 60%
+  );
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+  z-index: 10;
+}
+.tilt-card:hover .tilt-card-glare {
+  opacity: 1;
+}
