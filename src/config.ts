@@ -16,28 +16,28 @@ export const config = {
   },
   experiences: [
     {
-      role: "Graduate Apprentice — Engineering / Operations / Procurement",
+      role: "Graduate Apprentice",
       company: "Airports Authority of India",
       location: "Bengaluru International Airport",
       period: "2024 — Present",
-      highlights: ["SAP MM billing & procurement", "150+ vendor tender scrutiny", "GeM portal & e-Office", "MIS reporting & documentation"]
+      highlights: ["SAP MM billing and procurement", "150+ vendor tender scrutiny", "GeM portal and e-Office operations", "MIS reporting and documentation"]
     },
     {
-      role: "Graduate Engineer Trainee — Client Coordination / Design",
+      role: "Graduate Engineer Trainee",
       company: "Organo Eco Habitats Pvt Ltd",
       location: "Bengaluru, India",
       period: "2024 — 2024",
-      highlights: ["Premium NRI client coordination", "Design & drafting", "Documentation & billing", "ClickUp project management"]
+      highlights: ["Premium NRI client coordination", "Design and drafting", "Documentation and billing", "ClickUp project management"]
     },
     {
-      role: "Content Creator & Graphic Designer",
+      role: "Content Creator and Graphic Designer",
       company: "Freelance",
       location: "Remote",
       period: "2020 — Present",
-      highlights: ["Graphic designing & branding", "Script writing & animation", "Video editing & production", "Social media content creation"]
+      highlights: ["Graphic designing and branding", "Script writing and animation", "Video editing and production", "Social media content creation"]
     },
     {
-      role: "Meme Creator & Social Media Manager",
+      role: "Meme Creator and Social Media Manager",
       company: "Personal Brand",
       location: "Online",
       period: "2020 — Present",

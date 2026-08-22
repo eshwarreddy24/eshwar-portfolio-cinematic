@@ -8,10 +8,13 @@ export default function Journey() {
 
   useEffect(() => {
     if (!ref.current) return;
-    gsap.fromTo(ref.current.querySelectorAll('.journey-item'),
-      { opacity: 0, y: 30 },
-      { opacity: 1, y: 0, duration: .7, stagger: .15, ease: 'power3.out',
-        scrollTrigger: { trigger: ref.current, start: 'top 80%' }
+    const cards = ref.current.querySelectorAll('.journey-block');
+    gsap.fromTo(cards,
+      { opacity: 0, y: 60, rotateX: 12, scale: 0.95 },
+      {
+        opacity: 1, y: 0, rotateX: 0, scale: 1,
+        duration: 0.8, stagger: 0.2, ease: 'power3.out',
+        scrollTrigger: { trigger: ref.current, start: 'top 75%' }
       }
     );
   }, []);
@@ -20,17 +23,20 @@ export default function Journey() {
     <section className="journey-section" id="journey">
       <div className="journey-section-wrap" ref={ref}>
         <p className="stack-eyebrow"><span>02</span> Journey</p>
-        <h2 className="stack-h2">Where I've <em className="about-serif">Worked</em></h2>
+        <h2 className="stack-h2">Where I've <em className="about-serif about-green">Worked</em></h2>
 
-        <div className="journey-timeline">
+        <div className="journey-blocks">
           {config.experiences.map((exp, i) => (
-            <div key={i} className="journey-item">
-              <div className="journey-dot" />
-              <div className="journey-content">
-                <span className="journey-period">{exp.period}</span>
-                <h3>{exp.role}</h3>
-                <p className="journey-place">{exp.company} — {exp.location}</p>
-                <div className="journey-tags">
+            <div key={i} className="journey-block" style={{ perspective: 800 }}>
+              <div className="journey-block-inner">
+                <div className="journey-block-top">
+                  <span className="journey-period">{exp.period}</span>
+                  <span className="journey-block-num">{String(i + 1).padStart(2, '0')}</span>
+                </div>
+                <h3 className="journey-block-role">{exp.role}</h3>
+                <p className="journey-block-company">{exp.company}</p>
+                <p className="journey-block-location">{exp.location}</p>
+                <div className="journey-block-tags">
                   {exp.highlights.map((h, j) => <span key={j} className="work-tag">{h}</span>)}
                 </div>
               </div>

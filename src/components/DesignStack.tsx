@@ -11,7 +11,7 @@ const tools = [
   { name: 'AutoCAD', icon: '📐' }, { name: 'GitHub', icon: '🐙' },
   { name: 'MS Excel', icon: '📊' }, { name: 'MS Word', icon: '📝' },
   { name: 'MS PowerPoint', icon: '📽️' }, { name: 'Cursor', icon: '⌨️' },
-  { name: 'Vibe Coding', icon: '🎶' }, { name: 'SAP S/4HANA', icon: '🏢' },
+  { name: 'Vibe Coding', icon: '🎶' }, { name: 'Midjourney', icon: '🎨' },
 ];
 
 export default function DesignStack() {

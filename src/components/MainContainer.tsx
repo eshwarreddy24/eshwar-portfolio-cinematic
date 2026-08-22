@@ -9,7 +9,6 @@ import About from './About';
 import Journey from './Journey';
 import DesignStack from './DesignStack';
 import Work from './Work';
-import Experience from './Experience';
 import Credentials from './Credentials';
 import ChessGame from './ChessGame';
 import Contact from './Contact';
@@ -49,7 +48,6 @@ export default function MainContainer() {
         <Journey />
         <DesignStack />
         <Work />
-        <Experience />
         <Credentials />
         <ChessGame />
         <div className="finalFrame">
