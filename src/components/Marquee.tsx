@@ -1,5 +1,5 @@
-const solidSkills = ['SAP MM', 'Procurement', 'Interior Design', 'AutoCAD', 'SketchUp', 'Content Creation', 'Cinematography', 'Client Coordination', 'Tender Scrutiny', 'BOQ & Estimation'];
-const outlineSkills = ['Graphic Design', 'Video Editing', 'After Effects', 'Photoshop', 'MS Office Suite', 'Python', 'ChatGPT', 'Claude Code', 'Vibe Coding', 'GitHub', 'Figma', 'Canva'];
+const solidSkills = ['SAP MM', 'Procurement', 'AutoCAD', 'SketchUp', 'Content Creation', 'Cinematography', 'Client Coordination', 'Tender Scrutiny', 'Graphic Design', 'Video Editing'];
+const outlineSkills = ['After Effects', 'Photoshop', 'MS Office Suite', 'ChatGPT', 'Claude Code', 'Vibe Coding', 'Figma', 'Canva', 'Premiere Pro', 'SAP S/4HANA'];
 
 function Row({ items, dir }: { items: string[]; dir: 'left' | 'right' }) {
   const rep = [...items, ...items, ...items, ...items];

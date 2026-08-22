@@ -32,22 +32,22 @@ export default function Hero() {
         <p className="hero-kicker">Engineer &amp; SAP Specialist</p>
         <h1 className="hero-h1">
           <span className="hero-row">Engineering solutions that</span>
-          <span className="hero-row">feel <em className="hero-serif hero-red">obvious.</em></span>
+          <span className="hero-row">feel <em className="hero-serif hero-green">obvious.</em></span>
         </h1>
         <p className="hero-sub">
           I bridge engineering, procurement, and design — making complex processes
           feel effortless. From SAP MM to graphic design, I deliver results.
         </p>
         <div className="hero-ctas">
-          <a href="#work" className="btn btn-primary btn-md">
+          <a href="#contact" className="btn btn-primary btn-md">
             <span className="btn-fill" />
-            <span className="btn-labelWrap"><span className="btn-labelStack"><span className="btn-label">View My Work</span><span className="btn-label btn-labelClone" aria-hidden="true">View My Work</span></span></span>
+            <span className="btn-labelWrap"><span className="btn-labelStack"><span className="btn-label">Hire Me</span><span className="btn-label btn-labelClone" aria-hidden="true">Hire Me</span></span></span>
             <span className="btn-arrow">→</span>
           </a>
-          <a href="#about" className="btn btn-ghost btn-md">
+          <a href="#chess" className="btn btn-ghost btn-md">
             <span className="btn-fill" />
-            <span className="btn-lead"><span className="hero-play">▶</span></span>
-            <span className="btn-labelWrap"><span className="btn-labelStack"><span className="btn-label">See How I Work</span><span className="btn-label btn-labelClone" aria-hidden="true">See How I Work</span></span></span>
+            <span className="btn-lead"><span className="hero-play">♟</span></span>
+            <span className="btn-labelWrap"><span className="btn-labelStack"><span className="btn-label">Play a Game with Me</span><span className="btn-label btn-labelClone" aria-hidden="true">Play a Game with Me</span></span></span>
           </a>
         </div>
       </div>
@@ -67,7 +67,6 @@ export default function Hero() {
         <div className="hero-stage">
           <div className="hero-archLine" />
           <div className="hero-arch" />
-          {/* No portrait image — arch only */}
         </div>
 
         <div className="hero-side hero-sideR">

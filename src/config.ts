@@ -3,7 +3,7 @@ export const config = {
     name: "Eshwar",
     fullName: "Eshwar Reddy Gali",
     titles: ["ENGINEER", "SAP Specialist", "Procurement Specialist", "Graphic Designer", "Cinematographer", "Content Creator"],
-    tagline: "Engineering professional with expertise in design, documentation, estimation & procurement.",
+    tagline: "Engineering professional with expertise in design, documentation, and procurement.",
     location: "Bengaluru, India",
     photoUrl: ""
   },
@@ -20,14 +20,14 @@ export const config = {
       company: "Airports Authority of India",
       location: "Bengaluru International Airport",
       period: "2024 — Present",
-      highlights: ["SAP MM billing & procurement", "150+ vendor tender scrutiny", "BOQs, estimation & billing", "GeM portal & e-Office"]
+      highlights: ["SAP MM billing & procurement", "150+ vendor tender scrutiny", "GeM portal & e-Office", "MIS reporting & documentation"]
     },
     {
-      role: "Graduate Engineer Trainee — Client Coordination / Interior Design",
+      role: "Graduate Engineer Trainee — Client Coordination / Design",
       company: "Organo Eco Habitats Pvt Ltd",
       location: "Bengaluru, India",
       period: "2024 — 2024",
-      highlights: ["Premium NRI client coordination", "Interior design & drafting", "Estimation & billing", "ClickUp project management"]
+      highlights: ["Premium NRI client coordination", "Design & drafting", "Documentation & billing", "ClickUp project management"]
     },
     {
       role: "Content Creator & Graphic Designer",
@@ -48,12 +48,12 @@ export const config = {
     {
       name: "AI Resume Optimizer",
       description: "AI-powered tool that analyzes resumes against job descriptions and suggests improvements using NLP.",
-      tech: ["Python", "NLP", "Streamlit", "Hugging Face"]
+      tech: ["NLP", "Streamlit", "Hugging Face"]
     },
     {
       name: "Smart Invoice Generator",
       description: "AI-assisted invoice generator that auto-fills vendor details, calculates totals, and exports to PDF.",
-      tech: ["Python", "OpenAI API", "FastAPI", "React"]
+      tech: ["OpenAI API", "FastAPI", "React"]
     }
   ]
 };

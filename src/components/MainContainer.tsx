@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Lenis from 'lenis';
@@ -11,6 +11,7 @@ import DesignStack from './DesignStack';
 import Work from './Work';
 import Experience from './Experience';
 import Credentials from './Credentials';
+import ChessGame from './ChessGame';
 import Contact from './Contact';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -50,6 +51,7 @@ export default function MainContainer() {
         <Work />
         <Experience />
         <Credentials />
+        <ChessGame />
         <div className="finalFrame">
           <Contact />
         </div>

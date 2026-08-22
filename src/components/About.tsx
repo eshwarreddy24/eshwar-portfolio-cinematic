@@ -20,7 +20,7 @@ export default function About() {
       <div className="about-wrap" ref={ref}>
         <p className="about-eyebrow about-reveal"><span>01</span> About Me</p>
         <h2 className="about-h2 about-reveal">
-          Engineering professional<br />& <em className="about-serif">SAP Specialist</em>
+          Engineering professional<br />& <em className="about-serif about-green">SAP Specialist</em>
         </h2>
 
         <div className="about-grid">
@@ -29,14 +29,14 @@ export default function About() {
               <span className="about-beatN">01</span>
               <div>
                 <h3>Engineering &amp; Procurement</h3>
-                <p>Handling <b>SAP MM</b> billing, tender scrutiny for 150+ vendors, BOQs, estimation, GeM portal operations, and e-Office at Airports Authority of India.</p>
+                <p>Handling <b>SAP MM</b> billing, tender scrutiny for 150+ vendors, GeM portal operations, and e-Office at Airports Authority of India.</p>
               </div>
             </div>
             <div className="about-beat about-reveal">
               <span className="about-beatN">02</span>
               <div>
                 <h3>Design &amp; Coordination</h3>
-                <p>Previously at <b>Organo Eco Habitats</b>, coordinated premium NRI clients on interior design projects, estimation &amp; billing.</p>
+                <p>Previously at <b>Organo Eco Habitats</b>, coordinated premium NRI clients on design projects, documentation &amp; billing.</p>
               </div>
             </div>
             <div className="about-beat about-reveal">

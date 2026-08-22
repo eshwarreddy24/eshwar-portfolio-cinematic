@@ -8,10 +8,10 @@ const tools = [
   { name: 'Figma', icon: '🖌️' }, { name: 'Canva', icon: '🎯' },
   { name: 'Photoshop', icon: '🖼️' }, { name: 'After Effects', icon: '🎬' },
   { name: 'Premiere Pro', icon: '🎞️' }, { name: 'SketchUp', icon: '🏠' },
-  { name: 'AutoCAD', icon: '📐' }, { name: 'Python', icon: '🐍' },
-  { name: 'GitHub', icon: '🐙' }, { name: 'MS Excel', icon: '📊' },
-  { name: 'MS Word', icon: '📝' }, { name: 'MS PowerPoint', icon: '📽️' },
-  { name: 'Cursor', icon: '⌨️' }, { name: 'Vibe Coding', icon: '🎶' },
+  { name: 'AutoCAD', icon: '📐' }, { name: 'GitHub', icon: '🐙' },
+  { name: 'MS Excel', icon: '📊' }, { name: 'MS Word', icon: '📝' },
+  { name: 'MS PowerPoint', icon: '📽️' }, { name: 'Cursor', icon: '⌨️' },
+  { name: 'Vibe Coding', icon: '🎶' }, { name: 'SAP S/4HANA', icon: '🏢' },
 ];
 
 export default function DesignStack() {
@@ -30,7 +30,7 @@ export default function DesignStack() {
     <section className="stack">
       <div className="stack-wrap" ref={ref}>
         <p className="stack-eyebrow"><span>03</span> Design Stack</p>
-        <h2 className="stack-h2">Tools & <em className="about-serif">Software</em></h2>
+        <h2 className="stack-h2">Tools & <em className="about-serif about-green">Software</em></h2>
         <div className="stack-grid">
           {tools.map(t => (
             <div key={t.name} className="stack-item">
