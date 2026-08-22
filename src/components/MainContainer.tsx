@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Lenis from 'lenis';
@@ -14,20 +14,6 @@ import Credentials from './Credentials';
 import Contact from './Contact';
 
 gsap.registerPlugin(ScrollTrigger);
-
-function Scene({ id, runway, children }: { id?: string; runway?: number; children: React.ReactNode }) {
-  const runwayPx = runway ? `calc(${runway} * 100svh)` : undefined;
-  return (
-    <>
-      <div className="scene-hold" data-scene={id}>
-        {children}
-      </div>
-      {runway && (
-        <div className="scene-runway" data-runway={id} style={{ height: runwayPx }} aria-hidden="true" />
-      )}
-    </>
-  );
-}
 
 export default function MainContainer() {
   const [ready, setReady] = useState(false);
@@ -56,38 +42,14 @@ export default function MainContainer() {
     <div>
       <Navbar />
       <main>
-        <Scene id="hero">
-          <Hero />
-        </Scene>
-
-        <Scene id="about">
-          <Marquee />
-        </Scene>
-
-        <Scene id="about-content">
-          <About />
-        </Scene>
-
-        <Scene id="journey" runway={4}>
-          <Journey />
-        </Scene>
-
-        <Scene id="stack">
-          <DesignStack />
-        </Scene>
-
-        <Scene id="work" runway={3}>
-          <Work />
-        </Scene>
-
-        <Scene id="experience" runway={3}>
-          <Experience />
-        </Scene>
-
-        <Scene id="credentials" runway={2}>
-          <Credentials />
-        </Scene>
-
+        <Hero />
+        <Marquee />
+        <About />
+        <Journey />
+        <DesignStack />
+        <Work />
+        <Experience />
+        <Credentials />
         <div className="finalFrame">
           <Contact />
         </div>
