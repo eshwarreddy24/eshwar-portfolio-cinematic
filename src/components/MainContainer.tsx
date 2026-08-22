@@ -1,9 +1,8 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Lenis from 'lenis';
 import Navbar from './Navbar';
-import TunnelIntro from './TunnelIntro';
 import Hero from './Hero';
 import Marquee from './Marquee';
 import About from './About';
@@ -32,15 +31,12 @@ function Scene({ id, runway, children }: { id?: string; runway?: number; childre
 
 export default function MainContainer() {
   const [ready, setReady] = useState(false);
-  const [tunnelProgress, setTunnelProgress] = useState(0);
-  const tunnelRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const t = setTimeout(() => setReady(true), 100);
     return () => clearTimeout(t);
   }, []);
 
-  // Lenis smooth scroll
   useEffect(() => {
     if (!ready) return;
     const lenis = new Lenis({
@@ -54,91 +50,44 @@ export default function MainContainer() {
     return () => { lenis.destroy(); };
   }, [ready]);
 
-  // Tunnel scroll progress — calculated from the runway div below the tunnel
-  useEffect(() => {
-    if (!ready) return;
-    const handle = () => {
-      const runwayEl = document.querySelector('[data-runway="intro"]') as HTMLElement | null;
-      if (!runwayEl) return;
-      const rect = runwayEl.getBoundingClientRect();
-      const vh = window.innerHeight;
-      // runwayEl top goes from +6vh (start) to -vh (end)
-      // progress = how far through the runway we've scrolled
-      const totalScroll = rect.height + vh; // total scrollable distance
-      const scrolled = totalScroll - (rect.bottom + vh); // how much has scrolled past
-      const progress = Math.max(0, Math.min(1, scrolled / rect.height));
-      setTunnelProgress(progress);
-    };
-    window.addEventListener('scroll', handle, { passive: true });
-    handle();
-    return () => window.removeEventListener('scroll', handle);
-  }, [ready]);
-
   if (!ready) return null;
 
   return (
     <div>
       <Navbar />
       <main>
-        {/* TUNNEL INTRO — 6 screens of scroll */}
-        <Scene id="intro" runway={6}>
-          <section className="tunnel-intro" id="intro-section">
-            <div className="tunnel-frame" ref={tunnelRef}>
-              <TunnelIntro progress={tunnelProgress} />
-              <h1 style={{ clipPath: 'inset(50%)', whiteSpace: 'nowrap', width: 1, height: 1, position: 'absolute', overflow: 'hidden' }}>
-                ESHWAR — Engineer &amp; SAP Specialist
-              </h1>
-              <p className="tunnel-hint">Scroll to enter</p>
-              <div className="tunnel-progress">
-                <span className="tunnel-stageNow">{String(Math.min(6, Math.floor(tunnelProgress * 6) + 1)).padStart(2, '0')}</span>
-                <span className="tunnel-progLine"><span className="tunnel-progFill" style={{ transform: `scaleX(${tunnelProgress})` }} /></span>
-                <span>06</span>
-              </div>
-            </div>
-          </section>
-        </Scene>
-
-        {/* HERO */}
         <Scene id="hero">
           <Hero />
         </Scene>
 
-        {/* MARQUEE */}
         <Scene id="about">
           <Marquee />
         </Scene>
 
-        {/* ABOUT */}
         <Scene id="about-content">
           <About />
         </Scene>
 
-        {/* JOURNEY — 6 screens of scroll */}
-        <Scene id="journey" runway={6}>
+        <Scene id="journey" runway={4}>
           <Journey />
         </Scene>
 
-        {/* DESIGN STACK */}
         <Scene id="stack">
           <DesignStack />
         </Scene>
 
-        {/* WORK — 4.5 screens */}
-        <Scene id="work" runway={4.5}>
+        <Scene id="work" runway={3}>
           <Work />
         </Scene>
 
-        {/* EXPERIENCE — 4.4 screens */}
-        <Scene id="experience" runway={4.4}>
+        <Scene id="experience" runway={3}>
           <Experience />
         </Scene>
 
-        {/* CREDENTIALS — 3.5 screens */}
-        <Scene id="credentials" runway={3.5}>
+        <Scene id="credentials" runway={2}>
           <Credentials />
         </Scene>
 
-        {/* CONTACT */}
         <div className="finalFrame">
           <Contact />
         </div>

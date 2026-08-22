@@ -50,7 +50,11 @@ export default function About() {
 
           <div className="about-sideCol about-reveal">
             <div className="about-imgCard">
-              <div className="avatar-circle">EG</div>
+              <img
+                src="/profile.jpg"
+                alt="Eshwar Reddy Gali"
+                style={{ width: 120, height: 120, borderRadius: '50%', objectFit: 'cover', border: '3px solid #fff', boxShadow: '0 8px 30px rgba(0,0,0,.15)' }}
+              />
               <span className="avatar-label">Eshwar Reddy Gali</span>
             </div>
             <div className="about-philoCard">
