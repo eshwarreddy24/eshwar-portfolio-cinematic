@@ -8,7 +8,6 @@ import Marquee from './Marquee';
 import About from './About';
 import Journey from './Journey';
 import DesignStack from './DesignStack';
-import Work from './Work';
 import Credentials from './Credentials';
 import CricketGame from './CricketGame';
 import Contact from './Contact';
@@ -47,7 +46,6 @@ export default function MainContainer() {
         <About />
         <Journey />
         <DesignStack />
-        <Work />
         <Credentials />
         <CricketGame />
         <div className="finalFrame">

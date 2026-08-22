@@ -39,7 +39,7 @@ export default function Hero() {
           feel effortless. From SAP MM to graphic design, I deliver results.
         </p>
         <div className="hero-ctas">
-          <a href="#contact" className="btn btn-primary btn-md">
+          <a href="tel:+919515291117" className="btn btn-primary btn-md">
             <span className="btn-fill" />
             <span className="btn-labelWrap"><span className="btn-labelStack"><span className="btn-label">Hire Me</span><span className="btn-label btn-labelClone" aria-hidden="true">Hire Me</span></span></span>
             <span className="btn-arrow">→</span>

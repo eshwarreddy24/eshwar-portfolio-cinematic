@@ -8,7 +8,7 @@ const tools = [
   { name: 'Figma', icon: '🖌️' }, { name: 'Canva', icon: '🎯' },
   { name: 'Photoshop', icon: '🖼️' }, { name: 'After Effects', icon: '🎬' },
   { name: 'Premiere Pro', icon: '🎞️' }, { name: 'SketchUp', icon: '🏠' },
-  { name: 'AutoCAD', icon: '📐' }, { name: 'GitHub', icon: '🐙' },
+  { name: 'GitHub', icon: '🐙' },
   { name: 'MS Excel', icon: '📊' }, { name: 'MS Word', icon: '📝' },
   { name: 'MS PowerPoint', icon: '📽️' }, { name: 'Cursor', icon: '⌨️' },
   { name: 'Vibe Coding', icon: '🎶' }, { name: 'Midjourney', icon: '🎨' },
