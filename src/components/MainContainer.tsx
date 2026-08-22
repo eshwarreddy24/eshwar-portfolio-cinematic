@@ -1,30 +1,30 @@
-import { useState, useEffect, Suspense, lazy } from 'react';
+import { useState, useEffect } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Lenis from 'lenis';
 import Cursor from './Cursor';
-import WhiteParticles from './WhiteParticles';
 import Navbar from './Navbar';
-import Landing from './Landing';
+import Hero from './Hero';
+import Marquee from './Marquee';
 import About from './About';
-import SkillsSection from './SkillsSection';
-import Career from './Career';
-import Certifications from './Certifications';
-import Projects from './Projects';
+import Journey from './Journey';
+import DesignStack from './DesignStack';
+import Work from './Work';
+import Credentials from './Credentials';
 import Contact from './Contact';
 
 gsap.registerPlugin(ScrollTrigger);
 
 export default function MainContainer() {
-  const [loaded, setLoaded] = useState(false);
+  const [ready, setReady] = useState(false);
 
   useEffect(() => {
-    const timer = setTimeout(() => setLoaded(true), 200);
+    const timer = setTimeout(() => setReady(true), 100);
     return () => clearTimeout(timer);
   }, []);
 
   useEffect(() => {
-    if (!loaded) return;
+    if (!ready) return;
     const lenis = new Lenis({
       duration: 1.2,
       easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
@@ -34,22 +34,22 @@ export default function MainContainer() {
     gsap.ticker.add((time) => { lenis.raf(time * 1000); });
     gsap.ticker.lagSmoothing(0);
     return () => { lenis.destroy(); };
-  }, [loaded]);
+  }, [ready]);
 
-  if (!loaded) return null;
+  if (!ready) return null;
 
   return (
-    <div className="app-container">
+    <div>
       <Cursor />
-      <WhiteParticles />
       <Navbar />
-      <main className="main-content">
-        <Landing />
+      <main>
+        <Hero />
+        <Marquee />
         <About />
-        <SkillsSection />
-        <Career />
-        <Certifications />
-        <Projects />
+        <Journey />
+        <DesignStack />
+        <Work />
+        <Credentials />
         <Contact />
       </main>
     </div>

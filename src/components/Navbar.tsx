@@ -1,71 +1,71 @@
 import { useState, useEffect } from 'react';
 
 const links = [
+  { label: 'Home', href: '#home' },
   { label: 'About', href: '#about' },
-  { label: 'Skills', href: '#tools' },
-  { label: 'Experience', href: '#experience' },
-  { label: 'Projects', href: '#projects' },
+  { label: 'Work', href: '#work' },
   { label: 'Contact', href: '#contact' },
 ];
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
+  const [active, setActive] = useState('#home');
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 50);
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    const onScroll = () => {
+      setScrolled(window.scrollY > 60);
+      const sections = ['#home', '#about', '#work', '#contact'];
+      for (const id of sections.reverse()) {
+        const el = document.querySelector(id);
+        if (el && el.getBoundingClientRect().top <= 200) {
+          setActive(id);
+          break;
+        }
+      }
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
   return (
-    <nav style={{
-      position: 'fixed',
-      top: 0,
-      left: 0,
-      right: 0,
-      zIndex: 50,
-      padding: '16px 40px',
-      display: 'flex',
-      justifyContent: 'space-between',
-      alignItems: 'center',
-      background: scrolled ? 'rgba(0,0,0,0.85)' : 'transparent',
+    <header style={{
+      position: 'fixed', top: 0, left: 0, right: 0, zIndex: 100,
+      padding: '0 48px', height: 64,
+      display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+      background: scrolled ? 'rgba(10,10,10,0.9)' : 'transparent',
       backdropFilter: scrolled ? 'blur(20px)' : 'none',
-      borderBottom: scrolled ? '1px solid rgba(255,215,0,0.06)' : 'none',
+      borderBottom: scrolled ? '1px solid rgba(255,255,255,0.04)' : '1px solid transparent',
       transition: 'all 0.4s ease',
     }}>
       <a href="#home" style={{
-        fontFamily: "'Space Grotesk', sans-serif",
-        fontSize: 16,
-        fontWeight: 700,
-        color: '#ffd700',
-        letterSpacing: 2,
-        cursor: 'none',
+        fontFamily: "'Inter', sans-serif", fontSize: 18, fontWeight: 700,
+        color: '#fff', letterSpacing: 1,
       }}>
-        EG
+        ESHWAR<span style={{ color: '#facc15' }}>.</span>
       </a>
 
-      <div style={{
-        display: 'flex',
-        gap: 32,
-        alignItems: 'center',
-      }}>
-        {links.map(link => (
-          <a key={link.href} href={link.href} style={{
-            fontSize: 12,
-            letterSpacing: 2,
-            color: '#888',
-            fontWeight: 500,
-            textTransform: 'uppercase',
+      <nav style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
+        {links.map(l => (
+          <a key={l.href} href={l.href} style={{
+            position: 'relative', padding: '6px 16px',
+            fontSize: 13, fontWeight: 500, letterSpacing: 1,
+            color: active === l.href ? '#facc15' : '#888',
             transition: 'color 0.3s',
-            cursor: 'none',
-          }}
-          onMouseEnter={(e) => { (e.target as HTMLElement).style.color = '#ffd700'; }}
-          onMouseLeave={(e) => { (e.target as HTMLElement).style.color = '#888'; }}
-          >
-            {link.label}
+            overflow: 'hidden',
+          }}>
+            <span style={{
+              display: 'inline-flex', flexDirection: 'column', alignItems: 'center',
+              lineHeight: '18px',
+            }}>
+              <span>{l.label}</span>
+              <span aria-hidden="true" style={{
+                position: 'absolute', top: '100%',
+                transition: 'transform 0.3s', transform: active === l.href ? 'translateY(-100%)' : 'none',
+              }}>{l.label}</span>
+            </span>
           </a>
         ))}
-      </div>
-    </nav>
+      </nav>
+    </header>
   );
 }
