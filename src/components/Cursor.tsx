@@ -1,93 +1,64 @@
-import { useEffect, useRef } from "react";
-import "./styles/Cursor.css";
-import gsap from "gsap";
+import { useEffect, useRef } from 'react';
+import gsap from 'gsap';
 
-const Cursor = () => {
-  const cursorRef = useRef<HTMLDivElement>(null);
-  const trailRef = useRef<HTMLDivElement>(null);
-  const glowRef = useRef<HTMLDivElement>(null);
+export default function Cursor() {
+  const dotRef = useRef<HTMLDivElement>(null);
+  const ringRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const cursor = cursorRef.current!;
-    const trail = trailRef.current!;
-    const glow = glowRef.current!;
-    const mousePos = { x: 0, y: 0 };
-    const cursorPos = { x: 0, y: 0 };
-    const trailPos = { x: 0, y: 0 };
-    let hover = false;
+    const dot = dotRef.current;
+    const ring = ringRef.current;
+    if (!dot || !ring) return;
 
-    const onMouseMove = (e: MouseEvent) => {
-      mousePos.x = e.clientX;
-      mousePos.y = e.clientY;
+    const move = (e: MouseEvent) => {
+      gsap.to(dot, { x: e.clientX, y: e.clientY, duration: 0.1, ease: 'power2.out' });
+      gsap.to(ring, { x: e.clientX, y: e.clientY, duration: 0.35, ease: 'power2.out' });
     };
 
-    const loop = () => {
-      if (!hover) {
-        cursorPos.x += (mousePos.x - cursorPos.x) / 6;
-        cursorPos.y += (mousePos.y - cursorPos.y) / 6;
-        trailPos.x += (mousePos.x - trailPos.x) / 12;
-        trailPos.y += (mousePos.y - trailPos.y) / 12;
-
-        gsap.set(cursor, { x: cursorPos.x, y: cursorPos.y });
-        gsap.set(trail, { x: trailPos.x, y: trailPos.y });
-        gsap.set(glow, { x: mousePos.x, y: mousePos.y });
-      }
-      requestAnimationFrame(loop);
+    const enterLink = () => {
+      gsap.to(ring, { scale: 2, borderColor: 'rgba(255,215,0,0.6)', duration: 0.3 });
+      gsap.to(dot, { scale: 0.5, duration: 0.3 });
     };
-    requestAnimationFrame(loop);
+    const leaveLink = () => {
+      gsap.to(ring, { scale: 1, borderColor: 'rgba(255,215,0,0.3)', duration: 0.3 });
+      gsap.to(dot, { scale: 1, duration: 0.3 });
+    };
 
-    document.addEventListener("mousemove", onMouseMove);
-
-    // Magnetic pull on interactive elements
-    document.querySelectorAll("[data-cursor]").forEach((item) => {
-      const element = item as HTMLElement;
-
-      element.addEventListener("mouseenter", (e: MouseEvent) => {
-        const target = e.currentTarget as HTMLElement;
-        const rect = target.getBoundingClientRect();
-
-        if (element.dataset.cursor === "icons") {
-          cursor.classList.add("cursor-icons");
-          gsap.to(cursor, { x: rect.left, y: rect.top, duration: 0.15 });
-          cursor.style.setProperty("--cursorH", `${rect.height}px`);
-          hover = true;
-        }
-        if (element.dataset.cursor === "disable") {
-          cursor.classList.add("cursor-disable");
-        }
-        // Magnetic pull effect
-        gsap.to(glow, {
-          scale: 2.5,
-          opacity: 0.15,
-          duration: 0.4,
-          ease: "power2.out",
-        });
-      });
-
-      element.addEventListener("mouseleave", () => {
-        cursor.classList.remove("cursor-disable", "cursor-icons");
-        hover = false;
-        gsap.to(glow, {
-          scale: 1,
-          opacity: 0.06,
-          duration: 0.4,
-          ease: "power2.out",
-        });
-      });
+    window.addEventListener('mousemove', move);
+    document.querySelectorAll('a, button, [data-cursor]').forEach(el => {
+      el.addEventListener('mouseenter', enterLink);
+      el.addEventListener('mouseleave', leaveLink);
     });
 
     return () => {
-      document.removeEventListener("mousemove", onMouseMove);
+      window.removeEventListener('mousemove', move);
     };
   }, []);
 
   return (
     <>
-      <div className="cursor-main" ref={cursorRef}></div>
-      <div className="cursor-trail" ref={trailRef}></div>
-      <div className="cursor-glow" ref={glowRef}></div>
+      <div ref={dotRef} style={{
+        position: 'fixed',
+        top: 0, left: 0,
+        width: 6, height: 6,
+        borderRadius: '50%',
+        background: '#ffd700',
+        pointerEvents: 'none',
+        zIndex: 9999,
+        transform: 'translate(-50%, -50%)',
+        mixBlendMode: 'difference',
+      }} />
+      <div ref={ringRef} style={{
+        position: 'fixed',
+        top: 0, left: 0,
+        width: 36, height: 36,
+        borderRadius: '50%',
+        border: '1.5px solid rgba(255,215,0,0.3)',
+        pointerEvents: 'none',
+        zIndex: 9998,
+        transform: 'translate(-50%, -50%)',
+        transition: 'width 0.3s, height 0.3s',
+      }} />
     </>
   );
-};
-
-export default Cursor;
+}

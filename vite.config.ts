@@ -1,29 +1,20 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
-import tailwindcss from "@tailwindcss/vite";
 
 export default defineConfig({
-  plugins: [react(), tailwindcss()],
+  plugins: [react()],
   build: {
     rollupOptions: {
       output: {
         manualChunks: {
           gsap: ["gsap"],
-          three: ["three", "@react-three/fiber", "@react-three/drei"],
           vendor: ["react", "react-dom"],
         },
       },
     },
-    chunkSizeWarningLimit: 1500,
-    minify: "terser",
-    terserOptions: {
-      compress: {
-        drop_console: true,
-        drop_debugger: true,
-      },
-    },
+    chunkSizeWarningLimit: 500,
   },
   optimizeDeps: {
-    include: ["three", "gsap", "lenis"],
+    include: ["gsap", "lenis"],
   },
 });
