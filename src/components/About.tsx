@@ -28,21 +28,21 @@ export default function About() {
             <div className="about-beat about-reveal">
               <span className="about-beatN">01</span>
               <div>
-                <h3>Engineering & Procurement</h3>
+                <h3>Engineering &amp; Procurement</h3>
                 <p>Handling <b>SAP MM</b> billing, tender scrutiny for 150+ vendors, BOQs, estimation, GeM portal operations, and e-Office at Airports Authority of India.</p>
               </div>
             </div>
             <div className="about-beat about-reveal">
               <span className="about-beatN">02</span>
               <div>
-                <h3>Design & Coordination</h3>
-                <p>Previously at <b>Organo Eco Habitats</b>, coordinated premium NRI clients on interior design projects, estimation & billing.</p>
+                <h3>Design &amp; Coordination</h3>
+                <p>Previously at <b>Organo Eco Habitats</b>, coordinated premium NRI clients on interior design projects, estimation &amp; billing.</p>
               </div>
             </div>
             <div className="about-beat about-reveal">
               <span className="about-beatN">03</span>
               <div>
-                <h3>Content & Creativity</h3>
+                <h3>Content &amp; Creativity</h3>
                 <p>Since 2020, I've been a <b>content creator, graphic designer, and meme creator</b> — building visual stories, animations, and viral content.</p>
               </div>
             </div>

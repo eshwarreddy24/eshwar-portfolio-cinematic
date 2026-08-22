@@ -18,14 +18,18 @@ export default function Hero() {
         <span className="hero-glow hero-glowL" />
         <span className="hero-glow hero-glowR" />
         <span className="hero-ring" />
+        <span className="hero-plusA">+</span>
+        <span className="hero-plusB">+</span>
         <span className="hero-particle" style={{ left: '8%', top: '26%', width: 6, height: 6 }} />
         <span className="hero-particle" style={{ left: '14%', top: '62%', width: 4, height: 4 }} />
-        <span className="hero-particle hero-particleAcc" style={{ left: '90%', top: '22%', width: 5, height: 5 }} />
+        <span className="hero-particle" style={{ left: '5%', top: '78%', width: 5, height: 5 }} />
+        <span className="hero-particle" style={{ left: '90%', top: '22%', width: 5, height: 5 }} />
         <span className="hero-particle hero-particleAcc" style={{ left: '94%', top: '58%', width: 6, height: 6 }} />
+        <span className="hero-particle" style={{ left: '86%', top: '82%', width: 4, height: 4 }} />
       </div>
 
       <div className="hero-head" ref={ref}>
-        <p className="hero-kicker">Engineer & SAP Specialist</p>
+        <p className="hero-kicker">Engineer &amp; SAP Specialist</p>
         <h1 className="hero-h1">
           <span className="hero-row">Engineering solutions that</span>
           <span className="hero-row">feel <em className="hero-serif hero-red">obvious.</em></span>
