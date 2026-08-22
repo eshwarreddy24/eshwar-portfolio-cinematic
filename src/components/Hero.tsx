@@ -64,11 +64,6 @@ export default function Hero() {
           </div>
         </div>
 
-        <div className="hero-stage">
-          <div className="hero-archLine" />
-          <div className="hero-arch" />
-        </div>
-
         <div className="hero-side hero-sideR">
           <div className="hero-statCard">
             <div className="hero-statNum"><span>150</span><i>+</i></div>
