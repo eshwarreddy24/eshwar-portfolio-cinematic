@@ -44,9 +44,9 @@ export default function Hero() {
             <span className="btn-labelWrap"><span className="btn-labelStack"><span className="btn-label">Hire Me</span><span className="btn-label btn-labelClone" aria-hidden="true">Hire Me</span></span></span>
             <span className="btn-arrow">→</span>
           </a>
-          <a href="#chess" className="btn btn-ghost btn-md">
+          <a href="#cricket" className="btn btn-ghost btn-md">
             <span className="btn-fill" />
-            <span className="btn-lead"><span className="hero-play">♟</span></span>
+            <span className="btn-lead"><span className="hero-play">🏏</span></span>
             <span className="btn-labelWrap"><span className="btn-labelStack"><span className="btn-label">Play a Game with Me</span><span className="btn-label btn-labelClone" aria-hidden="true">Play a Game with Me</span></span></span>
           </a>
         </div>

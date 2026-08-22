@@ -10,7 +10,7 @@ import Journey from './Journey';
 import DesignStack from './DesignStack';
 import Work from './Work';
 import Credentials from './Credentials';
-import ChessGame from './ChessGame';
+import CricketGame from './CricketGame';
 import Contact from './Contact';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -49,7 +49,7 @@ export default function MainContainer() {
         <DesignStack />
         <Work />
         <Credentials />
-        <ChessGame />
+        <CricketGame />
         <div className="finalFrame">
           <Contact />
         </div>
