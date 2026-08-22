@@ -2,98 +2,111 @@ import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
-const tools = [
-  { name: 'SAP MM', icon: '⬡' }, { name: 'ChatGPT', icon: '🤖' },
-  { name: 'Claude', icon: '🧠' }, { name: 'Gemini', icon: '✨' },
-  { name: 'Figma', icon: '🖌️' }, { name: 'Canva', icon: '🎯' },
-  { name: 'Photoshop', icon: '🖼️' }, { name: 'After Effects', icon: '🎬' },
-  { name: 'Premiere Pro', icon: '🎞️' }, { name: 'SketchUp', icon: '🏠' },
-  { name: 'GitHub', icon: '🐙' }, { name: 'MS Excel', icon: '📊' },
-  { name: 'MS Word', icon: '📝' }, { name: 'MS PowerPoint', icon: '📽️' },
-  { name: 'Cursor', icon: '⌨️' }, { name: 'Vibe Coding', icon: '🎶' },
-  { name: 'Midjourney', icon: '🎨' },
+const rings = [
+  { radius: 120, speed: 25, items: [
+    { name: 'SAP MM', icon: '⬡' }, { name: 'ChatGPT', icon: '🤖' },
+    { name: 'Claude', icon: '🧠' }, { name: 'Gemini', icon: '✨' },
+    { name: 'Figma', icon: '🖌️' }, { name: 'Canva', icon: '🎯' },
+  ]},
+  { radius: 190, speed: -35, items: [
+    { name: 'Photoshop', icon: '🖼️' }, { name: 'After Effects', icon: '🎬' },
+    { name: 'Premiere Pro', icon: '🎞️' }, { name: 'SketchUp', icon: '🏠' },
+    { name: 'GitHub', icon: '🐙' }, { name: 'MS Excel', icon: '📊' },
+  ]},
+  { radius: 260, speed: 50, items: [
+    { name: 'MS Word', icon: '📝' }, { name: 'MS PowerPoint', icon: '📽️' },
+    { name: 'Cursor', icon: '⌨️' }, { name: 'Vibe Coding', icon: '🎶' },
+    { name: 'Midjourney', icon: '🎨' },
+  ]},
 ];
 
 export default function DesignStack() {
-  const ref = useRef<HTMLDivElement>(null);
-  const orbitRef = useRef<HTMLDivElement>(null);
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const ringRefs = useRef<(HTMLDivElement | null)[]>([]);
 
   useEffect(() => {
-    if (!ref.current) return;
-    gsap.fromTo(ref.current.querySelectorAll('.orbit-item'),
+    if (!sectionRef.current) return;
+    gsap.fromTo(sectionRef.current.querySelectorAll('.orbit-node'),
       { opacity: 0, scale: 0 },
-      { opacity: 1, scale: 1, duration: .6, stagger: .04, ease: 'back.out(1.7)',
-        scrollTrigger: { trigger: ref.current, start: 'top 75%' }
+      { opacity: 1, scale: 1, duration: .5, stagger: .03, ease: 'back.out(1.7)',
+        scrollTrigger: { trigger: sectionRef.current, start: 'top 75%' }
       }
     );
   }, []);
 
   useEffect(() => {
-    if (!orbitRef.current) return;
-    const el = orbitRef.current;
-    let angle = 0;
-    let raf: number;
-    const speed = 0.15;
-
-    const animate = () => {
-      angle += speed;
-      el.style.transform = `rotateY(${angle}deg)`;
-      raf = requestAnimationFrame(animate);
-    };
-    raf = requestAnimationFrame(animate);
-    return () => cancelAnimationFrame(raf);
+    const anims: number[] = [];
+    rings.forEach((ring, i) => {
+      const el = ringRefs.current[i];
+      if (!el) return;
+      let angle = (360 / ring.items.length) * i * 20; // offset each ring
+      const animate = () => {
+        angle += ring.speed > 0 ? 0.3 : -0.3;
+        el.style.transform = `rotate(${angle}deg)`;
+        // Counter-rotate children so text stays upright
+        el.querySelectorAll('.orbit-node').forEach(node => {
+          (node as HTMLElement).style.transform = `rotate(${-angle}deg)`;
+        });
+        anims.push(requestAnimationFrame(animate));
+      };
+      anims.push(requestAnimationFrame(animate));
+    });
+    return () => anims.forEach(id => cancelAnimationFrame(id));
   }, []);
 
-  const radius = 200;
-
   return (
-    <section className="stack" id="stack">
-      {/* Animated background grid */}
+    <section className="stack" id="stack" ref={sectionRef}>
       <div className="stack-bg-grid" aria-hidden="true" />
       <div className="stack-bg-glow" aria-hidden="true" />
 
-      <div className="stack-wrap" ref={ref}>
+      <div className="stack-wrap">
         <p className="stack-eyebrow"><span>03</span> Design Stack</p>
         <h2 className="stack-h2">Tools & <em className="about-serif about-green">Software</em></h2>
 
-        {/* 3D Orbit Sphere */}
-        <div className="orbit-scene">
-          <div className="orbit-sphere" ref={orbitRef}>
-            {tools.map((t, i) => {
-              const total = tools.length;
-              const theta = (i / total) * Math.PI * 2;
-              const phi = Math.acos(2 * ((i + 0.5) / total) - 1);
-              const x = radius * Math.sin(phi) * Math.cos(theta);
-              const y = radius * Math.sin(phi) * Math.sin(theta);
-              const z = radius * Math.cos(phi);
-              return (
-                <div
-                  key={t.name}
-                  className="orbit-item"
-                  style={{
-                    transform: `translate3d(${x}px, ${y}px, ${z}px)`,
-                  }}
-                >
-                  <span className="orbit-icon">{t.icon}</span>
-                  <span className="orbit-label">{t.name}</span>
-                </div>
-              );
-            })}
-          </div>
-          {/* Center core */}
-          <div className="orbit-core">
-            <span className="orbit-core-icon">💼</span>
-          </div>
-        </div>
+        <div className="solar-system">
+          {/* Orbit rings (visual guides) */}
+          {rings.map((ring, i) => (
+            <div
+              key={i}
+              className="solar-ring"
+              style={{ width: ring.radius * 2, height: ring.radius * 2 }}
+            />
+          ))}
 
-        {/* Flat grid below as fallback/secondary view */}
-        <div className="stack-grid">
-          {tools.map(t => (
-            <div key={t.name} className="stack-item">
-              <span>{t.icon}</span>
-              <small>{t.name}</small>
+          {/* Rotating rings with icons */}
+          {rings.map((ring, i) => (
+            <div
+              key={i}
+              className="solar-orbit"
+              ref={el => { ringRefs.current[i] = el; }}
+            >
+              {ring.items.map((item, j) => {
+                const angle = (j / ring.items.length) * 360;
+                const rad = (angle * Math.PI) / 180;
+                const x = Math.cos(rad) * ring.radius;
+                const y = Math.sin(rad) * ring.radius;
+                return (
+                  <div
+                    key={item.name}
+                    className="orbit-node"
+                    style={{
+                      position: 'absolute',
+                      left: `calc(50% + ${x}px - 26px)`,
+                      top: `calc(50% + ${y}px - 26px)`,
+                    }}
+                  >
+                    <span className="orbit-node-icon">{item.icon}</span>
+                    <span className="orbit-node-label">{item.name}</span>
+                  </div>
+                );
+              })}
             </div>
           ))}
+
+          {/* Sun center */}
+          <div className="solar-sun">
+            <span className="solar-sun-icon">☀️</span>
+          </div>
         </div>
       </div>
     </section>

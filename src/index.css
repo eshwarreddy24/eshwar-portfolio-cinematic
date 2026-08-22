@@ -173,24 +173,17 @@ button{font:inherit;cursor:pointer;background:none;border:none}
 .stack-eyebrow::after{content:"";background:var(--accent);flex:0 0 34px;height:1px}
 .stack-h2{letter-spacing:-.03em;font-size:clamp(36px,4.6vw,62px);font-weight:900;line-height:1.02;color:#fff}
 
-/* 3D Orbit Sphere */
-.orbit-scene{display:flex;justify-content:center;align-items:center;height:460px;perspective:900px;margin:40px auto 0;position:relative}
-.orbit-sphere{width:1px;height:1px;position:relative;transform-style:preserve-3d;animation:orbitRotate 30s linear infinite}
-@keyframes orbitRotate{0%{transform:rotateY(0deg) rotateX(10deg)}100%{transform:rotateY(360deg) rotateX(10deg)}}
-.orbit-item{position:absolute;display:flex;flex-direction:column;align-items:center;gap:6px;transform-style:preserve-3d;backface-visibility:hidden}
-.orbit-icon{width:52px;height:52px;border-radius:14px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;font-size:24px;backdrop-filter:blur(8px);transition:all .3s ease;box-shadow:0 4px 16px rgba(0,0,0,.3)}
-.orbit-icon:hover{background:rgba(0,200,83,.15);border-color:rgba(0,200,83,.4);box-shadow:0 0 24px rgba(0,200,83,.3);transform:scale(1.15)}
-.orbit-label{font-size:9px;font-weight:700;color:#ffffffa0;letter-spacing:.5px;text-transform:uppercase;text-align:center;white-space:nowrap;text-shadow:0 1px 4px rgba(0,0,0,.8)}
-.orbit-core{position:absolute;width:60px;height:60px;border-radius:50%;background:linear-gradient(135deg,var(--accent),#00a844);display:flex;align-items:center;justify-content:center;box-shadow:0 0 40px #00c85340,0 0 80px #00c85320;animation:corePulse 3s ease-in-out infinite alternate}
-@keyframes corePulse{0%{box-shadow:0 0 30px #00c85330,0 0 60px #00c85315}100%{box-shadow:0 0 50px #00c85350,0 0 100px #00c85325}}
-.orbit-core-icon{font-size:28px}
-
-/* Flat grid */
-.stack-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(90px,1fr));gap:12px;margin-top:48px;max-width:700px}
-.stack-item{display:flex;flex-direction:column;align-items:center;gap:8px;padding:18px 8px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:12px;transition:all var(--dur-base) var(--ease-out-expo);cursor:pointer;backdrop-filter:blur(4px)}
-.stack-item:hover{border-color:#00c85360;transform:translateY(-4px) scale(1.05);box-shadow:0 0 30px #00c85320;background:rgba(255,255,255,.08)}
-.stack-item span{font-size:28px}
-.stack-item small{font-size:10px;letter-spacing:.5px;color:#ffffffb0;font-weight:600;text-transform:uppercase;text-align:center}
+/* Solar System Orbit */
+.solar-system{position:relative;width:100%;max-width:580px;height:580px;margin:40px auto 0}
+.solar-ring{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);border:1px solid rgba(0,200,83,.1);border-radius:50%;pointer-events:none}
+.solar-orbit{position:absolute;inset:0}
+.orbit-node{display:flex;flex-direction:column;align-items:center;gap:4px;cursor:pointer;z-index:2}
+.orbit-node-icon{width:52px;height:52px;border-radius:14px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;font-size:24px;backdrop-filter:blur(8px);transition:all .3s ease;box-shadow:0 4px 16px rgba(0,0,0,.3)}
+.orbit-node:hover .orbit-node-icon{background:rgba(0,200,83,.15);border-color:rgba(0,200,83,.4);box-shadow:0 0 24px rgba(0,200,83,.3);transform:scale(1.2)}
+.orbit-node-label{font-size:9px;font-weight:700;color:#ffffffa0;letter-spacing:.5px;text-transform:uppercase;text-align:center;white-space:nowrap;text-shadow:0 1px 4px rgba(0,0,0,.8)}
+.solar-sun{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:64px;height:64px;border-radius:50%;background:linear-gradient(135deg,var(--accent),#00a844);display:flex;align-items:center;justify-content:center;box-shadow:0 0 40px #00c85340,0 0 80px #00c85320;z-index:3;animation:sunPulse 3s ease-in-out infinite alternate}
+@keyframes sunPulse{0%{box-shadow:0 0 30px #00c85330,0 0 60px #00c85315}100%{box-shadow:0 0 50px #00c85350,0 0 100px #00c85325}}
+.solar-sun-icon{font-size:30px}
 
 /* TAGS (shared) */
 .work-tags{display:flex;flex-wrap:wrap;gap:6px}
