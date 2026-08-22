@@ -67,7 +67,7 @@ export default function Hero() {
         <div className="hero-stage">
           <div className="hero-archLine" />
           <div className="hero-arch" />
-          <img alt="Eshwar Reddy Gali" width={554} height={573} className="hero-portrait" src="/profile.jpg" />
+          {/* No portrait image — arch only */}
         </div>
 
         <div className="hero-side hero-sideR">

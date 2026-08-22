@@ -22,7 +22,7 @@ button{font:inherit;cursor:pointer;background:none;border:none}
 /* TUNNEL */
 .tunnel-intro{background:var(--bg);position:relative}
 .tunnel-frame{background:var(--bg);height:100svh;position:relative;overflow:hidden}
-.tunnel-canvas{width:100%;height:100%;display:block}
+.tunnel-canvas{position:absolute;top:0;left:0;width:100%;height:100%;display:block}
 .tunnel-hint{letter-spacing:.26em;text-transform:uppercase;color:var(--ink-3);pointer-events:none;font-size:10.5px;font-weight:800;animation:2.6s ease-in-out infinite tunnelHintPulse;position:absolute;bottom:86px;left:50%;transform:translate(-50%)}
 @keyframes tunnelHintPulse{0%,100%{opacity:1}50%{opacity:.35}}
 .tunnel-progress{letter-spacing:.16em;color:var(--ink-3);font-variant-numeric:tabular-nums;pointer-events:none;align-items:center;gap:14px;font-size:10.5px;font-weight:800;display:flex;position:absolute;bottom:40px;left:50%;transform:translate(-50%)}
@@ -141,7 +141,9 @@ button{font:inherit;cursor:pointer;background:none;border:none}
 .about-beat p b{font-weight:700}
 .about-sideCol{flex-direction:column;gap:30px;display:flex}
 .about-sideCard{border-radius:var(--radius);box-shadow:var(--shadow);will-change:transform;background:var(--bg);border:1px solid #1414140a}
-.about-imgCard{background:var(--ph);height:300px;color:var(--ink-3);letter-spacing:.08em;justify-content:center;align-items:center;font-size:12px;font-weight:700;display:flex;transform:rotate(2deg)}
+.about-imgCard{background:var(--ph);height:300px;color:var(--ink-3);letter-spacing:.08em;justify-content:center;align-items:center;font-size:12px;font-weight:700;display:flex;flex-direction:column;gap:12px;transform:rotate(2deg)}
+.about-imgCard .avatar-circle{width:120px;height:120px;border-radius:50%;background:linear-gradient(135deg,#ff2e0f,#ff6b4a);display:flex;align-items:center;justify-content:center;font-size:48px;color:#fff;font-weight:900;border:3px solid #fff;box-shadow:0 8px 30px rgba(255,46,15,.25)}
+.about-imgCard .avatar-label{font-size:11px;letter-spacing:.15em;text-transform:uppercase}
 .about-philoCard{padding:32px 34px;transform:rotate(-1.5deg)}
 .about-philoCard h4{font-family:var(--font-script);color:var(--ink-2);margin-bottom:12px;font-size:25px;font-weight:700}
 .about-philoCard ul{list-style:none}
@@ -156,8 +158,9 @@ button{font:inherit;cursor:pointer;background:none;border:none}
 
 /* JOURNEY */
 .journey-frame{background:#0a0a0c;height:100svh;position:relative;overflow:hidden}
-.journey-canvas{width:100%;height:100%;display:block}
+.journey-canvas{position:absolute;top:0;left:0;width:100%;height:100%;display:block}
 .journey-scrim{pointer-events:none;background:radial-gradient(62% 54%,#040406cc 0%,#04040694 42%,#04040600 78%);position:absolute;inset:0}
+.journey-overlay{position:absolute;inset:0;z-index:2}
 .journey-chapter{text-align:center;opacity:0;filter:blur(2px);width:min(700px,88vw);transition:opacity .5s ease,transform .75s var(--ease-out-expo),filter .5s ease;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%) translateY(26px) scale(.985)}
 .journey-chapter.on{opacity:1;filter:none;transform:translate(-50%,-50%)}
 .journey-chYear,.journey-chTitle,.journey-chPlace,.journey-chStory,.journey-chBridge{opacity:0;transition:opacity .6s ease,transform .8s var(--ease-out-expo);transform:translateY(14px)}

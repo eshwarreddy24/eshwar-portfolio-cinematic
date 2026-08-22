@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, useCallback } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Lenis from 'lenis';
@@ -16,14 +16,11 @@ import Contact from './Contact';
 
 gsap.registerPlugin(ScrollTrigger);
 
-/* ── Sticky Scene wrapper (exact Gireesh) ── */
 function Scene({ id, runway, children }: { id?: string; runway?: number; children: React.ReactNode }) {
-  const holdRef = useRef<HTMLDivElement>(null);
   const runwayPx = runway ? `calc(${runway} * 100svh)` : undefined;
-
   return (
     <>
-      <div className="scene-hold" data-scene={id} ref={holdRef}>
+      <div className="scene-hold" data-scene={id}>
         {children}
       </div>
       {runway && (
@@ -36,8 +33,12 @@ function Scene({ id, runway, children }: { id?: string; runway?: number; childre
 export default function MainContainer() {
   const [ready, setReady] = useState(false);
   const [tunnelProgress, setTunnelProgress] = useState(0);
+  const tunnelRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => { const t = setTimeout(() => setReady(true), 100); return () => clearTimeout(t); }, []);
+  useEffect(() => {
+    const t = setTimeout(() => setReady(true), 100);
+    return () => clearTimeout(t);
+  }, []);
 
   // Lenis smooth scroll
   useEffect(() => {
@@ -53,17 +54,23 @@ export default function MainContainer() {
     return () => { lenis.destroy(); };
   }, [ready]);
 
-  // Tunnel scroll progress
+  // Tunnel scroll progress — calculated from the runway div below the tunnel
   useEffect(() => {
     if (!ready) return;
     const handle = () => {
-      const scrollY = window.scrollY;
-      constvh = window.innerHeight;
-      const tunnelHeight = vh * 6; // 6 screens of scrolling
-      const progress = Math.min(1, Math.max(0, scrollY / tunnelHeight));
+      const runwayEl = document.querySelector('[data-runway="intro"]') as HTMLElement | null;
+      if (!runwayEl) return;
+      const rect = runwayEl.getBoundingClientRect();
+      const vh = window.innerHeight;
+      // runwayEl top goes from +6vh (start) to -vh (end)
+      // progress = how far through the runway we've scrolled
+      const totalScroll = rect.height + vh; // total scrollable distance
+      const scrolled = totalScroll - (rect.bottom + vh); // how much has scrolled past
+      const progress = Math.max(0, Math.min(1, scrolled / rect.height));
       setTunnelProgress(progress);
     };
     window.addEventListener('scroll', handle, { passive: true });
+    handle();
     return () => window.removeEventListener('scroll', handle);
   }, [ready]);
 
@@ -73,10 +80,10 @@ export default function MainContainer() {
     <div>
       <Navbar />
       <main>
-        {/* ── TUNNEL INTRO (6 screens of scroll) ── */}
+        {/* TUNNEL INTRO — 6 screens of scroll */}
         <Scene id="intro" runway={6}>
           <section className="tunnel-intro" id="intro-section">
-            <div className="tunnel-frame">
+            <div className="tunnel-frame" ref={tunnelRef}>
               <TunnelIntro progress={tunnelProgress} />
               <h1 style={{ clipPath: 'inset(50%)', whiteSpace: 'nowrap', width: 1, height: 1, position: 'absolute', overflow: 'hidden' }}>
                 ESHWAR — Engineer &amp; SAP Specialist
@@ -91,47 +98,47 @@ export default function MainContainer() {
           </section>
         </Scene>
 
-        {/* ── HERO ── */}
+        {/* HERO */}
         <Scene id="hero">
           <Hero />
         </Scene>
 
-        {/* ── MARQUEE (About section) ── */}
+        {/* MARQUEE */}
         <Scene id="about">
           <Marquee />
         </Scene>
 
-        {/* ── ABOUT ── */}
+        {/* ABOUT */}
         <Scene id="about-content">
           <About />
         </Scene>
 
-        {/* ── JOURNEY (6 screens of scroll) ── */}
+        {/* JOURNEY — 6 screens of scroll */}
         <Scene id="journey" runway={6}>
           <Journey />
         </Scene>
 
-        {/* ── DESIGN STACK ── */}
+        {/* DESIGN STACK */}
         <Scene id="stack">
           <DesignStack />
         </Scene>
 
-        {/* ── WORK (4.5 screens) ── */}
+        {/* WORK — 4.5 screens */}
         <Scene id="work" runway={4.5}>
           <Work />
         </Scene>
 
-        {/* ── EXPERIENCE (4.4 screens) ── */}
+        {/* EXPERIENCE — 4.4 screens */}
         <Scene id="experience" runway={4.4}>
           <Experience />
         </Scene>
 
-        {/* ── CREDENTIALS (3.5 screens) ── */}
+        {/* CREDENTIALS — 3.5 screens */}
         <Scene id="credentials" runway={3.5}>
           <Credentials />
         </Scene>
 
-        {/* ── CONTACT ── */}
+        {/* CONTACT */}
         <div className="finalFrame">
           <Contact />
         </div>
