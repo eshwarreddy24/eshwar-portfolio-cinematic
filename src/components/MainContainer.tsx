@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Lenis from 'lenis';
-import Cursor from './Cursor';
 import Navbar from './Navbar';
 import Hero from './Hero';
 import Marquee from './Marquee';
@@ -17,11 +16,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 export default function MainContainer() {
   const [ready, setReady] = useState(false);
-
-  useEffect(() => {
-    const timer = setTimeout(() => setReady(true), 100);
-    return () => clearTimeout(timer);
-  }, []);
+  useEffect(() => { const t = setTimeout(() => setReady(true), 100); return () => clearTimeout(t); }, []);
 
   useEffect(() => {
     if (!ready) return;
@@ -40,7 +35,6 @@ export default function MainContainer() {
 
   return (
     <div>
-      <Cursor />
       <Navbar />
       <main>
         <Hero />

@@ -1,86 +1,96 @@
-import { useEffect, useRef } from 'react';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useState, useEffect, useRef } from 'react';
 import { config } from '../config';
 
 export default function Journey() {
-  const ref = useRef<HTMLDivElement>(null);
+  const [active, setActive] = useState(-1);
+  const frameRef = useRef<HTMLDivElement>(null);
+  const canvasRef = useRef<HTMLCanvasElement>(null);
 
+  // Particle canvas
   useEffect(() => {
-    if (!ref.current) return;
-    gsap.fromTo(ref.current.querySelectorAll('.journey-item'),
-      { opacity: 0, x: -40 },
-      { opacity: 1, x: 0, duration: 0.7, stagger: 0.2, ease: 'power3.out',
-        scrollTrigger: { trigger: ref.current, start: 'top 75%' }
-      }
-    );
+    const canvas = canvasRef.current;
+    const frame = frameRef.current;
+    if (!canvas || !frame) return;
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
+    const resize = () => { canvas.width = frame.clientWidth; canvas.height = frame.clientHeight; };
+    resize();
+    window.addEventListener('resize', resize);
+
+    const particles: { x: number; y: number; vx: number; vy: number; r: number; o: number }[] = [];
+    for (let i = 0; i < 80; i++) {
+      particles.push({
+        x: Math.random() * canvas.width, y: Math.random() * canvas.height,
+        vx: (Math.random() - .5) * .3, vy: (Math.random() - .5) * .3,
+        r: Math.random() * 1.5 + .5, o: Math.random() * .3 + .05,
+      });
+    }
+
+    let raf: number;
+    const draw = () => {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      particles.forEach(p => {
+        p.x += p.vx; p.y += p.vy;
+        if (p.x < 0) p.x = canvas.width; if (p.x > canvas.width) p.x = 0;
+        if (p.y < 0) p.y = canvas.height; if (p.y > canvas.height) p.y = 0;
+        ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(255,255,255,${p.o})`; ctx.fill();
+      });
+      raf = requestAnimationFrame(draw);
+    };
+    draw();
+    return () => { cancelAnimationFrame(raf); window.removeEventListener('resize', resize); };
+  }, []);
+
+  // Scroll through chapters
+  useEffect(() => {
+    let idx = -1;
+    const total = config.experiences.length;
+    const handle = () => {
+      if (!frameRef.current) return;
+      const rect = frameRef.current.getBoundingClientRect();
+      const progress = Math.max(0, Math.min(1, -rect.top / (rect.height - window.innerHeight)));
+      const newIdx = Math.min(total - 1, Math.floor(progress * total));
+      if (newIdx !== idx) { idx = newIdx; setActive(newIdx); }
+    };
+    window.addEventListener('scroll', handle, { passive: true });
+    return () => window.removeEventListener('scroll', handle);
   }, []);
 
   return (
-    <section style={{ padding: '100px 0' }}>
-      <div ref={ref} className="section-wrap">
-        <p className="section-num">02</p>
-        <h2 className="section-heading">
-          My <em className="serif" style={{ color: '#facc15' }}>Journey</em>
-        </h2>
-
-        <div style={{ position: 'relative', paddingLeft: 32 }}>
-          {/* Timeline line */}
-          <div style={{
-            position: 'absolute', left: 0, top: 8, bottom: 8,
-            width: 1, background: 'rgba(255,255,255,0.08)',
-          }} />
-
+    <section style={{ position: 'relative' }}>
+      <div ref={frameRef} className="journey-frame" style={{ height: `calc(${config.experiences.length} * 100svh)` }}>
+        <canvas ref={canvasRef} className="journey-canvas" />
+        <div className="journey-scrim" />
+        <div className="journey-overlay">
           {config.experiences.map((exp, i) => (
-            <div key={i} className="journey-item" style={{
-              position: 'relative',
-              padding: '28px 0',
-              borderBottom: i < config.experiences.length - 1 ? '1px solid rgba(255,255,255,0.04)' : 'none',
-            }}>
-              {/* Timeline dot */}
-              <div style={{
-                position: 'absolute', left: -36, top: 34,
-                width: 8, height: 8, borderRadius: '50%',
-                background: '#facc15', border: '2px solid #0a0a0a',
-              }} />
-
-              <div style={{ display: 'flex', gap: 24, alignItems: 'flex-start' }}>
-                {/* Period */}
-                <div style={{
-                  minWidth: 120, fontSize: 13, fontWeight: 500,
-                  color: '#facc15', letterSpacing: 1,
-                  fontFamily: "'Inter', sans-serif",
-                }}>
-                  {exp.period}
-                </div>
-
-                {/* Content */}
-                <div>
-                  <h3 style={{
-                    fontSize: 18, fontWeight: 600, color: '#fff',
-                    marginBottom: 4, fontFamily: "'Inter', sans-serif",
-                  }}>
-                    {exp.role}
-                  </h3>
-                  <p style={{ fontSize: 14, color: '#888', marginBottom: 12 }}>
-                    {exp.company} — {exp.location}
-                  </p>
-                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
-                    {exp.highlights.map((h, j) => (
-                      <span key={j} style={{
-                        fontSize: 12, color: '#aaa',
-                        background: 'rgba(250,204,21,0.06)',
-                        border: '1px solid rgba(250,204,21,0.1)',
-                        padding: '4px 12px', borderRadius: 20,
-                      }}>
-                        {h}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              </div>
+            <div key={i} className={`journey-chapter${active === i ? ' on' : ''}`}>
+              <span className="journey-chYear">{exp.period}</span>
+              <span className="journey-chTitle">{exp.role}</span>
+              <span className="journey-chPlace">{exp.company} — {exp.location}</span>
+              <p className="journey-chStory">
+                {exp.highlights.join(' • ')}
+              </p>
+              <p className="journey-chBridge">
+                <i>✦</i> {exp.role.includes('Content') || exp.role.includes('Meme')
+                  ? 'Creating visual stories and viral content since 2020.'
+                  : `Delivering results at ${exp.company}.`}
+              </p>
             </div>
           ))}
+
+          <div className="journey-rail">
+            <span className="journey-counter">
+              <span className="journey-counterNow">{String(active + 1).padStart(2, '0')}</span>
+              {' '}/ {String(config.experiences.length).padStart(2, '0')}
+            </span>
+            <span className="journey-ticks">
+              {config.experiences.map((_, i) => (
+                <span key={i} className={`journey-tick${active === i ? ' journey-tickOn' : ''}`} />
+              ))}
+            </span>
+          </div>
         </div>
       </div>
     </section>

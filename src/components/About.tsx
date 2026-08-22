@@ -9,52 +9,78 @@ export default function About() {
     if (!ref.current) return;
     gsap.fromTo(ref.current.querySelectorAll('.about-reveal'),
       { opacity: 0, y: 30 },
-      { opacity: 1, y: 0, duration: 0.8, stagger: 0.15, ease: 'power3.out',
+      { opacity: 1, y: 0, duration: .8, stagger: .12, ease: 'power3.out',
         scrollTrigger: { trigger: ref.current, start: 'top 80%' }
       }
     );
   }, []);
 
   return (
-    <section style={{ padding: '100px 0' }} id="about-content">
-      <div ref={ref} className="section-wrap" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 60, alignItems: 'center' }}>
-        {/* Left - Text */}
-        <div>
-          <p className="section-num about-reveal">01</p>
-          <h2 className="section-heading about-reveal">
-            About <em className="serif" style={{ color: '#facc15' }}>Me</em>
-          </h2>
-          <p className="about-reveal" style={{ fontSize: 15, color: '#aaa', lineHeight: 1.8, marginBottom: 16 }}>
-            Engineering professional with experience spanning procurement, SAP MM operations,
-            interior design coordination, graphic designing, and content creation.
-          </p>
-          <p className="about-reveal" style={{ fontSize: 15, color: '#888', lineHeight: 1.8, marginBottom: 24 }}>
-            At Airports Authority of India, I handle SAP MM billing, tender scrutiny for 150+ vendors,
-            BOQs, estimation, GeM portal operations, and e-Office. Previously at Organo Eco Habitats,
-            I coordinated premium NRI clients on interior design projects.
-          </p>
-          <p className="about-reveal" style={{ fontSize: 15, color: '#888', lineHeight: 1.8 }}>
-            Since 2020, I've been a content creator, graphic designer, and meme creator — building
-            visual stories, animations, and viral content across platforms.
-          </p>
+    <section className="about" id="about-content">
+      <div className="about-wrap" ref={ref}>
+        <p className="about-eyebrow about-reveal"><span>01</span> About Me</p>
+        <h2 className="about-h2 about-reveal">
+          Engineering professional<br />& <em className="about-serif">SAP Specialist</em>
+        </h2>
+
+        <div className="about-grid">
+          <div className="about-beats">
+            <div className="about-beat about-reveal">
+              <span className="about-beatN">01</span>
+              <div>
+                <h3>Engineering & Procurement</h3>
+                <p>Handling <b>SAP MM</b> billing, tender scrutiny for 150+ vendors, BOQs, estimation, GeM portal operations, and e-Office at Airports Authority of India.</p>
+              </div>
+            </div>
+            <div className="about-beat about-reveal">
+              <span className="about-beatN">02</span>
+              <div>
+                <h3>Design & Coordination</h3>
+                <p>Previously at <b>Organo Eco Habitats</b>, coordinated premium NRI clients on interior design projects, estimation & billing.</p>
+              </div>
+            </div>
+            <div className="about-beat about-reveal">
+              <span className="about-beatN">03</span>
+              <div>
+                <h3>Content & Creativity</h3>
+                <p>Since 2020, I've been a <b>content creator, graphic designer, and meme creator</b> — building visual stories, animations, and viral content.</p>
+              </div>
+            </div>
+          </div>
+
+          <div className="about-sideCol about-reveal">
+            <div className="about-imgCard">
+              <img src="/profile.jpg" alt="Eshwar" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+            </div>
+            <div className="about-philoCard">
+              <h4>My Philosophy</h4>
+              <ul>
+                <li><span>✦</span> Simplicity in complexity</li>
+                <li><span>✦</span> Design with purpose</li>
+                <li><span>✦</span> Build with integrity</li>
+                <li><span>✦</span> Deliver with passion</li>
+              </ul>
+            </div>
+          </div>
         </div>
 
-        {/* Right - Image */}
-        <div className="about-reveal" style={{ position: 'relative' }}>
-          <div style={{
-            width: '100%', aspectRatio: '3/4',
-            borderRadius: 16, overflow: 'hidden',
-            background: 'linear-gradient(135deg, rgba(250,204,21,0.06), rgba(255,255,255,0.02))',
-          }}>
-            <img src="/profile.jpg" alt="Eshwar Reddy Gali" style={{
-              width: '100%', height: '100%', objectFit: 'cover',
-            }} />
+        <div className="about-metrics about-reveal">
+          <div className="about-metric">
+            <div className="about-metricNum">4<i>+</i></div>
+            <div className="about-metricLabel">Professional Roles</div>
           </div>
-          {/* Accent line */}
-          <div style={{
-            position: 'absolute', bottom: -12, left: 20, right: 20,
-            height: 2, background: 'linear-gradient(90deg, #facc15, transparent)',
-          }} />
+          <div className="about-metric">
+            <div className="about-metricNum">2<i>+</i></div>
+            <div className="about-metricLabel">Years Experience</div>
+          </div>
+          <div className="about-metric">
+            <div className="about-metricNum">150<i>+</i></div>
+            <div className="about-metricLabel">Vendors Coordinated</div>
+          </div>
+          <div className="about-metric">
+            <div className="about-metricNum">100<i>%</i></div>
+            <div className="about-metricLabel">Commitment to Excellence</div>
+          </div>
         </div>
       </div>
     </section>
