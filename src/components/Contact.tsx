@@ -27,10 +27,10 @@ export default function Contact() {
           Let's connect and build something impactful together.
         </p>
         <div className="connect-cta sr">
-          <a href="tel:+919515291117" className="btn btn-primary btn-md">
+          <a href="#game" className="btn btn-primary btn-md">
             <span className="btn-fill" />
-            <span className="btn-labelWrap"><span className="btn-labelStack"><span className="btn-label">Call Me Now</span><span className="btn-labelClone">Call Me Now</span></span></span>
-            <span className="btn-arrow"><span className="btn-lead">📞</span></span>
+            <span className="btn-labelWrap"><span className="btn-labelStack"><span className="btn-label">Play a Game</span><span className="btn-labelClone">Play a Game</span></span></span>
+            <span className="btn-arrow"><span className="btn-lead">🎮</span></span>
           </a>
         </div>
       </div>

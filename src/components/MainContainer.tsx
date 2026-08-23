@@ -11,6 +11,7 @@ import DesignStack from './DesignStack';
 import Credentials from './Credentials';
 import Education from './Education';
 import Contact from './Contact';
+import Game from './Game';
 import Particles from './Particles';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -61,6 +62,7 @@ export default function MainContainer() {
         <DesignStack />
         <Credentials />
         <Education />
+        <Game />
         <div className="finalFrame">
           <Contact />
         </div>
