@@ -30,7 +30,7 @@ export default function Navbar() {
   return (
     <div className="nav-wrap">
       <nav className={`nav-cap${scrolled ? ' scrolled' : ''}`}>
-        <a href="#hero" className="nav-logo">ESHWA<i>.</i></a>
+        <a href="#hero" className="nav-logo">ESHWA<i>R.</i></a>
         <div className="nav-links">
           {links.map(l => (
             <a
