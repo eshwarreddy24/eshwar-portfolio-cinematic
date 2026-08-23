@@ -38,7 +38,7 @@ export default function Hero() {
       <div className="hero-head">
         <p className="hero-kicker">OPERATIONS · SAP MM · PROCUREMENT</p>
         <h1 className="hero-h1">
-          <span className="hero-row">GALI ESHWA</span>
+          <span className="hero-row">GALI ESHWAR</span>
           <span className="hero-row"><span className="hero-serif hero-accent">Reddy</span></span>
         </h1>
         <p className="hero-sub">
