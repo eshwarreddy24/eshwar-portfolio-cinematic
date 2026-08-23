@@ -173,29 +173,28 @@ button{font:inherit;cursor:pointer;background:none;border:none}
 .stack-eyebrow::after{content:"";background:var(--accent);flex:0 0 34px;height:1px}
 .stack-h2{letter-spacing:-.03em;font-size:clamp(36px,4.6vw,62px);font-weight:900;line-height:1.02;color:#fff}
 
-/* Solar System Orbit */
-.solar-system{position:relative;width:100%;max-width:580px;height:580px;margin:40px auto 0}
-.solar-ring{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);border:1px solid rgba(0,200,83,.1);border-radius:50%;pointer-events:none}
-.solar-orbit{position:absolute;inset:0}
-.orbit-node{display:flex;flex-direction:column;align-items:center;gap:4px;cursor:pointer;z-index:2}
-.orbit-node-icon{width:52px;height:52px;border-radius:14px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;font-size:24px;backdrop-filter:blur(8px);transition:all .3s ease;box-shadow:0 4px 16px rgba(0,0,0,.3)}
-.orbit-node:hover .orbit-node-icon{background:rgba(0,200,83,.15);border-color:rgba(0,200,83,.4);box-shadow:0 0 24px rgba(0,200,83,.3);transform:scale(1.2)}
-.orbit-node-label{font-size:9px;font-weight:700;color:#ffffffa0;letter-spacing:.5px;text-transform:uppercase;text-align:center;white-space:nowrap;text-shadow:0 1px 4px rgba(0,0,0,.8)}
-.solar-sun{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:64px;height:64px;border-radius:50%;background:linear-gradient(135deg,var(--accent),#00a844);display:flex;align-items:center;justify-content:center;box-shadow:0 0 40px #00c85340,0 0 80px #00c85320;z-index:3;animation:sunPulse 3s ease-in-out infinite alternate}
-@keyframes sunPulse{0%{box-shadow:0 0 30px #00c85330,0 0 60px #00c85315}100%{box-shadow:0 0 50px #00c85350,0 0 100px #00c85325}}
-.solar-sun-icon{font-size:30px}
+/* Solar System 3D Orbit */
+.solar-scene{perspective:900px;perspective-origin:50% 40%;width:100%;max-width:640px;margin:40px auto 0}
+.solar-system{position:relative;width:100%;aspect-ratio:1;transform-style:preserve-3d;transform:rotateX(12deg)}
+.solar-ring{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);border:1px solid rgba(0,200,83,.12);border-radius:50%;pointer-events:none;transform-style:preserve-3d}
+.solar-orbit{position:absolute;inset:0;transform-style:preserve-3d}
+.orbit-node{z-index:2;transform-style:preserve-3d}
+.solar-sun{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:72px;height:72px;border-radius:50%;background:linear-gradient(135deg,var(--accent),#00a844);display:flex;align-items:center;justify-content:center;box-shadow:0 0 40px #00c85340,0 0 80px #00c85320,0 0 120px #00c85310;z-index:3;animation:sunPulse 3s ease-in-out infinite alternate}
+@keyframes sunPulse{0%{box-shadow:0 0 30px #00c85330,0 0 60px #00c85315}100%{box-shadow:0 0 60px #00c85360,0 0 120px #00c85330,0 0 180px #00c85310}}
+.solar-sun-icon{font-size:32px}
 
-/* Flip Cards */
-.flip-card{width:56px;height:56px;perspective:400px;cursor:pointer}
-.flip-inner{position:relative;width:100%;height:100%;transition:transform .6s cubic-bezier(.34,1.56,.64,1);transform-style:preserve-3d}
-.flip-inner.flipped{transform:rotateY(180deg)}
-.flip-front,.flip-back{position:absolute;inset:0;border-radius:14px;backface-visibility:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px}
-.flip-front{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);backdrop-filter:blur(8px);box-shadow:0 4px 16px rgba(0,0,0,.3)}
-.flip-back{background:linear-gradient(135deg,var(--accent),#00a844);border:1px solid var(--accent);transform:rotateY(180deg)}
-.flip-icon{font-size:22px}
-.flip-label{font-size:7px;font-weight:700;color:#ffffffa0;letter-spacing:.3px;text-transform:uppercase;text-align:center;white-space:nowrap;text-shadow:0 1px 3px rgba(0,0,0,.8)}
-.flip-back-name{font-size:8px;font-weight:800;color:#fff;text-transform:uppercase;letter-spacing:.5px}
-.flip-back-tap{font-size:7px;color:#ffffffa0}
+/* Tool Flip Nodes */
+.tool-node{width:64px;height:64px;perspective:500px;cursor:pointer}
+.tool-flipper{position:relative;width:100%;height:100%;transition:transform .6s cubic-bezier(.34,1.56,.64,1);transform-style:preserve-3d}
+.tool-flipper.flipped{transform:rotateY(180deg)}
+.tool-face{position:absolute;inset:0;border-radius:16px;backface-visibility:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;transition:box-shadow .3s ease}
+.tool-front{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);backdrop-filter:blur(10px);box-shadow:0 4px 20px rgba(0,0,0,.3)}
+.tool-front:hover{box-shadow:0 0 24px rgba(0,200,83,.25);border-color:rgba(0,200,83,.3)}
+.tool-front img{width:28px;height:28px;object-fit:contain;filter:drop-shadow(0 2px 4px rgba(0,0,0,.4))}
+.tool-name{font-size:7px;font-weight:700;color:#ffffffb0;letter-spacing:.4px;text-transform:uppercase;text-align:center;white-space:nowrap;text-shadow:0 1px 4px rgba(0,0,0,.8);line-height:1}
+.tool-back{background:linear-gradient(135deg,var(--accent),#00a844);border:1px solid var(--accent);transform:rotateY(180deg);gap:2px}
+.tool-back-name{font-size:8px;font-weight:800;color:#fff;text-transform:uppercase;letter-spacing:.5px}
+.tool-back-hint{font-size:7px;color:#ffffffa0}
 
 /* TAGS (shared) */
 .work-tags{display:flex;flex-wrap:wrap;gap:6px}
