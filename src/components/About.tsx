@@ -2,90 +2,88 @@ import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
+const beats = [
+  {
+    title: 'Digital Literacy',
+    text: '<b>SAP MM</b>, Microsoft 365 (Expert Excel, Teams, SharePoint), Government <b>e-Office</b>.',
+  },
+  {
+    title: 'Executive Operations',
+    text: 'Meeting Choreography, Complex Calendar Systems, <b>Proactive Time Protection</b>.',
+  },
+  {
+    title: 'Strategic Governance',
+    text: 'Corporate Incubation, Project Milestones (<b>ClickUp</b>), Risk Mitigation, MIS Reporting.',
+  },
+  {
+    title: 'Interpersonal Excellence',
+    text: 'Boardroom Presentation, <b>C-Suite & PSU Liaison</b>, Confidentiality, Cross-Functional Alignment.',
+  },
+];
+
+const metrics = [
+  { num: '150+', label: 'MSME & vendor partners managed through GeM Portal' },
+  { num: '30+', label: 'Critical airport invoices certified monthly via SAP MM' },
+  { num: '7+', label: 'High-impact project milestones delivered on time' },
+  { num: '100%', label: 'Zero-error compliance in procurement workflows' },
+];
+
 export default function About() {
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (!ref.current) return;
-    gsap.fromTo(ref.current.querySelectorAll('.about-reveal'),
-      { opacity: 0, y: 30 },
-      { opacity: 1, y: 0, duration: .8, stagger: .12, ease: 'power3.out',
-        scrollTrigger: { trigger: ref.current, start: 'top 80%' }
+    gsap.fromTo(ref.current.querySelectorAll('.sr'),
+      { opacity: 0, y: 50 },
+      { opacity: 1, y: 0, stagger: 0.12, duration: 0.7, ease: 'power3.out',
+        scrollTrigger: { trigger: ref.current, start: 'top 70%' }
       }
     );
   }, []);
 
   return (
-    <section className="about" id="about-content">
-      <div className="about-wrap" ref={ref}>
-        <p className="about-eyebrow about-reveal"><span>01</span> About Me</p>
-        <h2 className="about-h2 about-reveal">
-          Engineering professional<br />& <em className="about-serif about-green">SAP Specialist</em>
+    <section className="about" id="about" ref={ref}>
+      <div className="about-wrap">
+        <p className="about-eyebrow sr"><span>02</span> About</p>
+        <h2 className="about-h2 sr">
+          Building <span className="about-serif green-glow">operational excellence</span> across
+          corporate &amp; government environments.
         </h2>
 
         <div className="about-grid">
           <div className="about-beats">
-            <div className="about-beat about-reveal">
-              <span className="about-beatN">01</span>
-              <div>
-                <h3>Engineering &amp; Procurement</h3>
-                <p>Handling <b>SAP MM</b> billing, tender scrutiny for 150+ vendors, GeM portal operations, and e-Office at Airports Authority of India.</p>
+            {beats.map((b, i) => (
+              <div className="about-beat sr" key={i}>
+                <span className="about-beatN">{String(i + 1).padStart(2, '0')}</span>
+                <div>
+                  <h3>{b.title}</h3>
+                  <p dangerouslySetInnerHTML={{ __html: b.text }} />
+                </div>
               </div>
-            </div>
-            <div className="about-beat about-reveal">
-              <span className="about-beatN">02</span>
-              <div>
-                <h3>Design &amp; Coordination</h3>
-                <p>Previously at <b>Organo Eco Habitats</b>, coordinated premium NRI clients on design projects, documentation &amp; billing.</p>
-              </div>
-            </div>
-            <div className="about-beat about-reveal">
-              <span className="about-beatN">03</span>
-              <div>
-                <h3>Content &amp; Creativity</h3>
-                <p>Since 2020, I've been a <b>content creator, graphic designer, and meme creator</b> — building visual stories, animations, and viral content.</p>
-              </div>
-            </div>
+            ))}
           </div>
-
-          <div className="about-sideCol about-reveal">
-            <div className="about-imgCard">
-              <img
-                src="/profile.jpg"
-                alt="Eshwar Reddy Gali"
-                style={{ width: 120, height: 120, borderRadius: '50%', objectFit: 'cover', border: '3px solid #fff', boxShadow: '0 8px 30px rgba(0,0,0,.15)' }}
-              />
-              <span className="avatar-label">Eshwar Reddy Gali</span>
-            </div>
-            <div className="about-philoCard">
-              <h4>My Philosophy</h4>
+          <div className="about-sideCol">
+            <div className="about-sideCard about-philoCard sr">
+              <h4>Core Strengths</h4>
               <ul>
-                <li><span>✦</span> Simplicity in complexity</li>
-                <li><span>✦</span> Design with purpose</li>
-                <li><span>✦</span> Build with integrity</li>
-                <li><span>✦</span> Deliver with passion</li>
+                <li><span>✦</span> SAP MM Procurement</li>
+                <li><span>✦</span> Executive Liaison</li>
+                <li><span>✦</span> e-Office & GeM</li>
+                <li><span>✦</span> Advanced Excel</li>
+                <li><span>✦</span> MIS Reporting</li>
+                <li><span>✦</span> Content Creation</li>
               </ul>
             </div>
           </div>
         </div>
 
-        <div className="about-metrics about-reveal">
-          <div className="about-metric">
-            <div className="about-metricNum">4<i>+</i></div>
-            <div className="about-metricLabel">Professional Roles</div>
-          </div>
-          <div className="about-metric">
-            <div className="about-metricNum">2<i>+</i></div>
-            <div className="about-metricLabel">Years Experience</div>
-          </div>
-          <div className="about-metric">
-            <div className="about-metricNum">150<i>+</i></div>
-            <div className="about-metricLabel">Vendors Coordinated</div>
-          </div>
-          <div className="about-metric">
-            <div className="about-metricNum">100<i>%</i></div>
-            <div className="about-metricLabel">Commitment to Excellence</div>
-          </div>
+        <div className="about-metrics">
+          {metrics.map((m, i) => (
+            <div className="about-metric sr" key={i}>
+              <div className="about-metricNum">{m.num}</div>
+              <div className="about-metricLabel">{m.label}</div>
+            </div>
+          ))}
         </div>
       </div>
     </section>

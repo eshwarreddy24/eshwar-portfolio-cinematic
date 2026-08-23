@@ -1,41 +1,51 @@
 import { useState, useEffect } from 'react';
 
 const links = [
-  { label: 'Home', href: '#home' },
+  { label: 'Home', href: '#hero' },
   { label: 'About', href: '#about' },
-  { label: 'Work', href: '#work' },
+  { label: 'Work', href: '#journey' },
   { label: 'Contact', href: '#contact' },
 ];
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
-  const [on, setOn] = useState('#home');
+  const [active, setActive] = useState('#hero');
 
   useEffect(() => {
-    const h = () => {
+    const onScroll = () => {
       setScrolled(window.scrollY > 60);
-      const ids = ['#home', '#about', '#work', '#contact'];
-      for (const id of [...ids].reverse()) {
-        const el = document.querySelector(id);
-        if (el && el.getBoundingClientRect().top <= 200) { setOn(id); break; }
+      const sections = ['#hero', '#about', '#journey', '#contact'];
+      for (let i = sections.length - 1; i >= 0; i--) {
+        const el = document.querySelector(sections[i]);
+        if (el && el.getBoundingClientRect().top <= 200) {
+          setActive(sections[i]);
+          break;
+        }
       }
     };
-    window.addEventListener('scroll', h, { passive: true });
-    return () => window.removeEventListener('scroll', h);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
   return (
-    <header className="nav-wrap">
-      <div className={`nav-cap${scrolled ? ' scrolled' : ''}`}>
-        <a href="#home" className="nav-logo">ESHWAR<i>.</i></a>
-        <nav className="nav-links">
+    <div className="nav-wrap">
+      <nav className={`nav-cap${scrolled ? ' scrolled' : ''}`}>
+        <a href="#hero" className="nav-logo">ESHWA<i>.</i></a>
+        <div className="nav-links">
           {links.map(l => (
-            <a key={l.href} href={l.href} className={on === l.href ? 'on' : ''}>
-              <span className="nav-roll"><span>{l.label}</span><span aria-hidden="true">{l.label}</span></span>
+            <a
+              key={l.href}
+              href={l.href}
+              className={active === l.href ? 'on' : ''}
+            >
+              <span className="nav-roll">
+                <span>{l.label}</span>
+                <span>{l.label}</span>
+              </span>
             </a>
           ))}
-        </nav>
-      </div>
-    </header>
+        </div>
+      </nav>
+    </div>
   );
 }

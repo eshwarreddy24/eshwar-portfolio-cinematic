@@ -9,8 +9,9 @@ import About from './About';
 import Journey from './Journey';
 import DesignStack from './DesignStack';
 import Credentials from './Credentials';
-import SpeedGame from './SpeedGame';
+import Education from './Education';
 import Contact from './Contact';
+import Particles from './Particles';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -32,13 +33,25 @@ export default function MainContainer() {
     lenis.on('scroll', ScrollTrigger.update);
     gsap.ticker.add((time) => { lenis.raf(time * 1000); });
     gsap.ticker.lagSmoothing(0);
+
+    // Global scroll reveals
+    const revealEls = document.querySelectorAll('.sr');
+    revealEls.forEach((el) => {
+      ScrollTrigger.create({
+        trigger: el,
+        start: 'top 85%',
+        onEnter: () => el.classList.add('revealed'),
+      });
+    });
+
     return () => { lenis.destroy(); };
   }, [ready]);
 
   if (!ready) return null;
 
   return (
-    <div>
+    <>
+      <Particles />
       <Navbar />
       <main>
         <Hero />
@@ -47,11 +60,11 @@ export default function MainContainer() {
         <Journey />
         <DesignStack />
         <Credentials />
-        <SpeedGame />
+        <Education />
         <div className="finalFrame">
           <Contact />
         </div>
       </main>
-    </div>
+    </>
   );
 }

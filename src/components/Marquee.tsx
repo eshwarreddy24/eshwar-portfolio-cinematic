@@ -1,14 +1,23 @@
-const solidSkills = ['SAP MM', 'Procurement', 'SketchUp', 'Content Creation', 'Cinematography', 'Client Coordination', 'Tender Scrutiny', 'Graphic Design', 'Video Editing', 'MS Office Suite'];
-const outlineSkills = ['After Effects', 'Photoshop', 'ChatGPT', 'Claude Code', 'Vibe Coding', 'Figma', 'Canva', 'Premiere Pro', 'SketchUp', 'GitHub'];
+const row1 = [
+  'SAP MM', 'Procurement', 'Microsoft 365', 'Advanced Excel',
+  'SharePoint', 'e-Office', 'GeM Portal', 'MIS Reporting',
+  'Executive Operations', 'Corporate Governance',
+];
 
-function Row({ items, dir }: { items: string[]; dir: 'left' | 'right' }) {
-  const rep = [...items, ...items, ...items, ...items];
+const row2 = [
+  'Graphic Design', 'After Effects', 'Premiere Pro',
+  'Content Creation', 'Cinematography', 'Figma', 'Canva',
+  'Video Editing', 'SketchUp', 'GitHub',
+];
+
+function MarqueeRow({ items, direction }: { items: string[]; direction: 'left' | 'right' }) {
+  const content = [...items, ...items, ...items, ...items];
   return (
     <div className="marquee-row">
-      <div className={`marquee-track marquee-track--${dir}`}>
-        {rep.map((s, i) => (
+      <div className={`marquee-track marquee-track--${direction === 'left' ? 'left' : 'right'}`}>
+        {content.map((item, i) => (
           <span key={i} className="marquee-item">
-            <span className={dir === 'left' ? 'marquee-solid' : 'marquee-outline'}>{s}</span>
+            <span className={i % 2 === 0 ? 'marquee-solid' : 'marquee-outline'}>{item}</span>
             <span className="marquee-sep">✦</span>
           </span>
         ))}
@@ -19,9 +28,9 @@ function Row({ items, dir }: { items: string[]; dir: 'left' | 'right' }) {
 
 export default function Marquee() {
   return (
-    <div className="marquee" id="about">
-      <Row items={solidSkills} dir="left" />
-      <Row items={outlineSkills} dir="right" />
-    </div>
+    <section className="marquee">
+      <MarqueeRow items={row1} direction="left" />
+      <MarqueeRow items={row2} direction="right" />
+    </section>
   );
 }

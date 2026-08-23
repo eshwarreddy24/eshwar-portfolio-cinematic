@@ -1,53 +1,60 @@
 import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 export default function Hero() {
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (!ref.current) return;
-    const els = ref.current.querySelectorAll('.hero-head > *');
-    gsap.fromTo(els, { opacity: 0, y: 30 }, {
-      opacity: 1, y: 0, duration: 1, stagger: 0.12, ease: 'power3.out', delay: 0.2,
+    const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
+    tl.fromTo(ref.current.querySelector('.hero-kicker'), { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.6 })
+      .fromTo(ref.current.querySelector('.hero-h1'), { opacity: 0, y: 40, rotateX: 8 }, { opacity: 1, y: 0, rotateX: 0, duration: 0.8 }, '-=0.3')
+      .fromTo(ref.current.querySelector('.hero-sub'), { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.6 }, '-=0.4')
+      .fromTo(ref.current.querySelectorAll('.hero-ctas .btn'), { opacity: 0, y: 15 }, { opacity: 1, y: 0, stagger: 0.1, duration: 0.5 }, '-=0.3')
+      .fromTo(ref.current.querySelectorAll('.hero-statCard'), { opacity: 0, scale: 0.8, rotateY: 10 }, { opacity: 1, scale: 1, rotateY: 0, stagger: 0.08, duration: 0.6 }, '-=0.5');
+
+    // Parallax on scroll
+    gsap.to(ref.current.querySelector('.hero-head'), {
+      y: -80, opacity: 0,
+      scrollTrigger: { trigger: ref.current, start: 'top top', end: '40% top', scrub: 1 }
+    });
+    gsap.to(ref.current.querySelector('.hero-stageRow'), {
+      y: -40, opacity: 0,
+      scrollTrigger: { trigger: ref.current, start: '20% top', end: '60% top', scrub: 1 }
     });
   }, []);
 
   return (
-    <section className="hero" id="home">
-      <div className="hero-ambient">
-        <span className="hero-glow hero-glowL" />
-        <span className="hero-glow hero-glowR" />
-        <span className="hero-ring" />
-        <span className="hero-plusA">+</span>
-        <span className="hero-plusB">+</span>
-        <span className="hero-particle" style={{ left: '8%', top: '26%', width: 6, height: 6 }} />
-        <span className="hero-particle" style={{ left: '14%', top: '62%', width: 4, height: 4 }} />
-        <span className="hero-particle" style={{ left: '5%', top: '78%', width: 5, height: 5 }} />
-        <span className="hero-particle" style={{ left: '90%', top: '22%', width: 5, height: 5 }} />
-        <span className="hero-particle hero-particleAcc" style={{ left: '94%', top: '58%', width: 6, height: 6 }} />
-        <span className="hero-particle" style={{ left: '86%', top: '82%', width: 4, height: 4 }} />
+    <section className="hero" id="hero" ref={ref}>
+      <div className="hero-ambient" aria-hidden="true">
+        <div className="hero-glow hero-glowL" />
+        <div className="hero-glow hero-glowR" />
+        <div className="hero-ring" />
+        <div className="hero-plusA">+</div>
+        <div className="hero-plusB">+</div>
       </div>
 
-      <div className="hero-head" ref={ref}>
-        <p className="hero-kicker">Engineer &amp; SAP Specialist</p>
+      <div className="hero-head">
+        <p className="hero-kicker">OPERATIONS · SAP MM · PROCUREMENT</p>
         <h1 className="hero-h1">
-          <span className="hero-row">Engineering solutions that</span>
-          <span className="hero-row">feel <em className="hero-serif hero-green">obvious.</em></span>
+          <span className="hero-row">GALI ESHWAR</span>
+          <span className="hero-row"><span className="hero-serif hero-accent">Reddy</span></span>
         </h1>
         <p className="hero-sub">
-          I bridge engineering, procurement, and design — making complex processes
-          feel effortless. From SAP MM to graphic design, I deliver results.
+          Operational professional with hands-on expertise in SAP MM and office operations,
+          managing complex documentation for senior leadership including former IPS/IAS officials.
         </p>
         <div className="hero-ctas">
-          <a href="tel:+919515291117" className="btn btn-primary btn-md">
+          <a href="#contact" className="btn btn-primary btn-md">
             <span className="btn-fill" />
-            <span className="btn-labelWrap"><span className="btn-labelStack"><span className="btn-label">Hire Me</span><span className="btn-label btn-labelClone" aria-hidden="true">Hire Me</span></span></span>
-            <span className="btn-arrow">→</span>
+            <span className="btn-labelWrap"><span className="btn-labelStack"><span className="btn-label">Hire Me</span><span className="btn-labelClone">Hire Me</span></span></span>
+            <span className="btn-arrow"><span className="btn-lead">↗</span></span>
           </a>
-          <a href="#cricket" className="btn btn-ghost btn-md">
+          <a href="#journey" className="btn btn-ghost btn-md">
             <span className="btn-fill" />
-            <span className="btn-lead"><span className="hero-play">🏏</span></span>
-            <span className="btn-labelWrap"><span className="btn-labelStack"><span className="btn-label">Play a Game with Me</span><span className="btn-label btn-labelClone" aria-hidden="true">Play a Game with Me</span></span></span>
+            <span className="btn-labelWrap"><span className="btn-labelStack"><span className="btn-label">View Work</span><span className="btn-labelClone">View Work</span></span></span>
+            <span className="btn-arrow"><span className="btn-lead">→</span></span>
           </a>
         </div>
       </div>
@@ -55,29 +62,28 @@ export default function Hero() {
       <div className="hero-stageRow">
         <div className="hero-side hero-sideL">
           <div className="hero-statCard">
-            <div className="hero-statNum"><span>4</span><i>+</i></div>
-            <div className="hero-statLabel">Roles Handled</div>
+            <div className="hero-statNum">4<i>+</i></div>
+            <div className="hero-statLabel">Roles Across Engineering & Operations</div>
           </div>
           <div className="hero-statCard">
-            <div className="hero-statNum"><span>2</span><i>+</i></div>
-            <div className="hero-statLabel">Years Experience</div>
+            <div className="hero-statNum">150<i>+</i></div>
+            <div className="hero-statLabel">MSME & Vendor Partners Managed</div>
           </div>
         </div>
-
         <div className="hero-side hero-sideR">
           <div className="hero-statCard">
-            <div className="hero-statNum"><span>150</span><i>+</i></div>
-            <div className="hero-statLabel">Vendors Coordinated</div>
+            <div className="hero-statNum">30<i>+</i></div>
+            <div className="hero-statLabel">Critical Invoices Certified Monthly</div>
           </div>
           <div className="hero-statCard">
-            <div className="hero-statNum"><span>100</span><i>%</i></div>
-            <div className="hero-statLabel">Commitment</div>
+            <div className="hero-statNum">100<i>%</i></div>
+            <div className="hero-statLabel">Zero-Error Procurement Workflow</div>
           </div>
         </div>
       </div>
 
       <div className="hero-scrollCue">
-        <span>Scroll to Explore</span>
+        <span>SCROLL</span>
         <span className="hero-cueArrow">↓</span>
       </div>
     </section>

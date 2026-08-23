@@ -3,23 +3,23 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 const TOOLS = [
-  { name: 'SAP MM', slug: 'sap', color: '#0070F2' },
-  { name: 'ChatGPT', slug: 'openai', color: '#10A37F' },
-  { name: 'Claude', slug: 'anthropic', color: '#D97706' },
-  { name: 'Gemini', slug: 'google', color: '#4285F4' },
-  { name: 'Figma', slug: 'figma', color: '#F24E1E' },
-  { name: 'Canva', slug: 'canva', color: '#00C4CC' },
-  { name: 'Photoshop', slug: 'adobephotoshop', color: '#31A8FF' },
-  { name: 'After Effects', slug: 'adobeaftereffects', color: '#9999FF' },
-  { name: 'Premiere Pro', slug: 'adobepremierepro', color: '#9999FF' },
-  { name: 'SketchUp', slug: 'sketchup', color: '#E8E4E1' },
-  { name: 'GitHub', slug: 'github', color: '#FFFFFF' },
-  { name: 'MS Excel', slug: 'microsoftexcel', color: '#217346' },
-  { name: 'MS Word', slug: 'microsoftword', color: '#2B579A' },
-  { name: 'MS PPT', slug: 'microsoftpowerpoint', color: '#B7472A' },
-  { name: 'Cursor', slug: 'cursor', color: '#00D4FF' },
-  { name: 'Midjourney', slug: 'midjourney', color: '#FFFFFF' },
-  { name: 'Python', slug: 'python', color: '#3776AB' },
+  { name: 'SAP MM', slug: 'sap', color: '0070F2' },
+  { name: 'ChatGPT', slug: 'openai', color: '10A37F' },
+  { name: 'Claude', slug: 'anthropic', color: 'D97706' },
+  { name: 'Gemini', slug: 'google', color: '4285F4' },
+  { name: 'Figma', slug: 'figma', color: 'F24E1E' },
+  { name: 'Canva', slug: 'canva', color: '00C4CC' },
+  { name: 'Photoshop', slug: 'adobephotoshop', color: '31A8FF' },
+  { name: 'After Effects', slug: 'adobeaftereffects', color: '9999FF' },
+  { name: 'Premiere Pro', slug: 'adobepremierepro', color: '9999FF' },
+  { name: 'SketchUp', slug: 'sketchup', color: 'E8E4E1' },
+  { name: 'GitHub', slug: 'github', color: 'FFFFFF' },
+  { name: 'MS Excel', slug: 'microsoftexcel', color: '217346' },
+  { name: 'MS Word', slug: 'microsoftword', color: '2B579A' },
+  { name: 'MS PPT', slug: 'microsoftpowerpoint', color: 'B7472A' },
+  { name: 'Cursor', slug: 'cursor', color: '00D4FF' },
+  { name: 'Midjourney', slug: 'midjourney', color: 'FFFFFF' },
+  { name: 'Python', slug: 'python', color: '3776AB' },
 ];
 
 const orbits = [
@@ -35,14 +35,12 @@ function ToolNode({ tool }: { tool: typeof TOOLS[0] }) {
       <div className={`tool-flipper ${flipped ? 'flipped' : ''}`}>
         <div className="tool-face tool-front">
           <img
-            src={`https://cdn.simpleicons.org/${tool.slug}/${tool.color.replace('#', '')}`}
+            src={`https://cdn.simpleicons.org/${tool.slug}/${tool.color}`}
             alt={tool.name}
             width={28}
             height={28}
             loading="lazy"
-            onError={(e) => {
-              (e.target as HTMLImageElement).style.display = 'none';
-            }}
+            onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }}
           />
           <span className="tool-name">{tool.name}</span>
         </div>
@@ -60,21 +58,17 @@ export default function DesignStack() {
   const angleRef = useRef([0, 0, 0]);
   const orbitRefs = useRef<(HTMLDivElement | null)[]>([]);
 
-  // Scroll-triggered entrance
   useEffect(() => {
     if (!sectionRef.current) return;
     gsap.fromTo(
       sectionRef.current.querySelectorAll('.tool-node'),
       { opacity: 0, scale: 0 },
-      {
-        opacity: 1, scale: 1, duration: 0.5, stagger: 0.04,
-        ease: 'back.out(1.7)',
-        scrollTrigger: { trigger: sectionRef.current, start: 'top 75%' },
+      { opacity: 1, scale: 1, duration: 0.5, stagger: 0.04, ease: 'back.out(1.7)',
+        scrollTrigger: { trigger: sectionRef.current, start: 'top 75%' }
       }
     );
   }, []);
 
-  // Continuous orbit rotation via requestAnimationFrame
   useEffect(() => {
     let raf: number;
     const tick = () => {
@@ -83,7 +77,6 @@ export default function DesignStack() {
         if (!el) return;
         angleRef.current[i] += orb.speed;
         const a = angleRef.current[i];
-        // Rotate the orbit ring; counter-rotate children so icons stay upright
         el.style.transform = `rotateX(${orb.tilt}deg) rotateZ(${a}deg)`;
         el.querySelectorAll<HTMLElement>('.tool-node').forEach((node) => {
           node.style.transform = `rotateZ(${-a}deg) rotateX(${-orb.tilt}deg)`;
@@ -99,63 +92,39 @@ export default function DesignStack() {
     <section className="stack" id="stack" ref={sectionRef}>
       <div className="stack-bg-grid" aria-hidden="true" />
       <div className="stack-bg-glow" aria-hidden="true" />
-
       <div className="stack-wrap">
-        <p className="stack-eyebrow"><span>03</span> Design Stack</p>
-        <h2 className="stack-h2">
-          Tools & <em className="about-serif about-green">Software</em>
+        <p className="stack-eyebrow sr"><span>04</span> Design Stack</p>
+        <h2 className="stack-h2 sr">
+          Tools & <em className="about-serif green-glow">Software</em>
         </h2>
-
-        {/* 3D perspective container */}
         <div className="solar-scene">
           <div className="solar-system">
-            {/* Orbit ring guides */}
             {orbits.map((orb, i) => (
-              <div
-                key={i}
-                className="solar-ring"
-                style={{
-                  width: orb.radius * 2,
-                  height: orb.radius * 2,
-                  transform: `rotateX(${orb.tilt}deg)`,
-                }}
+              <div key={i} className="solar-ring"
+                style={{ width: orb.radius * 2, height: orb.radius * 2, transform: `rotateX(${orb.tilt}deg)` }}
               />
             ))}
-
-            {/* Orbiting icon containers */}
             {orbits.map((orb, i) => (
-              <div
-                key={i}
-                className="solar-orbit"
-                ref={(el) => { orbitRefs.current[i] = el; }}
-                style={{ transform: `rotateX(${orb.tilt}deg)` }}
-              >
+              <div key={i} className="solar-orbit" ref={el => { orbitRefs.current[i] = el; }}
+                style={{ transform: `rotateX(${orb.tilt}deg)` }}>
                 {orb.items.map((tool, j) => {
                   const angle = (j / orb.items.length) * 360;
                   const rad = (angle * Math.PI) / 180;
                   const x = Math.cos(rad) * orb.radius;
                   const y = Math.sin(rad) * orb.radius;
                   return (
-                    <div
-                      key={tool.name}
-                      className="orbit-node"
-                      style={{
-                        position: 'absolute',
-                        left: `calc(50% + ${x}px - 32px)`,
-                        top: `calc(50% + ${y}px - 32px)`,
-                      }}
-                    >
+                    <div key={tool.name} className="orbit-node" style={{
+                      position: 'absolute',
+                      left: `calc(50% + ${x}px - 32px)`,
+                      top: `calc(50% + ${y}px - 32px)`,
+                    }}>
                       <ToolNode tool={tool} />
                     </div>
                   );
                 })}
               </div>
             ))}
-
-            {/* Sun center */}
-            <div className="solar-sun">
-              <span className="solar-sun-icon">☀️</span>
-            </div>
+            <div className="solar-sun"><span className="solar-sun-icon">☀️</span></div>
           </div>
         </div>
       </div>
