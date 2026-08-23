@@ -212,46 +212,6 @@ button{font:inherit;cursor:pointer;background:none;border:none}
 .cred-issuer{display:flex;align-items:center;gap:8px;margin-top:16px;padding-top:14px;border-top:1px solid #1414140a}
 .cred-issuer span{font-size:12px;color:var(--ink-3);font-weight:600}
 
-/* CRICKET */
-.cricket-section{background:var(--bg);position:relative}
-.cricket-wrap{max-width:var(--max);margin:0 auto;padding:120px 44px 130px;text-align:center}
-.cricket-scoreboard{display:flex;align-items:center;justify-content:center;gap:24px;margin:32px 0;padding:20px 32px;background:var(--ph);border-radius:var(--radius);border:1px solid #1414140a}
-.cricket-score-item{display:flex;flex-direction:column;align-items:center;gap:4px}
-.cricket-score-label{font-size:11px;font-weight:700;color:var(--ink-3);text-transform:uppercase;letter-spacing:.1em}
-.cricket-score-num{font-size:28px;font-weight:900;color:var(--ink);letter-spacing:-.02em}
-.cricket-score-divider{color:var(--ink-3);font-size:16px;font-weight:700}
-.cricket-choices{display:flex;gap:16px;justify-content:center;margin-top:32px}
-.cricket-choice-btn{display:flex;flex-direction:column;align-items:center;gap:8px;padding:28px 40px;background:var(--bg);border:2px solid var(--line);border-radius:var(--radius);cursor:pointer;transition:all var(--dur-base) var(--ease-out-expo);box-shadow:var(--shadow)}
-.cricket-choice-btn:hover{border-color:var(--accent);transform:translateY(-4px);box-shadow:var(--shadow-lg)}
-.cricket-choice-icon{font-size:36px}
-.cricket-choice-text{font-size:18px;font-weight:800;color:var(--ink)}
-.cricket-choice-sub{font-size:12px;color:var(--ink-3);font-weight:600}
-.cricket-instruction{color:var(--ink-2);margin:24px 0 12px;font-size:15px;font-weight:600}
-.cricket-actions{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin:16px 0 24px}
-.cricket-action-btn{padding:12px 24px;border-radius:999px;background:var(--ink);color:#fff;font-weight:700;font-size:14px;cursor:pointer;border:none;transition:all var(--dur-base) var(--ease-out-expo)}
-.cricket-action-btn:hover{background:var(--accent);transform:translateY(-2px);box-shadow:var(--shadow)}
-.cricket-result{display:flex;align-items:center;gap:16px;justify-content:center;padding:20px 32px;background:var(--ph);border-radius:var(--radius);margin:16px 0;border:1px solid #1414140a;animation:cricketPop .4s ease}
-@keyframes cricketPop{0%{transform:scale(.9);opacity:0}100%{transform:scale(1);opacity:1}}
-.cricket-result-emoji{font-size:32px}
-.cricket-result-text{font-size:15px;font-weight:600;color:var(--ink);text-align:left;max-width:400px}
-.cricket-result-runs{font-size:24px;font-weight:900;color:var(--accent);-webkit-text-stroke:1px var(--ink)}
-.cricket-gameover{margin-top:32px;animation:cricketPop .5s ease}
-.cricket-gameover-title{font-size:clamp(28px,4vw,48px);font-weight:900;letter-spacing:-.03em;margin-bottom:8px}
-.cricket-gameover-score{color:var(--ink-2);font-size:16px;margin-bottom:20px}
-
-/* SPEED GAME */
-.speed-grid{display:grid;grid-template-columns:repeat(4,64px);grid-template-rows:repeat(4,64px);gap:8px;justify-content:center;margin:24px auto}
-.speed-cell{width:64px;height:64px;border-radius:14px;border:2px solid #e4e4e6;background:var(--ph);cursor:pointer;transition:all .15s ease}
-.speed-cell-active{background:var(--accent);border-color:var(--accent-dark);box-shadow:0 0 20px #00c85340;transform:scale(1.05);animation:speedPulse .5s ease-in-out infinite alternate}
-@keyframes speedPulse{0%{box-shadow:0 0 15px #00c85330}100%{box-shadow:0 0 30px #00c85360}}
-.speed-controls{text-align:center;margin-top:16px}
-.speed-message{color:var(--ink-2);font-size:16px;font-weight:700;margin-top:12px}
-.speed-instruction{color:var(--ink-3);font-size:13px;font-weight:600;margin-top:16px}
-
-/* SHARED RESET */
-.chess-reset{margin-top:20px;padding:10px 28px;border-radius:999px;background:var(--ink);color:#fff;font-weight:700;font-size:13px;cursor:pointer;border:none;transition:background .3s}
-.chess-reset:hover{background:var(--accent)}
-
 /* CONTACT */
 .connect{position:relative}
 .connect-head{text-align:center;max-width:620px;margin:0 auto;padding:120px 44px 80px}
