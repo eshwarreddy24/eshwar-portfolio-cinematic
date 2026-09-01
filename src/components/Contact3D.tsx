@@ -1,6 +1,6 @@
 import { useRef } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
-import { Float, MeshDistortMaterial } from '@react-three/drei';
+import { Float } from '@react-three/drei';
 import * as THREE from 'three';
 
 function RotatingEnvelope() {
@@ -8,36 +8,25 @@ function RotatingEnvelope() {
 
   useFrame((state) => {
     if (group.current) {
-      group.current.rotation.y = state.clock.elapsedTime * 0.5;
-      group.current.rotation.x = Math.sin(state.clock.elapsedTime * 0.3) * 0.1;
+      group.current.rotation.y = state.clock.elapsedTime * 0.4;
+      group.current.rotation.x = Math.sin(state.clock.elapsedTime * 0.2) * 0.08;
     }
   });
 
   return (
-    <Float speed={2} rotationIntensity={0.5} floatIntensity={1}>
+    <Float speed={1.5} rotationIntensity={0.3} floatIntensity={0.8}>
       <group ref={group}>
-        {/* Envelope body */}
-        <mesh position={[0, 0, 0]}>
-          <boxGeometry args={[1.4, 1, 0.08]} />
-          <meshStandardMaterial color="#1a1a1a" emissive="#00ff88" emissiveIntensity={0.1} />
+        <mesh>
+          <boxGeometry args={[1.2, 0.8, 0.06]} />
+          <meshStandardMaterial color="#1a1a1a" emissive="#00ff88" emissiveIntensity={0.08} />
         </mesh>
-        {/* Envelope flap */}
-        <mesh position={[0, 0.35, 0.04]} rotation={[0, 0, 0]}>
-          <coneGeometry args={[0.8, 0.5, 4]} />
-          <MeshDistortMaterial
-            color="#00ff88"
-            emissive="#00ff88"
-            emissiveIntensity={0.4}
-            transparent
-            opacity={0.6}
-            distort={0.2}
-            speed={2}
-          />
+        <mesh position={[0, 0.3, 0.03]} rotation={[0, 0, 0]}>
+          <coneGeometry args={[0.65, 0.4, 4]} />
+          <meshStandardMaterial color="#00ff88" emissive="#00ff88" emissiveIntensity={0.3} transparent opacity={0.5} />
         </mesh>
-        {/* Glow ring */}
-        <mesh position={[0, 0, -0.1]}>
-          <torusGeometry args={[1, 0.02, 16, 64]} />
-          <meshStandardMaterial color="#00ff88" emissive="#00ff88" emissiveIntensity={1} transparent opacity={0.3} />
+        <mesh position={[0, 0, -0.08]}>
+          <torusGeometry args={[0.85, 0.015, 12, 48]} />
+          <meshStandardMaterial color="#00ff88" emissive="#00ff88" emissiveIntensity={0.8} transparent opacity={0.25} />
         </mesh>
       </group>
     </Float>
@@ -46,16 +35,16 @@ function RotatingEnvelope() {
 
 function ContactParticles() {
   const mesh = useRef<THREE.Points>(null!);
-  const positions = new Float32Array(200 * 3);
-  for (let i = 0; i < 200; i++) {
-    positions[i * 3] = (Math.random() - 0.5) * 12;
-    positions[i * 3 + 1] = (Math.random() - 0.5) * 12;
-    positions[i * 3 + 2] = (Math.random() - 0.5) * 12;
+  const positions = new Float32Array(80 * 3);
+  for (let i = 0; i < 80; i++) {
+    positions[i * 3] = (Math.random() - 0.5) * 10;
+    positions[i * 3 + 1] = (Math.random() - 0.5) * 10;
+    positions[i * 3 + 2] = (Math.random() - 0.5) * 10;
   }
 
   useFrame((state) => {
     if (mesh.current) {
-      mesh.current.rotation.y = state.clock.elapsedTime * 0.05;
+      mesh.current.rotation.y = state.clock.elapsedTime * 0.03;
     }
   });
 
@@ -64,7 +53,7 @@ function ContactParticles() {
       <bufferGeometry>
         <bufferAttribute attach="attributes-position" args={[positions, 3]} />
       </bufferGeometry>
-      <pointsMaterial size={0.02} color="#00ff88" transparent opacity={0.4} sizeAttenuation />
+      <pointsMaterial size={0.025} color="#00ff88" transparent opacity={0.35} sizeAttenuation />
     </points>
   );
 }
@@ -72,10 +61,9 @@ function ContactParticles() {
 export default function Contact3D() {
   return (
     <div className="contact-3d-canvas">
-      <Canvas camera={{ position: [0, 0, 4], fov: 50 }}>
-        <ambientLight intensity={0.15} />
-        <pointLight position={[3, 3, 3]} intensity={0.6} color="#00ff88" />
-        <pointLight position={[-3, -2, 2]} intensity={0.3} color="#00cc6a" />
+      <Canvas camera={{ position: [0, 0, 3.5], fov: 45 }} dpr={[1, 1.5]}>
+        <ambientLight intensity={0.12} />
+        <pointLight position={[2, 2, 2]} intensity={0.4} color="#00ff88" />
         <RotatingEnvelope />
         <ContactParticles />
       </Canvas>

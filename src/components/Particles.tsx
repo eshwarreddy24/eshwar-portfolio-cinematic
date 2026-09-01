@@ -5,7 +5,7 @@ export default function Particles() {
   const cursorDotRef = useRef<HTMLDivElement>(null);
   const cursorRingRef = useRef<HTMLDivElement>(null);
 
-  // Floating particles
+  // Floating particles — reduced to 25
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -17,17 +17,25 @@ export default function Particles() {
     canvas.width = w;
     canvas.height = h;
 
-    const particles = Array.from({ length: 50 }, () => ({
+    const particles = Array.from({ length: 25 }, () => ({
       x: Math.random() * w,
       y: Math.random() * h,
-      r: 1 + Math.random() * 2,
-      dx: (Math.random() - 0.5) * 0.3,
-      dy: (Math.random() - 0.5) * 0.3,
-      alpha: 0.1 + Math.random() * 0.2,
+      r: 1 + Math.random() * 1.5,
+      dx: (Math.random() - 0.5) * 0.2,
+      dy: (Math.random() - 0.5) * 0.2,
+      alpha: 0.08 + Math.random() * 0.12,
     }));
 
     let raf: number;
-    const draw = () => {
+    let lastTime = 0;
+    const fps = 30;
+    const interval = 1000 / fps;
+
+    const draw = (time: number) => {
+      raf = requestAnimationFrame(draw);
+      if (time - lastTime < interval) return;
+      lastTime = time;
+
       ctx.clearRect(0, 0, w, h);
       particles.forEach(p => {
         p.x += p.dx;
@@ -41,7 +49,6 @@ export default function Particles() {
         ctx.fillStyle = `rgba(0,255,136,${p.alpha})`;
         ctx.fill();
       });
-      raf = requestAnimationFrame(draw);
     };
     raf = requestAnimationFrame(draw);
 
@@ -55,26 +62,31 @@ export default function Particles() {
     return () => { cancelAnimationFrame(raf); window.removeEventListener('resize', onResize); };
   }, []);
 
-  // Custom cursor
+  // Custom cursor — throttled with RAF
   useEffect(() => {
     const dot = cursorDotRef.current;
     const ring = cursorRingRef.current;
     if (!dot || !ring) return;
 
     let mx = 0, my = 0;
+    let ticking = false;
     const onMove = (e: MouseEvent) => {
       mx = e.clientX;
       my = e.clientY;
-      dot.style.left = `${mx - 4}px`;
-      dot.style.top = `${my - 4}px`;
-      ring.style.left = `${mx - 18}px`;
-      ring.style.top = `${my - 18}px`;
+      if (!ticking) {
+        ticking = true;
+        requestAnimationFrame(() => {
+          dot.style.transform = `translate(${mx - 4}px, ${my - 4}px)`;
+          ring.style.transform = `translate(${mx - 18}px, ${my - 18}px)`;
+          ticking = false;
+        });
+      }
     };
 
     const onEnter = () => ring.classList.add('hovering');
     const onLeave = () => ring.classList.remove('hovering');
 
-    window.addEventListener('mousemove', onMove);
+    window.addEventListener('mousemove', onMove, { passive: true });
     document.querySelectorAll('a, button, .tool-node, .paper, .cred-card, .connect-social').forEach(el => {
       el.addEventListener('mouseenter', onEnter);
       el.addEventListener('mouseleave', onLeave);
