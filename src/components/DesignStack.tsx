@@ -60,11 +60,33 @@ export default function DesignStack() {
 
   useEffect(() => {
     if (!sectionRef.current) return;
+    // Eyebrow from left
+    gsap.fromTo(sectionRef.current.querySelector('.stack-eyebrow'),
+      { opacity: 0, x: -60, rotateY: 10 },
+      { opacity: 1, x: 0, rotateY: 0, duration: 0.7, ease: 'power3.out',
+        scrollTrigger: { trigger: sectionRef.current, start: 'top 75%' }
+      }
+    );
+    // Heading from top
+    gsap.fromTo(sectionRef.current.querySelector('.stack-h2'),
+      { opacity: 0, y: -40, rotateX: -10 },
+      { opacity: 1, y: 0, rotateX: 0, duration: 0.9, ease: 'power4.out',
+        scrollTrigger: { trigger: sectionRef.current, start: 'top 72%' }
+      }
+    );
+    // Solar system scales in from center
+    gsap.fromTo(sectionRef.current.querySelector('.solar-scene'),
+      { opacity: 0, scale: 0.5, rotateX: 25 },
+      { opacity: 1, scale: 1, rotateX: 0, duration: 1.2, ease: 'power3.out',
+        scrollTrigger: { trigger: sectionRef.current.querySelector('.solar-scene'), start: 'top 85%' }
+      }
+    );
+    // Tool nodes pop in with stagger
     gsap.fromTo(
       sectionRef.current.querySelectorAll('.tool-node'),
       { opacity: 0, scale: 0 },
       { opacity: 1, scale: 1, duration: 0.5, stagger: 0.04, ease: 'back.out(1.7)',
-        scrollTrigger: { trigger: sectionRef.current, start: 'top 75%' }
+        scrollTrigger: { trigger: sectionRef.current, start: 'top 70%' }
       }
     );
   }, []);

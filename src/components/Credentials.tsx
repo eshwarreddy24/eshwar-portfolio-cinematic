@@ -23,12 +23,30 @@ export default function Credentials() {
 
   useEffect(() => {
     if (!ref.current) return;
-    gsap.fromTo(ref.current.querySelectorAll('.cred-card'),
-      { opacity: 0, y: 40, rotateX: 6 },
-      { opacity: 1, y: 0, rotateX: 0, stagger: 0.15, duration: 0.7, ease: 'power3.out',
+    // Eyebrow from left
+    gsap.fromTo(ref.current.querySelector('.about-eyebrow'),
+      { opacity: 0, x: -60, rotateY: 10 },
+      { opacity: 1, x: 0, rotateY: 0, duration: 0.7, ease: 'power3.out',
         scrollTrigger: { trigger: ref.current, start: 'top 75%' }
       }
     );
+    // Heading drops from top
+    gsap.fromTo(ref.current.querySelector('.about-h2'),
+      { opacity: 0, y: -40, rotateX: -10 },
+      { opacity: 1, y: 0, rotateX: 0, duration: 0.9, ease: 'power4.out',
+        scrollTrigger: { trigger: ref.current, start: 'top 72%' }
+      }
+    );
+    // Cards fly from alternating directions
+    ref.current.querySelectorAll('.cred-card').forEach((card: any, i: number) => {
+      const fromRight = i % 2 === 1;
+      gsap.fromTo(card,
+        { opacity: 0, x: fromRight ? 80 : -80, rotateY: fromRight ? 15 : -15, scale: 0.85, transformPerspective: 700 },
+        { opacity: 1, x: 0, rotateY: 0, scale: 1, duration: 0.9, ease: 'back.out(1.2)',
+          scrollTrigger: { trigger: card, start: 'top 85%' }, delay: i * 0.15
+        }
+      );
+    });
   }, []);
 
   return (

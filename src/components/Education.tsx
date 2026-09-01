@@ -7,10 +7,32 @@ export default function Education() {
 
   useEffect(() => {
     if (!ref.current) return;
-    gsap.fromTo(ref.current.querySelector('.edu-card'),
-      { opacity: 0, y: 40 },
-      { opacity: 1, y: 0, duration: 0.7, ease: 'power3.out',
+    // Eyebrow from left
+    gsap.fromTo(ref.current.querySelector('.about-eyebrow'),
+      { opacity: 0, x: -60, rotateY: 10 },
+      { opacity: 1, x: 0, rotateY: 0, duration: 0.7, ease: 'power3.out',
         scrollTrigger: { trigger: ref.current, start: 'top 75%' }
+      }
+    );
+    // Heading from top
+    gsap.fromTo(ref.current.querySelector('.about-h2'),
+      { opacity: 0, y: -40, rotateX: -10 },
+      { opacity: 1, y: 0, rotateX: 0, duration: 0.9, ease: 'power4.out',
+        scrollTrigger: { trigger: ref.current, start: 'top 72%' }
+      }
+    );
+    // Card rises from bottom with 3D perspective
+    gsap.fromTo(ref.current.querySelector('.edu-card'),
+      { opacity: 0, y: 80, rotateX: 12, scale: 0.9, transformPerspective: 700 },
+      { opacity: 1, y: 0, rotateX: 0, scale: 1, duration: 1, ease: 'power3.out',
+        scrollTrigger: { trigger: ref.current.querySelector('.edu-card'), start: 'top 88%' }
+      }
+    );
+    // Highlight items stagger from left
+    gsap.fromTo(ref.current.querySelectorAll('.edu-highlights li'),
+      { opacity: 0, x: -30, rotateY: 5 },
+      { opacity: 1, x: 0, rotateY: 0, stagger: 0.1, duration: 0.6, ease: 'power3.out',
+        scrollTrigger: { trigger: ref.current.querySelector('.edu-highlights'), start: 'top 85%' }
       }
     );
   }, []);

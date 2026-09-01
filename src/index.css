@@ -174,6 +174,10 @@ button{font:inherit;cursor:pointer;background:none;border:none}
 .journey-vfx-bg{pointer-events:none;position:absolute;inset:0;z-index:0}
 .journey-particle{opacity:.08;border-radius:50%;position:absolute;background:var(--accent);animation:journeyFloat 6s ease-in-out infinite alternate}
 @keyframes journeyFloat{0%{transform:translateY(0) scale(1)}100%{transform:translateY(-18px) scale(1.2)}}
+.journey-orb{position:absolute;border-radius:50%;pointer-events:none;filter:blur(80px);opacity:.06}
+.journey-orb1{width:400px;height:400px;background:var(--accent);top:10%;left:-100px;animation:journeyOrbDrift 8s ease-in-out infinite alternate}
+.journey-orb2{width:300px;height:300px;background:var(--accent);bottom:10%;right:-80px;animation:journeyOrbDrift 10s ease-in-out infinite alternate-reverse}
+@keyframes journeyOrbDrift{0%{transform:translate(0,0) scale(1)}100%{transform:translate(30px,-20px) scale(1.1)}}
 .journey-section-wrap{max-width:var(--max);margin:0 auto;padding:120px 44px 130px;position:relative;z-index:1}
 .papers-stack{display:flex;flex-direction:column;gap:24px;margin-top:48px;max-width:680px}
 .paper{position:relative;background:var(--ph);border:1px solid var(--line);border-radius:var(--radius);box-shadow:0 4px 20px rgba(0,0,0,.3);will-change:transform;transform-style:preserve-3d;transition:transform var(--dur-base) var(--ease-out-expo),box-shadow var(--dur-base) ease}

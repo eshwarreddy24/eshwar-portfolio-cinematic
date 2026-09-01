@@ -48,89 +48,46 @@ export default function MainContainer() {
       });
     }
 
-    // === SCROLL REVEALS (existing) ===
-    const revealEls = document.querySelectorAll('.sr');
-    revealEls.forEach((el) => {
-      ScrollTrigger.create({
-        trigger: el,
-        start: 'top 85%',
-        onEnter: () => el.classList.add('revealed'),
-      });
-    });
-
-    // === CLIP-PATH TEXT REVEALS ===
-    document.querySelectorAll('.clip-reveal').forEach((el) => {
+    // === SECTION SEPARATOR LINES ===
+    document.querySelectorAll('.section-line').forEach((el: any) => {
       gsap.fromTo(el,
-        { clipPath: 'inset(0 100% 0 0)' },
+        { scaleX: 0, opacity: 0 },
         {
-          clipPath: 'inset(0 0% 0 0)',
-          duration: 1.2,
+          scaleX: 1, opacity: 0.15,
+          duration: 1.5,
           ease: 'power4.out',
-          scrollTrigger: { trigger: el, start: 'top 80%' },
+          scrollTrigger: { trigger: el, start: 'top 90%' },
         }
       );
     });
 
-    // === HERO PARALLAX DEPTH LAYERS ===
+    // === PARALLAX DEPTH LAYERS (hero) ===
     gsap.utils.toArray('.parallax-layer').forEach((el: any) => {
       const speed = parseFloat(el.dataset.speed || '0.3');
       gsap.to(el, {
-        y: () => -200 * speed,
+        y: () => -250 * speed,
         ease: 'none',
         scrollTrigger: {
           trigger: el.closest('section') || el,
           start: 'top bottom',
           end: 'bottom top',
-          scrub: 1.5,
+          scrub: 2,
         },
       });
     });
 
-    // === HERO NAME PARALLAX (moves up faster on scroll) ===
-    const heroH1 = document.querySelector('.hero-h1');
-    if (heroH1) {
-      gsap.to(heroH1, {
-        y: -120,
-        opacity: 0,
-        scale: 0.92,
-        ease: 'none',
-        scrollTrigger: {
-          trigger: '.hero',
-          start: 'top top',
-          end: '60% top',
-          scrub: 1,
-        },
-      });
-    }
-
-    // === HERO STAT CARDS SCATTER ON SCROLL ===
-    document.querySelectorAll('.hero-statCard').forEach((card: any, i) => {
-      gsap.to(card, {
-        y: -80 - i * 30,
-        opacity: 0,
-        rotate: i % 2 === 0 ? -15 : 15,
-        ease: 'none',
-        scrollTrigger: {
-          trigger: '.hero',
-          start: '20% top',
-          end: '60% top',
-          scrub: 1,
-        },
-      });
-    });
-
-    // === COUNTING NUMBERS for metrics ===
+    // === COUNTING NUMBERS ===
     document.querySelectorAll('.about-metricNum').forEach((el: any) => {
       const target = parseInt(el.dataset.count || '0', 10);
       const suffix = el.dataset.suffix || '';
       const obj = { val: 0 };
       gsap.to(obj, {
         val: target,
-        duration: 2,
+        duration: 2.5,
         ease: 'power2.out',
         scrollTrigger: {
           trigger: el,
-          start: 'top 80%',
+          start: 'top 82%',
           once: true,
         },
         onUpdate: () => {
@@ -142,6 +99,7 @@ export default function MainContainer() {
     // === MARQUEE SPEED BOOST ON SCROLL ===
     const marqueeTracks = document.querySelectorAll('.marquee-track');
     let lastScroll = 0;
+    let rafId: number;
     const boostMarquee = () => {
       const currentScroll = window.scrollY;
       const speed = Math.abs(currentScroll - lastScroll) * 0.5;
@@ -149,120 +107,35 @@ export default function MainContainer() {
         track.style.animationDuration = `${Math.max(10, 28 - speed)}s`;
       });
       lastScroll = currentScroll;
+      rafId = requestAnimationFrame(boostMarquee);
     };
-    window.addEventListener('scroll', boostMarquee, { passive: true });
+    rafId = requestAnimationFrame(boostMarquee);
 
-    // === SECTION SEPARATOR LINES ===
-    document.querySelectorAll('.section-line').forEach((el: any) => {
-      gsap.fromTo(el,
-        { scaleX: 0 },
-        {
-          scaleX: 1,
-          duration: 1.5,
-          ease: 'power4.out',
-          scrollTrigger: { trigger: el, start: 'top 85%' },
-        }
-      );
-    });
-
-    // === JOURNEY CARDS 3D FLIP-IN STAGGER ===
-    const papers = document.querySelectorAll('.paper');
-    papers.forEach((paper: any, i) => {
-      gsap.fromTo(paper,
-        { opacity: 0, y: 80, rotateY: -25, rotateX: 10, transformPerspective: 800 },
-        {
-          opacity: 1,
-          y: 0,
-          rotateY: 0,
-          rotateX: 0,
-          duration: 0.9,
-          ease: 'power3.out',
-          scrollTrigger: { trigger: paper, start: 'top 88%' },
-          delay: i * 0.12,
-        }
-      );
-    });
-
-    // === CREDENTIALS CARDS SCALE-IN ===
-    document.querySelectorAll('.cred-card').forEach((card: any, i) => {
-      gsap.fromTo(card,
-        { opacity: 0, scale: 0.8, rotateX: 15 },
-        {
-          opacity: 1,
-          scale: 1,
-          rotateX: 0,
-          duration: 0.8,
-          ease: 'back.out(1.4)',
-          scrollTrigger: { trigger: card, start: 'top 85%' },
-          delay: i * 0.15,
-        }
-      );
-    });
-
-    // === EDUCATION CARD LIFT-IN ===
-    const eduCard = document.querySelector('.edu-card');
-    if (eduCard) {
-      gsap.fromTo(eduCard,
-        { opacity: 0, y: 60, rotateX: 8 },
-        {
-          opacity: 1,
-          y: 0,
-          rotateX: 0,
-          duration: 1,
-          ease: 'power3.out',
-          scrollTrigger: { trigger: eduCard, start: 'top 85%' },
-        }
-      );
-    }
-
-    // === CONTACT SECTION SCALE REVEAL ===
-    const connectHead = document.querySelector('.connect-head');
-    if (connectHead) {
-      gsap.fromTo(connectHead,
-        { opacity: 0, scale: 0.9, y: 40 },
-        {
-          opacity: 1,
-          scale: 1,
-          y: 0,
-          duration: 1,
-          ease: 'power3.out',
-          scrollTrigger: { trigger: connectHead, start: 'top 80%' },
-        }
-      );
-    }
-
-    // === MAGNETIC HOVER on buttons ===
+    // === MAGNETIC HOVER on buttons & socials ===
     const magneticEls = document.querySelectorAll('.btn, .connect-social');
+    const cleanups: (() => void)[] = [];
     magneticEls.forEach((el: any) => {
-      el.addEventListener('mousemove', (e: MouseEvent) => {
+      const onMove = (e: MouseEvent) => {
         const rect = el.getBoundingClientRect();
         const x = e.clientX - rect.left - rect.width / 2;
         const y = e.clientY - rect.top - rect.height / 2;
         gsap.to(el, { x: x * 0.3, y: y * 0.3, duration: 0.3, ease: 'power2.out' });
-      });
-      el.addEventListener('mouseleave', () => {
+      };
+      const onLeave = () => {
         gsap.to(el, { x: 0, y: 0, duration: 0.5, ease: 'elastic.out(1,0.5)' });
+      };
+      el.addEventListener('mousemove', onMove);
+      el.addEventListener('mouseleave', onLeave);
+      cleanups.push(() => {
+        el.removeEventListener('mousemove', onMove);
+        el.removeEventListener('mouseleave', onLeave);
       });
     });
 
-    // === GAME SECTION REVEAL ===
-    const gameSection = document.querySelector('.game-section');
-    if (gameSection) {
-      gsap.fromTo(gameSection,
-        { opacity: 0, y: 50 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 1,
-          ease: 'power3.out',
-          scrollTrigger: { trigger: gameSection, start: 'top 80%' },
-        }
-      );
-    }
-
     return () => {
       lenis.destroy();
-      window.removeEventListener('scroll', boostMarquee);
+      cancelAnimationFrame(rafId);
+      cleanups.forEach(fn => fn());
     };
   }, [ready]);
 

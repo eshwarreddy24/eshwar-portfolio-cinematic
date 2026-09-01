@@ -8,20 +8,25 @@ export default function Hero() {
   useEffect(() => {
     if (!ref.current) return;
     const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
-    tl.fromTo(ref.current.querySelector('.hero-kicker'), { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.6 })
-      .fromTo(ref.current.querySelector('.hero-h1'), { opacity: 0, y: 40, rotateX: 8 }, { opacity: 1, y: 0, rotateX: 0, duration: 0.8 }, '-=0.3')
-      .fromTo(ref.current.querySelector('.hero-sub'), { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.6 }, '-=0.4')
-      .fromTo(ref.current.querySelectorAll('.hero-ctas .btn'), { opacity: 0, y: 15 }, { opacity: 1, y: 0, stagger: 0.1, duration: 0.5 }, '-=0.3')
-      .fromTo(ref.current.querySelectorAll('.hero-statCard'), { opacity: 0, scale: 0.8, rotateY: 10 }, { opacity: 1, scale: 1, rotateY: 0, stagger: 0.08, duration: 0.6 }, '-=0.5');
+    tl.fromTo(ref.current.querySelector('.hero-kicker'), { opacity: 0, y: 20, rotateX: 15 }, { opacity: 1, y: 0, rotateX: 0, duration: 0.7 })
+      .fromTo(ref.current.querySelector('.hero-h1'), { opacity: 0, y: 60, rotateX: 20, transformPerspective: 600 }, { opacity: 1, y: 0, rotateX: 0, duration: 1, ease: 'power4.out' }, '-=0.3')
+      .fromTo(ref.current.querySelector('.hero-sub'), { opacity: 0, x: -40, rotateY: 10 }, { opacity: 1, x: 0, rotateY: 0, duration: 0.7 }, '-=0.5')
+      .fromTo(ref.current.querySelectorAll('.hero-ctas .btn'), { opacity: 0, y: 20, scale: 0.85 }, { opacity: 1, y: 0, scale: 1, stagger: 0.12, duration: 0.5 }, '-=0.3')
+      .fromTo(ref.current.querySelectorAll('.hero-statCard'), { opacity: 0, scale: 0.6, rotateY: 20, transformPerspective: 500 }, { opacity: 1, scale: 1, rotateY: 0, stagger: 0.1, duration: 0.7, ease: 'back.out(1.5)' }, '-=0.5')
+      .fromTo(ref.current.querySelector('.hero-scrollCue'), { opacity: 0 }, { opacity: 1, duration: 0.5 }, '-=0.2');
 
-    // Parallax on scroll
+    // Parallax on scroll — depth layers move at different speeds
     gsap.to(ref.current.querySelector('.hero-head'), {
-      y: -80, opacity: 0,
-      scrollTrigger: { trigger: ref.current, start: 'top top', end: '40% top', scrub: 1 }
+      y: -100, opacity: 0, scale: 0.92, rotateX: 5,
+      scrollTrigger: { trigger: ref.current, start: 'top top', end: '50% top', scrub: 1.5 }
     });
     gsap.to(ref.current.querySelector('.hero-stageRow'), {
-      y: -40, opacity: 0,
-      scrollTrigger: { trigger: ref.current, start: '20% top', end: '60% top', scrub: 1 }
+      y: -60, opacity: 0, scale: 0.95,
+      scrollTrigger: { trigger: ref.current, start: '15% top', end: '55% top', scrub: 1.2 }
+    });
+    gsap.to(ref.current.querySelector('.hero-scrollCue'), {
+      opacity: 0, y: -30,
+      scrollTrigger: { trigger: ref.current, start: '5% top', end: '25% top', scrub: 1 }
     });
   }, []);
 

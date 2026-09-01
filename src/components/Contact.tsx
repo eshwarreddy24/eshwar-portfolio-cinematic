@@ -7,10 +7,39 @@ export default function Contact() {
 
   useEffect(() => {
     if (!ref.current) return;
-    gsap.fromTo(ref.current.querySelectorAll('.sr'),
-      { opacity: 0, y: 30 },
-      { opacity: 1, y: 0, stagger: 0.1, duration: 0.6, ease: 'power3.out',
+    // Eyebrow from left
+    gsap.fromTo(ref.current.querySelector('.connect-eyebrow'),
+      { opacity: 0, x: -60, rotateY: 10 },
+      { opacity: 1, x: 0, rotateY: 0, duration: 0.7, ease: 'power3.out',
         scrollTrigger: { trigger: ref.current, start: 'top 75%' }
+      }
+    );
+    // Heading scales up from center
+    gsap.fromTo(ref.current.querySelector('.connect-h2'),
+      { opacity: 0, scale: 0.8, rotateX: 12 },
+      { opacity: 1, scale: 1, rotateX: 0, duration: 1, ease: 'power4.out',
+        scrollTrigger: { trigger: ref.current, start: 'top 72%' }
+      }
+    );
+    // Lede fades in
+    gsap.fromTo(ref.current.querySelector('.connect-lede'),
+      { opacity: 0, y: 30 },
+      { opacity: 1, y: 0, duration: 0.7, ease: 'power3.out',
+        scrollTrigger: { trigger: ref.current, start: 'top 70%' }
+      }
+    );
+    // CTA bounces in
+    gsap.fromTo(ref.current.querySelector('.connect-cta'),
+      { opacity: 0, scale: 0.7, y: 20 },
+      { opacity: 1, scale: 1, y: 0, duration: 0.8, ease: 'back.out(1.5)',
+        scrollTrigger: { trigger: ref.current, start: 'top 68%' }
+      }
+    );
+    // Social pills fly from bottom
+    gsap.fromTo(ref.current.querySelectorAll('.connect-social'),
+      { opacity: 0, y: 40, rotateX: 10 },
+      { opacity: 1, y: 0, rotateX: 0, stagger: 0.08, duration: 0.6, ease: 'power3.out',
+        scrollTrigger: { trigger: ref.current.querySelector('.connect-socials'), start: 'top 90%' }
       }
     );
   }, []);
