@@ -15,7 +15,6 @@ import Credentials from './Credentials';
 import Education from './Education';
 import Contact3D from './Contact3D';
 import Contact from './Contact';
-import Game from './Game';
 import Particles from './Particles';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -261,8 +260,6 @@ export default function MainContainer() {
         <Credentials />
         <div className="section-line" />
         <Education />
-        <div className="section-line" />
-        <Game />
         <div className="section-line" />
 
         {/* 3D CONTACT */}

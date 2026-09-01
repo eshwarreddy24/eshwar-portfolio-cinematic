@@ -55,13 +55,7 @@ export default function Contact() {
           Open to opportunities in SAP, procurement, operations, and business analysis.
           Let's connect and build something impactful together.
         </p>
-        <div className="connect-cta sr">
-          <a href="#game" className="btn btn-primary btn-md">
-            <span className="btn-fill" />
-            <span className="btn-labelWrap"><span className="btn-labelStack"><span className="btn-label">Play a Game</span><span className="btn-labelClone">Play a Game</span></span></span>
-            <span className="btn-arrow"><span className="btn-lead">🎮</span></span>
-          </a>
-        </div>
+
       </div>
 
       <div className="connect-socials">
