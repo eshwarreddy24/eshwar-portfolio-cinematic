@@ -31,7 +31,7 @@ export default function Hero() {
   }, []);
 
   return (
-    <section className="hero" id="hero" ref={ref}>
+    <div className="hero" ref={ref}>
       <div className="hero-ambient" aria-hidden="true">
         <div className="hero-glow hero-glowL parallax-layer" data-speed="0.4" />
         <div className="hero-glow hero-glowR parallax-layer" data-speed="0.6" />
@@ -91,6 +91,6 @@ export default function Hero() {
         <span>SCROLL</span>
         <span className="hero-cueArrow">↓</span>
       </div>
-    </section>
+    </div>
   );
 }
