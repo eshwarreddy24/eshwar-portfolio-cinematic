@@ -68,7 +68,8 @@ export default function Contact() {
         {[
           { href: 'tel:+919515291117', glyph: '📞', label: 'Phone', hover: '+91 95152 91117' },
           { href: 'mailto:eshwarreddy.gali@outlook.com', glyph: '✉', label: 'Email', hover: 'Send Email' },
-          { href: 'https://linkedin.com/in/eshwarreddy24', glyph: 'in', label: 'LinkedIn', hover: 'Connect' },
+          { href: 'https://www.linkedin.com/in/eshwar-reddy-gali-', glyph: 'in', label: 'LinkedIn', hover: 'Connect' },
+          { href: 'https://www.instagram.com/eshwarrxddy', glyph: '📸', label: 'Instagram', hover: 'Follow' },
         ].map(s => (
           <a key={s.label} href={s.href} target="_blank" rel="noopener noreferrer" className="connect-social">
             <span className="glyph">{s.glyph}</span>
