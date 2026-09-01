@@ -28,11 +28,11 @@ export default function Hero() {
   return (
     <section className="hero" id="hero" ref={ref}>
       <div className="hero-ambient" aria-hidden="true">
-        <div className="hero-glow hero-glowL" />
-        <div className="hero-glow hero-glowR" />
-        <div className="hero-ring" />
-        <div className="hero-plusA">+</div>
-        <div className="hero-plusB">+</div>
+        <div className="hero-glow hero-glowL parallax-layer" data-speed="0.4" />
+        <div className="hero-glow hero-glowR parallax-layer" data-speed="0.6" />
+        <div className="hero-ring parallax-layer" data-speed="0.2" />
+        <div className="hero-plusA parallax-layer" data-speed="0.5">+</div>
+        <div className="hero-plusB parallax-layer" data-speed="0.3">+</div>
       </div>
 
       <div className="hero-head">

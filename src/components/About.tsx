@@ -22,10 +22,10 @@ const beats = [
 ];
 
 const metrics = [
-  { num: '150+', label: 'MSME & vendor partners managed through GeM Portal' },
-  { num: '30+', label: 'Critical airport invoices certified monthly via SAP MM' },
-  { num: '7+', label: 'High-impact project milestones delivered on time' },
-  { num: '100%', label: 'Zero-error compliance in procurement workflows' },
+  { num: '150+', count: 150, suffix: '+', label: 'MSME & vendor partners managed through GeM Portal' },
+  { num: '30+', count: 30, suffix: '+', label: 'Critical airport invoices certified monthly via SAP MM' },
+  { num: '7+', count: 7, suffix: '+', label: 'High-impact project milestones delivered on time' },
+  { num: '100%', count: 100, suffix: '%', label: 'Zero-error compliance in procurement workflows' },
 ];
 
 export default function About() {
@@ -80,7 +80,7 @@ export default function About() {
         <div className="about-metrics">
           {metrics.map((m, i) => (
             <div className="about-metric sr" key={i}>
-              <div className="about-metricNum">{m.num}</div>
+              <div className="about-metricNum" data-count={m.count} data-suffix={m.suffix}>0{m.suffix}</div>
               <div className="about-metricLabel">{m.label}</div>
             </div>
           ))}

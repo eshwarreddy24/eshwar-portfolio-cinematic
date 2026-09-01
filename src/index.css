@@ -28,6 +28,18 @@ img{max-width:100%;display:block}
 button{font:inherit;cursor:pointer;background:none;border:none}
 .finalFrame{z-index:20;background:var(--bg);position:relative}
 
+/* SCROLL PROGRESS BAR */
+.scroll-progress{position:fixed;top:0;left:0;width:100%;height:3px;background:linear-gradient(90deg,var(--accent),var(--accent-dark));transform-origin:left;transform:scaleX(0);z-index:9999;pointer-events:none;box-shadow:0 0 12px rgba(0,255,136,.5)}
+
+/* SECTION SEPARATOR LINES */
+.section-line{width:100%;max-width:var(--max);margin:0 auto;height:1px;background:linear-gradient(90deg,transparent 0%,var(--accent) 20%,var(--accent) 80%,transparent 100%);opacity:.15;transform:scaleX(0);transform-origin:center}
+
+/* CLIP-PATH TEXT REVEAL */
+.clip-reveal{clip-path:inset(0 100% 0 0);will-change:clip-path}
+
+/* PARALLAX LAYER */
+.parallax-layer{will-change:transform}
+
 /* GREEN GLOW TEXT */
 .green-glow{color:var(--accent);text-shadow:0 0 20px rgba(0,255,136,.4),0 0 40px rgba(0,255,136,.2)}
 
