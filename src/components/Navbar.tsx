@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import ThemeToggle from './ThemeToggle';
 
 const links = [
   { label: 'Home', href: '#hero' },
@@ -32,7 +31,6 @@ export default function Navbar() {
     <div className="nav-wrap">
       <nav className={`nav-cap${scrolled ? ' scrolled' : ''}`}>
         <a href="#hero" className="nav-logo">ESHWA<i>R.</i></a>
-        <ThemeToggle />
         <div className="nav-links">
           {links.map(l => (
             <a
