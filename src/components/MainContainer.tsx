@@ -13,81 +13,59 @@ export default function MainContainer() {
     const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     if (prefersReduced) {
-      document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale, .reveal-up, .hero-stat, .timeline')
-        .forEach(el => el.classList.add('visible'));
+      document.querySelectorAll('.r,.r-l,.r-r,.r-s,.tl').forEach(el => el.classList.add('vis'));
       return;
     }
 
-    // Main reveal observer — handles all reveal classes
-    const revealObserver = new IntersectionObserver(
-      (entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
-            revealObserver.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.08, rootMargin: '0px 0px -60px 0px' }
-    );
-
-    document.querySelectorAll(
-      '.reveal, .reveal-left, .reveal-right, .reveal-scale, .reveal-up, .timeline'
-    ).forEach(el => revealObserver.observe(el));
-
-    // Hero stats staggered entry
-    const statsObserver = new IntersectionObserver(
-      (entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            const stats = entry.target.querySelectorAll('.hero-stat');
-            stats.forEach((stat) => {
-              const delay = parseInt(stat.getAttribute('data-delay') || '0', 10) * 120;
-              setTimeout(() => stat.classList.add('visible'), delay);
-            });
-            statsObserver.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.3 }
-    );
-
-    const statsGroup = document.querySelector('[data-scroll-group="hero-stats"]');
-    if (statsGroup) statsObserver.observe(statsGroup);
-
-    // 3D tilt on cards — gentle perspective shift based on scroll position
-    let tiltTicking = false;
-    const onScroll = () => {
-      if (tiltTicking) return;
-      tiltTicking = true;
-      requestAnimationFrame(() => {
-        document.querySelectorAll('.tilt-card').forEach((el: Element) => {
-          const rect = el.getBoundingClientRect();
-          const viewH = window.innerHeight;
-          const center = rect.top + rect.height / 2;
-          const progress = (center - viewH / 2) / (viewH / 2);
-          const rotateX = Math.max(-6, Math.min(6, progress * 4));
-          (el as HTMLElement).style.transform = `perspective(800px) rotateX(${rotateX}deg)`;
-        });
-        tiltTicking = false;
+    // Reveal observer
+    const revealObs = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('vis');
+          revealObs.unobserve(e.target);
+        }
       });
+    }, { threshold: 0.08, rootMargin: '0px 0px -50px 0px' });
+    document.querySelectorAll('.r,.r-l,.r-r,.r-s,.tl').forEach(el => revealObs.observe(el));
+
+    // Hero stats stagger
+    const statsObs = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.querySelectorAll('.hero-stat').forEach(s => {
+            const d = parseInt(s.getAttribute('data-delay') || '0', 10) * 120;
+            setTimeout(() => s.classList.add('vis'), d);
+          });
+          statsObs.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.3 });
+    const sg = document.querySelector('[data-scroll-group="hero-stats"]');
+    if (sg) statsObs.observe(sg);
+
+    // Progress bar
+    const bar = document.querySelector('.progress') as HTMLElement;
+    const onScroll = () => {
+      if (bar) {
+        const h = document.documentElement.scrollHeight - window.innerHeight;
+        bar.style.transform = `scaleX(${h > 0 ? window.scrollY / h : 0})`;
+      }
     };
     window.addEventListener('scroll', onScroll, { passive: true });
 
     return () => {
-      revealObserver.disconnect();
-      statsObserver.disconnect();
+      revealObs.disconnect();
+      statsObs.disconnect();
       window.removeEventListener('scroll', onScroll);
     };
   }, []);
 
   return (
     <>
-      <a href="#main-content" className="skip-link">
-        Skip to main content
-      </a>
+      <a href="#main" className="skip">Skip to main content</a>
+      <div className="progress" />
       <Navbar />
-      <main id="main-content" role="main" className="perspective-container">
+      <main id="main">
         <Hero />
         <About />
         <Projects />
