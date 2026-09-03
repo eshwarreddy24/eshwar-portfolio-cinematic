@@ -1,8 +1,8 @@
 const items = [
-  { icon: '📞', label: 'Call Me', href: 'tel:+919515291117' },
-  { icon: '✉️', label: 'Email Me', href: 'mailto:eshwarreddy.gali@outlook.com' },
-  { icon: '🔗', label: 'LinkedIn', href: 'https://www.linkedin.com/in/eshwar-reddy-gali-' },
-  { icon: '📸', label: 'Instagram', href: 'https://www.instagram.com/eshwarrxddy' },
+  { icon: '📞', href: 'tel:+919515291117', title: 'Call Me' },
+  { icon: '✉️', href: 'mailto:eshwarreddy.gali@outlook.com', title: 'Email Me' },
+  { icon: '🔗', href: 'https://www.linkedin.com/in/eshwar-reddy-gali-', title: 'LinkedIn' },
+  { icon: '📸', href: 'https://www.instagram.com/eshwarrxddy', title: 'Instagram' },
 ];
 
 export default function Contact() {
@@ -12,19 +12,20 @@ export default function Contact() {
         <div className="section-header">
           <p className="section-label r"><span>05</span> Contact</p>
           <h2 className="section-title r">Let's <i>Connect</i></h2>
-          <p className="section-desc r">Open to opportunities in workplace operations, program management, and executive support.</p>
+          <p className="section-desc r">Tap an icon to reach out.</p>
         </div>
-        <div className="contact-grid">
+        <div className="contact-icons r">
           {items.map((c, i) => (
             <a
-              key={c.label}
+              key={c.title}
               href={c.href}
               target={c.href.startsWith('http') ? '_blank' : undefined}
               rel={c.href.startsWith('http') ? 'noopener noreferrer' : undefined}
-              className={`contact-card ${i % 2 === 0 ? 'r-l' : 'r-r'} d${i + 1}`}
+              className={`contact-icon-btn d${i + 1}`}
+              title={c.title}
+              aria-label={c.title}
             >
-              <div className="contact-ico" aria-hidden="true">{c.icon}</div>
-              <span className="contact-lbl">{c.label}</span>
+              <span className="contact-ico">{c.icon}</span>
             </a>
           ))}
         </div>
