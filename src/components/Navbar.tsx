@@ -1,9 +1,12 @@
 import { useState, useEffect } from 'react';
+import ThemeToggle from './ThemeToggle';
 
 const links = [
   { label: 'Home', href: '#hero' },
   { label: 'About', href: '#about' },
-  { label: 'Work', href: '#journey' },
+  { label: 'Projects', href: '#projects' },
+  { label: 'Experience', href: '#experience' },
+  { label: 'Certifications', href: '#certifications' },
   { label: 'Contact', href: '#contact' },
 ];
 
@@ -13,12 +16,12 @@ export default function Navbar() {
 
   useEffect(() => {
     const onScroll = () => {
-      setScrolled(window.scrollY > 60);
-      const sections = ['#hero', '#about', '#journey', '#contact'];
-      for (let i = sections.length - 1; i >= 0; i--) {
-        const el = document.querySelector(sections[i]);
-        if (el && el.getBoundingClientRect().top <= 200) {
-          setActive(sections[i]);
+      setScrolled(window.scrollY > 40);
+      const ids = links.map(l => l.href.slice(1));
+      for (let i = ids.length - 1; i >= 0; i--) {
+        const el = document.getElementById(ids[i]);
+        if (el && el.getBoundingClientRect().top <= 120) {
+          setActive('#' + ids[i]);
           break;
         }
       }
@@ -28,24 +31,24 @@ export default function Navbar() {
   }, []);
 
   return (
-    <div className="nav-wrap">
-      <nav className={`nav-cap${scrolled ? ' scrolled' : ''}`}>
-        <a href="#hero" className="nav-logo">ESHWA<i>R.</i></a>
+    <nav className={`nav${scrolled ? ' scrolled' : ''}`} role="navigation" aria-label="Main navigation">
+      <div className="container nav-inner">
+        <a href="#hero" className="nav-logo" aria-label="Gali Eshwar Reddy — Home">
+          ESHWAR<span style={{ color: 'var(--accent)' }}>.</span>
+        </a>
         <div className="nav-links">
           {links.map(l => (
             <a
               key={l.href}
               href={l.href}
-              className={active === l.href ? 'on' : ''}
+              className={`nav-link${active === l.href ? ' active' : ''}`}
             >
-              <span className="nav-roll">
-                <span>{l.label}</span>
-                <span>{l.label}</span>
-              </span>
+              {l.label}
             </a>
           ))}
         </div>
-      </nav>
-    </div>
+        <ThemeToggle />
+      </div>
+    </nav>
   );
 }

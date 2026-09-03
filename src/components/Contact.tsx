@@ -1,84 +1,40 @@
-import { useEffect, useRef } from 'react';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
+const contacts = [
+  { icon: '📞', label: 'Phone', value: '+91 95152 91117', href: 'tel:+919515291117' },
+  { icon: '✉️', label: 'Email', value: 'eshwarreddy.gali@outlook.com', href: 'mailto:eshwarreddy.gali@outlook.com' },
+  { icon: '🔗', label: 'LinkedIn', value: 'linkedin.com/in/eshwar-reddy-gali-', href: 'https://www.linkedin.com/in/eshwar-reddy-gali-' },
+  { icon: '📸', label: 'Instagram', value: '@eshwarrxddy', href: 'https://www.instagram.com/eshwarrxddy' },
+];
 
 export default function Contact() {
-  const ref = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    if (!ref.current) return;
-    // Eyebrow from left
-    gsap.fromTo(ref.current.querySelector('.connect-eyebrow'),
-      { opacity: 0, x: -60, rotateY: 10 },
-      { opacity: 1, x: 0, rotateY: 0, duration: 0.7, ease: 'power3.out',
-        scrollTrigger: { trigger: ref.current, start: 'top 75%' }
-      }
-    );
-    // Heading scales up from center
-    gsap.fromTo(ref.current.querySelector('.connect-h2'),
-      { opacity: 0, scale: 0.8, rotateX: 12 },
-      { opacity: 1, scale: 1, rotateX: 0, duration: 1, ease: 'power4.out',
-        scrollTrigger: { trigger: ref.current, start: 'top 72%' }
-      }
-    );
-    // Lede fades in
-    gsap.fromTo(ref.current.querySelector('.connect-lede'),
-      { opacity: 0, y: 30 },
-      { opacity: 1, y: 0, duration: 0.7, ease: 'power3.out',
-        scrollTrigger: { trigger: ref.current, start: 'top 70%' }
-      }
-    );
-    // CTA bounces in
-    gsap.fromTo(ref.current.querySelector('.connect-cta'),
-      { opacity: 0, scale: 0.7, y: 20 },
-      { opacity: 1, scale: 1, y: 0, duration: 0.8, ease: 'back.out(1.5)',
-        scrollTrigger: { trigger: ref.current, start: 'top 68%' }
-      }
-    );
-    // Social pills fly from bottom
-    gsap.fromTo(ref.current.querySelectorAll('.connect-social'),
-      { opacity: 0, y: 40, rotateX: 10 },
-      { opacity: 1, y: 0, rotateX: 0, stagger: 0.08, duration: 0.6, ease: 'power3.out',
-        scrollTrigger: { trigger: ref.current.querySelector('.connect-socials'), start: 'top 90%' }
-      }
-    );
-  }, []);
-
   return (
-    <section className="connect" id="contact" ref={ref}>
-      <div className="connect-head">
-        <p className="connect-eyebrow sr"><span>07</span> Contact</p>
-        <h2 className="connect-h2 sr">
-          Let's create what's <span className="about-serif green-glow">next.</span>
-        </h2>
-        <p className="connect-lede sr">
-          Open to opportunities in SAP, procurement, operations, and business analysis.
-          Let's connect and build something impactful together.
-        </p>
-
-      </div>
-
-      <div className="connect-socials">
-        {[
-          { href: 'tel:+919515291117', glyph: '📞', label: 'Phone', hover: '+91 95152 91117' },
-          { href: 'mailto:eshwarreddy.gali@outlook.com', glyph: '✉', label: 'Email', hover: 'Send Email' },
-          { href: 'https://www.linkedin.com/in/eshwar-reddy-gali-', glyph: 'in', label: 'LinkedIn', hover: 'Connect' },
-          { href: 'https://www.instagram.com/eshwarrxddy', glyph: '📸', label: 'Instagram', hover: 'Follow' },
-        ].map(s => (
-          <a key={s.label} href={s.href} target="_blank" rel="noopener noreferrer" className="connect-social">
-            <span className="glyph">{s.glyph}</span>
-            <span className="roll">
-              <span>{s.label}</span>
-              <span>{s.hover}</span>
-            </span>
-            <span className="arr">→</span>
-          </a>
-        ))}
-      </div>
-
-      <div className="footer">
-        <span>© {new Date().getFullYear()} Gali Eshwar Reddy</span>
-        <a href="#hero">Back to top ↑</a>
+    <section className="section" id="contact">
+      <div className="container">
+        <div className="section-header">
+          <p className="section-label reveal"><span>06</span> Contact</p>
+          <h2 className="section-title reveal">
+            Let's <span style={{ fontStyle: 'italic', color: 'var(--accent)' }}>Connect</span>
+          </h2>
+          <p className="section-subtitle reveal">
+            Open to opportunities in SAP, procurement, operations, and business analysis.
+          </p>
+        </div>
+        <div className="contact-grid">
+          {contacts.map(c => (
+            <a
+              key={c.label}
+              href={c.href}
+              target={c.href.startsWith('http') ? '_blank' : undefined}
+              rel={c.href.startsWith('http') ? 'noopener noreferrer' : undefined}
+              className="contact-card reveal"
+            >
+              <div className="contact-icon" aria-hidden="true">{c.icon}</div>
+              <div>
+                <div className="contact-label">{c.label}</div>
+                <div className="contact-value">{c.value}</div>
+              </div>
+            </a>
+          ))}
+        </div>
       </div>
     </section>
   );
