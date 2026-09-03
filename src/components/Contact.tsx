@@ -19,13 +19,13 @@ export default function Contact() {
           </p>
         </div>
         <div className="contact-grid">
-          {contacts.map(c => (
+          {contacts.map((c, i) => (
             <a
               key={c.label}
               href={c.href}
               target={c.href.startsWith('http') ? '_blank' : undefined}
               rel={c.href.startsWith('http') ? 'noopener noreferrer' : undefined}
-              className="contact-card reveal"
+              className={`contact-card ${i % 2 === 0 ? 'reveal-left' : 'reveal-right'} reveal-delay-${i + 1}`}
             >
               <div className="contact-icon" aria-hidden="true">{c.icon}</div>
               <div>

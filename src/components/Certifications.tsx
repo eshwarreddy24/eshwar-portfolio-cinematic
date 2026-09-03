@@ -1,25 +1,7 @@
 const certs = [
-  {
-    name: 'SAP Certified — Implementation Consultant — SAP Service Cloud Version 2',
-    issuer: 'SAP',
-    date: '2025',
-    badgeClass: 'cert-badge-stripe',
-    icon: '🔷',
-  },
-  {
-    name: 'Microsoft 365 Certified: Copilot Administrator Associate',
-    issuer: 'Microsoft',
-    date: '2025',
-    badgeClass: 'cert-badge-google',
-    icon: '🟦',
-  },
-  {
-    name: 'Entrepreneurship Development — AIC SKU IGNITE 3.0',
-    issuer: 'Atal Innovation Mission, NITI Aayog',
-    date: '2024',
-    badgeClass: 'cert-badge-atal',
-    icon: '🏆',
-  },
+  { name: 'SAP Certified — Implementation Consultant — SAP Service Cloud Version 2', issuer: 'SAP', date: '2025', badgeClass: 'cert-badge-stripe', icon: '🔷' },
+  { name: 'Microsoft 365 Certified: Copilot Administrator Associate', issuer: 'Microsoft', date: '2025', badgeClass: 'cert-badge-google', icon: '🟦' },
+  { name: 'Entrepreneurship Development — AIC SKU IGNITE 3.0', issuer: 'Atal Innovation Mission, NITI Aayog', date: '2024', badgeClass: 'cert-badge-atal', icon: '🏆' },
 ];
 
 export default function Certifications() {
@@ -33,11 +15,9 @@ export default function Certifications() {
           </h2>
         </div>
         <div className="certs-grid">
-          {certs.map((c) => (
-            <article key={c.name} className="cert-card reveal">
-              <div className={`cert-badge ${c.badgeClass}`} aria-hidden="true">
-                {c.icon}
-              </div>
+          {certs.map((c, i) => (
+            <article key={c.name} className={`cert-card ${i % 2 === 0 ? 'reveal-left' : 'reveal-right'} reveal-delay-${i + 1}`}>
+              <div className={`cert-badge ${c.badgeClass}`} aria-hidden="true">{c.icon}</div>
               <div className="cert-info">
                 <h3 className="cert-name">{c.name}</h3>
                 <p className="cert-issuer">{c.issuer}</p>

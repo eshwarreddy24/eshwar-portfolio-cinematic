@@ -29,7 +29,7 @@ const jobs = [
 
 export default function Experience() {
   return (
-    <section className="section" id="experience">
+    <section className="section section-alt" id="experience">
       <div className="container">
         <div className="section-header">
           <p className="section-label reveal"><span>03</span> Experience</p>
@@ -38,15 +38,15 @@ export default function Experience() {
           </h2>
         </div>
         <div className="timeline">
-          {jobs.map((j) => (
-            <article key={j.company} className="timeline-item reveal">
+          {jobs.map((j, i) => (
+            <article key={j.company} className={`timeline-item ${i === 0 ? 'reveal-left' : 'reveal-right'}`}>
               <div className="timeline-dot" aria-hidden="true" />
               <p className="timeline-period">{j.period}</p>
               <h3 className="timeline-role">{j.role}</h3>
               <p className="timeline-company">{j.company} — {j.location}</p>
               <ul className="timeline-list">
-                {j.highlights.map((h, i) => (
-                  <li key={i}>{h}</li>
+                {j.highlights.map((h, idx) => (
+                  <li key={idx}>{h}</li>
                 ))}
               </ul>
             </article>

@@ -59,13 +59,15 @@ export default function Projects() {
             Case <span style={{ fontStyle: 'italic', color: 'var(--accent)' }}>Studies</span>
           </h2>
           <p className="section-subtitle reveal">
-            Key projects and initiatives demonstrating impact across procurement,
-            operations, and stakeholder management.
+            Key projects demonstrating impact across procurement, operations, and stakeholder management.
           </p>
         </div>
         <div className="projects-grid">
-          {projects.map((p) => (
-            <article key={p.title} className="project-card">
+          {projects.map((p, i) => (
+            <article
+              key={p.title}
+              className={`project-card tilt-card ${i % 2 === 0 ? 'reveal-scale' : 'reveal-up'} reveal-delay-${(i % 6) + 1}`}
+            >
               <div className="project-metric">📊 {p.metric}</div>
               <h3 className="project-title">{p.title}</h3>
               <div className="project-row">

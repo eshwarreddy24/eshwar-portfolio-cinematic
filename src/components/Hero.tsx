@@ -4,10 +4,16 @@ export default function Hero() {
   const bgRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    let ticking = false;
     const onScroll = () => {
-      if (!bgRef.current) return;
-      const y = window.scrollY;
-      bgRef.current.style.transform = `translateY(${y * 0.15}px)`;
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        if (bgRef.current) {
+          bgRef.current.style.transform = `translateY(${window.scrollY * 0.15}px)`;
+        }
+        ticking = false;
+      });
     };
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
@@ -43,20 +49,20 @@ export default function Hero() {
             <span aria-hidden="true">→</span>
           </a>
         </div>
-        <div className="hero-stats reveal">
-          <div className="hero-stat">
+        <div className="hero-stats" data-scroll-group="hero-stats">
+          <div className="hero-stat" data-delay="0">
             <div className="hero-stat-value">150+</div>
             <div className="hero-stat-label">Vendor Partners</div>
           </div>
-          <div className="hero-stat">
+          <div className="hero-stat" data-delay="1">
             <div className="hero-stat-value">30+</div>
             <div className="hero-stat-label">Invoices / Month</div>
           </div>
-          <div className="hero-stat">
+          <div className="hero-stat" data-delay="2">
             <div className="hero-stat-value">2+</div>
             <div className="hero-stat-label">Years Experience</div>
           </div>
-          <div className="hero-stat">
+          <div className="hero-stat" data-delay="3">
             <div className="hero-stat-value">0</div>
             <div className="hero-stat-label">Error Rate</div>
           </div>

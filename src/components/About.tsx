@@ -1,29 +1,13 @@
 const strengths = [
-  {
-    icon: '💻',
-    title: 'Digital Literacy',
-    text: 'SAP MM, Microsoft 365 (Expert Excel, Teams, SharePoint), Government e-Office.',
-  },
-  {
-    icon: '📋',
-    title: 'Executive Operations',
-    text: 'Meeting choreography, complex calendar systems, proactive time protection.',
-  },
-  {
-    icon: '🎯',
-    title: 'Strategic Governance',
-    text: 'Corporate incubation, project milestones (ClickUp), risk mitigation, MIS reporting.',
-  },
-  {
-    icon: '🤝',
-    title: 'Interpersonal Excellence',
-    text: 'Boardroom presentation, C-Suite & PSU liaison, confidentiality, cross-functional alignment.',
-  },
+  { icon: '💻', title: 'Digital Literacy', text: 'SAP MM, Microsoft 365 (Expert Excel, Teams, SharePoint), Government e-Office.' },
+  { icon: '📋', title: 'Executive Operations', text: 'Meeting choreography, complex calendar systems, proactive time protection.' },
+  { icon: '🎯', title: 'Strategic Governance', text: 'Corporate incubation, project milestones (ClickUp), risk mitigation, MIS reporting.' },
+  { icon: '🤝', title: 'Interpersonal Excellence', text: 'Boardroom presentation, C-Suite & PSU liaison, confidentiality, cross-functional alignment.' },
 ];
 
 export default function About() {
   return (
-    <section className="section" id="about">
+    <section className="section section-alt" id="about">
       <div className="container">
         <div className="section-header">
           <p className="section-label reveal"><span>01</span> About</p>
@@ -32,15 +16,14 @@ export default function About() {
           </h2>
           <p className="section-subtitle reveal">
             Operational professional with hands-on expertise in SAP MM and office operations,
-            with a proven track record of managing complex documentation and sensitive correspondence
-            for senior leadership, including former IPS/IAS officials.
+            managing complex documentation for senior leadership including former IPS/IAS officials.
           </p>
         </div>
-        <div className="grid strengths-grid">
+        <div className="grid strengths-grid" style={{ transformStyle: 'preserve-3d' }}>
           {strengths.map((s, i) => (
             <article
               key={s.title}
-              className={`strength-card reveal reveal-delay-${i + 1}`}
+              className={`strength-card ${i % 2 === 0 ? 'reveal-left' : 'reveal-right'} reveal-delay-${i + 1}`}
             >
               <div className="strength-icon" aria-hidden="true">{s.icon}</div>
               <h3 className="strength-title">{s.title}</h3>

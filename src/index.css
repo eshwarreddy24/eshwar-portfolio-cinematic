@@ -214,7 +214,7 @@ ul, ol { list-style: none; }
   padding: var(--sp-4xl) 0;
   background: var(--bg);
 }
-.section:nth-child(even) {
+.section-alt {
   background: var(--bg-alt);
 }
 
@@ -612,22 +612,7 @@ ul, ol { list-style: none; }
   color: var(--text-muted);
 }
 
-/* Entry animation */
-.project-card {
-  opacity: 0;
-  transform: translateY(24px);
-  animation: cardIn 0.5s var(--ease) forwards;
-}
-.project-card:nth-child(1) { animation-delay: 0s; }
-.project-card:nth-child(2) { animation-delay: 0.08s; }
-.project-card:nth-child(3) { animation-delay: 0.16s; }
-.project-card:nth-child(4) { animation-delay: 0.24s; }
-.project-card:nth-child(5) { animation-delay: 0.32s; }
-.project-card:nth-child(6) { animation-delay: 0.40s; }
 
-@keyframes cardIn {
-  to { opacity: 1; transform: translateY(0); }
-}
 
 @media (max-width: 600px) {
   .projects-grid { grid-template-columns: 1fr; }
@@ -900,20 +885,109 @@ ul, ol { list-style: none; }
 .footer a:hover { opacity: 0.7; }
 
 /* ═══════════════════════════════════════════════
-   SCROLL ANIMATIONS
+   3D SCROLL ANIMATIONS
    ═══════════════════════════════════════════════ */
+.perspective-container {
+  perspective: 1200px;
+  perspective-origin: 50% 50%;
+}
+
+/* Base reveal */
 .reveal {
   opacity: 0;
-  transform: translateY(30px);
-  transition: opacity 0.6s var(--ease), transform 0.6s var(--ease);
+  transform: translateY(40px) rotateX(8deg);
+  transition: opacity 0.7s var(--ease), transform 0.7s var(--ease);
+  will-change: opacity, transform;
 }
 .reveal.visible {
   opacity: 1;
-  transform: translateY(0);
+  transform: translateY(0) rotateX(0);
 }
-.reveal-delay-1 { transition-delay: 0.1s; }
-.reveal-delay-2 { transition-delay: 0.2s; }
-.reveal-delay-3 { transition-delay: 0.3s; }
+
+/* 3D direction variants */
+.reveal-left {
+  opacity: 0;
+  transform: translateX(-60px) rotateY(12deg);
+  transition: opacity 0.7s var(--ease), transform 0.7s var(--ease);
+  will-change: opacity, transform;
+}
+.reveal-left.visible {
+  opacity: 1;
+  transform: translateX(0) rotateY(0);
+}
+
+.reveal-right {
+  opacity: 0;
+  transform: translateX(60px) rotateY(-12deg);
+  transition: opacity 0.7s var(--ease), transform 0.7s var(--ease);
+  will-change: opacity, transform;
+}
+.reveal-right.visible {
+  opacity: 1;
+  transform: translateX(0) rotateY(0);
+}
+
+.reveal-scale {
+  opacity: 0;
+  transform: scale(0.85) rotateX(10deg);
+  transition: opacity 0.7s var(--ease), transform 0.7s var(--ease);
+  will-change: opacity, transform;
+}
+.reveal-scale.visible {
+  opacity: 1;
+  transform: scale(1) rotateX(0);
+}
+
+.reveal-up {
+  opacity: 0;
+  transform: translateY(60px) rotateX(-5deg);
+  transition: opacity 0.7s var(--ease), transform 0.7s var(--ease);
+  will-change: opacity, transform;
+}
+.reveal-up.visible {
+  opacity: 1;
+  transform: translateY(0) rotateX(0);
+}
+
+/* Stagger delays */
+.reveal-delay-1 { transition-delay: 0.08s; }
+.reveal-delay-2 { transition-delay: 0.16s; }
+.reveal-delay-3 { transition-delay: 0.24s; }
+.reveal-delay-4 { transition-delay: 0.32s; }
+.reveal-delay-5 { transition-delay: 0.40s; }
+.reveal-delay-6 { transition-delay: 0.48s; }
+
+/* 3D tilt on scroll (continuous, driven by JS data-rotate) */
+.tilt-card {
+  transition: transform 0.4s var(--ease);
+  transform-style: preserve-3d;
+}
+
+/* Hero parallax */
+.hero-bg {
+  transition: none;
+}
+
+/* Timeline line grow */
+.timeline::before {
+  transform-origin: top;
+  transform: scaleY(0);
+  transition: transform 1s var(--ease);
+}
+.timeline.visible::before {
+  transform: scaleY(1);
+}
+
+/* Stat card 3D entry */
+.hero-stat {
+  opacity: 0;
+  transform: translateY(20px) rotateX(10deg);
+  transition: opacity 0.5s var(--ease), transform 0.5s var(--ease);
+}
+.hero-stat.visible {
+  opacity: 1;
+  transform: translateY(0) rotateX(0);
+}
 
 /* ═══════════════════════════════════════════════
    PREFERS REDUCED MOTION
