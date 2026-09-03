@@ -6,6 +6,7 @@ import Projects from './Projects';
 import Experience from './Experience';
 import Certifications from './Certifications';
 import Education from './Education';
+import Marquee from './Marquee';
 import Contact from './Contact';
 
 export default function MainContainer() {
@@ -67,6 +68,7 @@ export default function MainContainer() {
       <Navbar />
       <main id="main">
         <Hero />
+        <Marquee />
         <About />
         <Projects />
         <Experience />
