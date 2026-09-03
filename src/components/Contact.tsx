@@ -10,9 +10,9 @@ export default function Contact() {
     <section className="section" id="contact">
       <div className="container">
         <div className="section-header">
-          <p className="section-label r"><span>06</span> Contact</p>
+          <p className="section-label r"><span>05</span> Contact</p>
           <h2 className="section-title r">Let's <i>Connect</i></h2>
-          <p className="section-desc r">Open to opportunities in SAP, procurement, operations, and business analysis.</p>
+          <p className="section-desc r">Open to opportunities in workplace operations, program management, and executive support.</p>
         </div>
         <div className="contact-grid">
           {items.map((c, i) => (

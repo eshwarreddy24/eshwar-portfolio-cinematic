@@ -1,6 +1,29 @@
 const jobs = [
-  { period: 'Sep 2025 – Present', role: 'Graduate Apprentice — Civil Engineering Wing', company: 'Airports Authority of India (AAI)', location: 'Bengaluru International Airport', highlights: ['Centralized audit-ready records across e-Office, establishing ironclad information architecture.', 'Managed procurement administration for 150+ MSME and vendor partners via GeM Portal.', 'Engineered dynamic analytical dashboard using advanced Excel for invoice lifecycle tracking.', 'Streamlined high-stakes correspondence with premium PSU executives and former IPS/IAS officers.', 'Spearheaded end-to-end financial workflows using SAP MM, processing 30+ invoices monthly.', 'Synthesized technical case studies on airport land records, ATC and AOCC mechanisms.'] },
-  { period: 'Nov 2024 – Jun 2025', role: 'Graduate Engineer Trainee — Metaphor Interiors', company: 'Organo Eco Habitats Pvt Ltd', location: 'Hyderabad, Telangana', highlights: ['Directed high-level stakeholder logistics and pre-visit strategy for multi-city schedules.', 'Tracked cross-departmental deliverables using ClickUp, flagging timeline risks to Board of Directors.', 'Pioneered technical case study on sustainable microclimates — 17°C surface temperature reduction.', 'Co-authored and published definitive brief with firm board members.'] },
+  {
+    period: 'Sep 2025 – Aug 2026',
+    role: 'Graduate Apprentice – Civil Engineering Wing',
+    company: 'Airports Authority of India (AAI)',
+    location: 'Bengaluru, Karnataka',
+    highlights: [
+      'Coordinated sensitive briefs and confidential correspondence for board members and senior officials.',
+      'Processed 30+ high value invoices monthly in SAP MM with zero errors, ensuring audit readiness.',
+      'Streamlined senior calendars and prepared concise pre-reads and objective Minutes of Meeting.',
+      'Revamped dynamic dashboards mapping invoice lifecycles and highlighted bottlenecks for leadership.',
+      'Coordinated onboarding for 150+ MSME partners via portals, reducing procurement friction.',
+      'Architected asynchronous document pipelines, reducing search latency & cross team retrieval by 40%.',
+    ],
+  },
+  {
+    period: 'Nov 2024 – Jun 2025',
+    role: 'Graduate Engineer Trainee – Operations & Workspaces',
+    company: 'Organo Eco Habitats Pvt Ltd',
+    location: 'Hyderabad, Telangana',
+    highlights: [
+      'Tracked milestones via ClickUp, diagnosed bottlenecks and surfaced risks to the Board.',
+      'Led field study on climate resilient workspace optimization and co-authored findings with MDs.',
+      'Orchestrated multi-city stakeholder travel, accommodations, and groundwork flow for executive visits.',
+    ],
+  },
 ];
 
 export default function Experience() {
@@ -9,7 +32,7 @@ export default function Experience() {
       <div className="container">
         <div className="section-header">
           <p className="section-label r"><span>03</span> Experience</p>
-          <h2 className="section-title r">Professional <i>Journey</i></h2>
+          <h2 className="section-title r">Work <i>History</i></h2>
         </div>
         <div className="tl">
           {jobs.map((j, i) => (

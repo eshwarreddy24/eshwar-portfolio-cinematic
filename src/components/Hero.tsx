@@ -31,10 +31,11 @@ export default function Hero() {
           <span className="line"><span>Gali Eshwar</span></span>
           <span className="line"><span className="accent">Reddy</span></span>
         </h1>
-        <p className="hero-role">SAP Specialist · Procurement · Operations</p>
+        <p className="hero-role">Operations · SAP MM · Executive Support · Procurement</p>
         <p className="hero-sub">
-          Operational professional with hands-on expertise in SAP MM and office operations,
-          managing complex documentation for senior leadership including former IPS/IAS officials.
+          Operations and workplace professional with 1.6 years of experience and extensive
+          exposure within the Airports Authority of India. Spearheaded office operations
+          and executive support collaboration among cross-functional teams.
         </p>
         <div className="hero-btns">
           <a href="#contact" className="btn btn-primary">
@@ -49,19 +50,19 @@ export default function Hero() {
         <div className="hero-stats" data-scroll-group="hero-stats">
           <div className="hero-stat" data-delay="0">
             <div className="hero-stat-num">150+</div>
-            <div className="hero-stat-lbl">Vendor Partners</div>
+            <div className="hero-stat-lbl">MSME Partners Onboarded</div>
           </div>
           <div className="hero-stat" data-delay="1">
             <div className="hero-stat-num">30+</div>
-            <div className="hero-stat-lbl">Invoices / Month</div>
+            <div className="hero-stat-lbl">High-Value Invoices / Mo</div>
           </div>
           <div className="hero-stat" data-delay="2">
-            <div className="hero-stat-num">2+</div>
+            <div className="hero-stat-num">1.6</div>
             <div className="hero-stat-lbl">Years Experience</div>
           </div>
           <div className="hero-stat" data-delay="3">
-            <div className="hero-stat-num">0</div>
-            <div className="hero-stat-lbl">Error Rate</div>
+            <div className="hero-stat-num">40%</div>
+            <div className="hero-stat-lbl">Faster Retrieval</div>
           </div>
         </div>
       </div>

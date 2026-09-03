@@ -53,10 +53,33 @@ export default function MainContainer() {
     };
     window.addEventListener('scroll', onScroll, { passive: true });
 
+    // 3D mouse tilt on .tilt3d cards
+    const cleanups: (() => void)[] = [];
+    document.querySelectorAll('.tilt3d').forEach((el) => {
+      const onMove = (e: MouseEvent) => {
+        const rect = el.getBoundingClientRect();
+        const x = (e.clientX - rect.left) / rect.width - 0.5;
+        const y = (e.clientY - rect.top) / rect.height - 0.5;
+        el.style.transform = `perspective(800px) rotateY(${x * 12}deg) rotateX(${-y * 12}deg) scale(1.02)`;
+        el.classList.add('tilted');
+      };
+      const onLeave = () => {
+        el.style.transform = '';
+        el.classList.remove('tilted');
+      };
+      el.addEventListener('mousemove', onMove);
+      el.addEventListener('mouseleave', onLeave);
+      cleanups.push(() => {
+        el.removeEventListener('mousemove', onMove);
+        el.removeEventListener('mouseleave', onLeave);
+      });
+    });
+
     return () => {
       revealObs.disconnect();
       statsObs.disconnect();
       window.removeEventListener('scroll', onScroll);
+      cleanups.forEach(fn => fn());
     };
   }, []);
 

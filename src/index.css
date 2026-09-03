@@ -230,6 +230,16 @@ ul{list-style:none}
   --accent-glow: rgba(0,153,80,.08);
 }
 
+/* ═══ 3D MOUSE TILT ═══ */
+.tilt3d{transform-style:preserve-3d;perspective:800px;transition:transform .4s var(--ease),box-shadow .4s var(--ease)}
+.tilt3d.tilted{box-shadow:0 20px 60px rgba(0,0,0,.5),0 0 30px rgba(0,255,136,.05)}
+
+/* ═══ 3D SCROLL PARALLAX ═══ */
+.parallax-3d{transform-style:preserve-3d;will-change:transform}
+.depth-1{transform:translateZ(0)}
+.depth-2{transform:translateZ(20px)}
+.depth-3{transform:translateZ(40px)}
+
 /* ═══ REDUCED MOTION ═══ */
 @media(prefers-reduced-motion:reduce){
   *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
