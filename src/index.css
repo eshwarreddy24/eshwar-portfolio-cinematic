@@ -56,8 +56,7 @@ button{font:inherit;cursor:pointer;background:none;border:none}
 
 /* ===== HERO ===== */
 .hero{background:var(--bg);flex-direction:column;min-height:100svh;padding-top:96px;display:flex;position:relative;overflow:hidden}
-.hero-3d-canvas{position:absolute;inset:0;z-index:0;will-change:opacity}
-.hero-3d-canvas canvas{width:100%!important;height:100%!important;will-change:transform}
+
 .hero-ambient{z-index:0;pointer-events:none;position:absolute;inset:0}
 .hero-glow{opacity:.9;border-radius:50%;width:600px;height:600px;position:absolute}
 .hero-glowL{background:radial-gradient(circle,rgba(0,255,136,.08) 0%,transparent 68%);top:10%;left:-200px}
@@ -153,22 +152,7 @@ button{font:inherit;cursor:pointer;background:none;border:none}
 .about-metricNum i{color:var(--accent);font-style:normal}
 .about-metricLabel{color:var(--ink-3);max-width:220px;margin-top:10px;font-size:13px;font-weight:600;line-height:1.45}
 
-/* ===== 3D GALLERY ===== */
-.gallery-section{background:var(--bg2);position:relative;overflow:hidden}
-.gallery-wrap{max-width:var(--max);margin:0 auto;padding:120px 44px 130px;position:relative;z-index:1}
-.gallery-3d-section{position:relative;width:100%;min-height:400px}
-.gallery-3d-canvas{width:100%;height:400px;position:relative;will-change:transform}
-.gallery-3d-canvas canvas{width:100%!important;height:100%!important}
-.gallery-overlay{position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,.85);backdrop-filter:blur(12px);display:flex;align-items:center;justify-content:center;animation:fadeIn .3s ease}
-@keyframes fadeIn{from{opacity:0}to{opacity:1}}
-.gallery-overlay-card{position:relative;max-width:480px;width:90%;background:var(--ph);border:1px solid var(--line);border-radius:var(--radius);padding:48px;box-shadow:var(--shadow-lg)}
-.gallery-overlay-glow{position:absolute;top:-2px;right:-2px;width:100px;height:100px;border-radius:50%;filter:blur(40px);opacity:.3}
-.gallery-close{position:absolute;top:16px;right:16px;width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,.06);color:var(--ink);border:1px solid var(--line);font-size:14px;display:flex;align-items:center;justify-content:center;transition:all .2s}
-.gallery-close:hover{background:var(--accent);color:#000;border-color:var(--accent)}
-.gallery-overlay-card h3{font-size:24px;font-weight:800;margin-bottom:12px}
-.gallery-overlay-card p{color:var(--ink-2);font-size:15px;line-height:1.7;margin-bottom:20px}
-.gallery-tags{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:24px}
-.gallery-tag{font-size:11px;color:var(--accent);border:1px solid;padding:4px 12px;border-radius:999px;font-weight:600}
+
 
 /* ===== JOURNEY ===== */
 .journey-section{background:var(--bg);position:relative;overflow:hidden}
@@ -196,15 +180,9 @@ button{font:inherit;cursor:pointer;background:none;border:none}
 .paper-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:14px}
 .paper-tag{font-size:11px;color:var(--accent);background:var(--accent-dim);padding:4px 10px;border-radius:999px;font-weight:600;border:1px solid rgba(0,255,136,.15)}
 
-/* ===== 3D EXPERIENCE ===== */
-.experience-section{background:linear-gradient(135deg,#080810 0%,#0d1117 50%,#080810 100%);position:relative;overflow:hidden}
-.experience-3d-canvas{width:100%;height:500px;position:relative;will-change:transform}
-.experience-3d-canvas canvas{width:100%!important;height:100%!important}
 
-/* ===== 3D CONTACT ===== */
-.contact-section{background:var(--bg);position:relative;overflow:hidden}
-.contact-3d-canvas{width:100%;height:350px;position:relative;will-change:transform}
-.contact-3d-canvas canvas{width:100%!important;height:100%!important}
+
+
 
 /* ===== STACK (Solar Orbit) ===== */
 .stack{background:linear-gradient(135deg,#080810 0%,#0d1117 50%,#080810 100%);position:relative;overflow:hidden}

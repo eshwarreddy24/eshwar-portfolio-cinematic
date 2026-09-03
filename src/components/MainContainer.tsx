@@ -1,44 +1,22 @@
-import { useState, useEffect, Suspense } from 'react';
+import { useEffect } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Lenis from 'lenis';
 import Navbar from './Navbar';
-import HeroScene from './HeroScene';
 import Hero from './Hero';
 import Marquee from './Marquee';
 import About from './About';
 import Journey from './Journey';
-import Gallery3D from './Gallery3D';
-import ExperienceRoom from './ExperienceRoom';
 import DesignStack from './DesignStack';
 import Credentials from './Credentials';
 import Education from './Education';
-import Contact3D from './Contact3D';
 import Contact from './Contact';
 import Particles from './Particles';
 
 gsap.registerPlugin(ScrollTrigger);
 
-function CanvasLoader() {
-  return (
-    <div style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-      <div style={{ color: 'var(--accent)', fontSize: 14, fontWeight: 700, letterSpacing: '.1em' }}>
-        LOADING 3D...
-      </div>
-    </div>
-  );
-}
-
 export default function MainContainer() {
-  const [ready, setReady] = useState(false);
-
   useEffect(() => {
-    const t = setTimeout(() => setReady(true), 150);
-    return () => clearTimeout(t);
-  }, []);
-
-  useEffect(() => {
-    if (!ready) return;
     const lenis = new Lenis({
       duration: 1.4,
       easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
@@ -48,7 +26,7 @@ export default function MainContainer() {
     gsap.ticker.add((time) => { lenis.raf(time * 1000); });
     gsap.ticker.lagSmoothing(0);
 
-    // === SCROLL PROGRESS BAR ===
+    // Scroll progress bar
     const progressBar = document.querySelector('.scroll-progress') as HTMLElement;
     if (progressBar) {
       ScrollTrigger.create({
@@ -61,7 +39,7 @@ export default function MainContainer() {
       });
     }
 
-    // === SECTION SEPARATOR LINES ===
+    // Section separator lines
     document.querySelectorAll('.section-line').forEach((el: any) => {
       gsap.fromTo(el,
         { scaleX: 0, opacity: 0 },
@@ -74,7 +52,7 @@ export default function MainContainer() {
       );
     });
 
-    // === PARALLAX DEPTH LAYERS ===
+    // Parallax depth layers
     gsap.utils.toArray('.parallax-layer').forEach((el: any) => {
       const speed = parseFloat(el.dataset.speed || '0.3');
       gsap.to(el, {
@@ -89,7 +67,7 @@ export default function MainContainer() {
       });
     });
 
-    // === COUNTING NUMBERS ===
+    // Counting numbers
     document.querySelectorAll('.about-metricNum').forEach((el: any) => {
       const target = parseInt(el.dataset.count || '0', 10);
       const suffix = el.dataset.suffix || '';
@@ -109,10 +87,9 @@ export default function MainContainer() {
       });
     });
 
-    // === MAGNETIC HOVER (throttled) ===
-    const magneticEls = document.querySelectorAll('.btn, .connect-social');
+    // Magnetic hover
     const cleanups: (() => void)[] = [];
-    magneticEls.forEach((el: any) => {
+    document.querySelectorAll('.btn, .connect-social').forEach((el: any) => {
       let ticking = false;
       const onMove = (e: MouseEvent) => {
         if (ticking) return;
@@ -136,22 +113,11 @@ export default function MainContainer() {
       });
     });
 
-    // === 3D SCENE SCROLL EFFECTS ===
-    const heroCanvas = document.querySelector('.hero-3d-canvas');
-    if (heroCanvas) {
-      gsap.to(heroCanvas, {
-        opacity: 0,
-        scrollTrigger: { trigger: '.hero', start: '40% top', end: '80% top', scrub: 1 },
-      });
-    }
-
     return () => {
       lenis.destroy();
       cleanups.forEach(fn => fn());
     };
-  }, [ready]);
-
-  if (!ready) return null;
+  }, []);
 
   return (
     <>
@@ -159,13 +125,7 @@ export default function MainContainer() {
       <Particles />
       <Navbar />
       <main>
-        <section className="hero" id="hero">
-          <Suspense fallback={<CanvasLoader />}>
-            <HeroScene />
-          </Suspense>
-          <Hero />
-        </section>
-
+        <Hero />
         <div className="section-line" />
         <Marquee />
         <div className="section-line" />
@@ -173,47 +133,12 @@ export default function MainContainer() {
         <div className="section-line" />
         <Journey />
         <div className="section-line" />
-
-        <section className="gallery-section" id="gallery">
-          <div className="gallery-wrap">
-            <p className="about-eyebrow"><span>04</span> Projects</p>
-            <h2 className="about-h2">
-              Featured <span className="about-serif green-glow">Work</span>
-            </h2>
-          </div>
-          <Suspense fallback={<CanvasLoader />}>
-            <Gallery3D />
-          </Suspense>
-        </section>
-
-        <div className="section-line" />
-
-        <section className="experience-section" id="experience">
-          <div className="gallery-wrap">
-            <p className="about-eyebrow"><span>05</span> Interactive</p>
-            <h2 className="about-h2">
-              Skill <span className="about-serif green-glow">Universe</span>
-            </h2>
-          </div>
-          <Suspense fallback={<CanvasLoader />}>
-            <ExperienceRoom />
-          </Suspense>
-        </section>
-
-        <div className="section-line" />
         <DesignStack />
         <div className="section-line" />
         <Credentials />
         <div className="section-line" />
         <Education />
         <div className="section-line" />
-
-        <section className="contact-section" id="contact-3d">
-          <Suspense fallback={<CanvasLoader />}>
-            <Contact3D />
-          </Suspense>
-        </section>
-
         <div className="finalFrame">
           <Contact />
         </div>
