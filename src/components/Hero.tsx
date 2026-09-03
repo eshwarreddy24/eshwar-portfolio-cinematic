@@ -38,7 +38,7 @@ export default function Hero() {
           and executive support collaboration among cross-functional teams.
         </p>
         <div className="hero-btns">
-          <a href="#contact" className="btn btn-primary">
+          <a href="/Eshwar-Reddy-Resume.pdf" download className="btn btn-primary">
             <span>Download Resume</span>
             <span aria-hidden="true">↓</span>
           </a>
