@@ -31,6 +31,7 @@ export default function Hero() {
           <span className="line"><span>Gali Eshwar</span></span>
           <span className="line"><span className="accent">Reddy</span></span>
         </h1>
+        <p className="hero-role">SAP Specialist · Procurement · Operations</p>
         <p className="hero-sub">
           Operational professional with hands-on expertise in SAP MM and office operations,
           managing complex documentation for senior leadership including former IPS/IAS officials.

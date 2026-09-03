@@ -1,12 +1,11 @@
 import { useEffect } from 'react';
 import Navbar from './Navbar';
 import Hero from './Hero';
+import Marquee from './Marquee';
 import About from './About';
 import Projects from './Projects';
 import Experience from './Experience';
-import Certifications from './Certifications';
 import Education from './Education';
-import Marquee from './Marquee';
 import Contact from './Contact';
 
 export default function MainContainer() {
@@ -72,7 +71,6 @@ export default function MainContainer() {
         <About />
         <Projects />
         <Experience />
-        <Certifications />
         <Education />
         <Contact />
       </main>

@@ -1,9 +1,8 @@
 import { useState, useEffect } from 'react';
 
-type Theme = 'dark' | 'light' | 'white';
+type Theme = 'dark' | 'white';
 const themes: { key: Theme; icon: string }[] = [
   { key: 'dark', icon: '🌙' },
-  { key: 'light', icon: '☀️' },
   { key: 'white', icon: '◻️' },
 ];
 
@@ -12,7 +11,6 @@ const links = [
   { label: 'About', href: '#about' },
   { label: 'Projects', href: '#projects' },
   { label: 'Experience', href: '#experience' },
-  { label: 'Credentials', href: '#credentials' },
   { label: 'Contact', href: '#contact' },
 ];
 
